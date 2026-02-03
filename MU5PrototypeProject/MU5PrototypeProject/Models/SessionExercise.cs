@@ -6,22 +6,22 @@ namespace MU5PrototypeProject.Models
     {
         public int ID { get; set; }
 
-        [Display(Name = "Exercise Name")]
-        [Required(ErrorMessage = "You must provide the name of the exercise.")]
-        [StringLength(100, ErrorMessage = "Exercise name cannot be more than 100 characters long.")]
-        public string ExerciseName { get; set; }
+        [Required]
+        public int SessionID { get; set; }
+        public Session Session { get; set; } = null!;
 
-        [Required(ErrorMessage = "Please specify the apparatus used.")]
-        [StringLength(100, ErrorMessage = "Apparatus description cannot exceed 100 characters.")]
-        public string Apparatus { get; set; }
+        [Required]
+        public int ExerciseID { get; set; }
+        public Exercise Exercise { get; set; } = null!;
 
         [Display(Name = "Spring Setting")]
         [StringLength(50, ErrorMessage = "Spring settings cannot exceed 50 characters.")]
-        public string Springs { get; set; }
+        public string? Springs { get; set; }
 
         [StringLength(100, ErrorMessage = "Props description cannot exceed 100 characters.")]
-        public string Props { get; set; }
+        public string? Props { get; set; }
 
-        public string Notes { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string? Notes { get; set; }
     }
 }
