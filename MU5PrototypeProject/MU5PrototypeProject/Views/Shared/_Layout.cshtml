@@ -4,41 +4,39 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - MU5PrototypeProject</title>
-    <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MU5PrototypeProject.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm custom-navbar border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm custom-navbar box-shadow">
             <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center"
-                   asp-area=""
-                   asp-controller="Home"
-                   asp-action="Index">
-                    <img src="~/images/logo.png"
-                         alt="MU5 Logo"
-                         class="navbar-logo" />
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="Index">Client</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Session" asp-action="Index">Session</a>
-                        </li>
+
+                <div class="navbar-center-stack">
+                    <a href="/">
+                        <img src="~/images/mulogo.png" alt="Movement Unlimited" class="logo-image" />
+                    </a>
+                    <ul class="nav-sub-links">
+                        <li><a class="nav-link" asp-controller="Client" asp-action="Index">Client</a></li>
+                        <li><a class="nav-link" asp-controller="Session" asp-action="Index">Session</a></li>
                     </ul>
-                    <partial name="_LoginPartial" />
                 </div>
+
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ms-auto">
+                        <partial name="_LoginPartial" />
+                    </ul>
+                </div>
+
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -50,6 +48,7 @@
             &copy; 2026 - SUM Solution - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

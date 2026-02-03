@@ -1,5 +1,8 @@
-﻿html {
+﻿
+html {
     font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -8,73 +11,95 @@
     }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
 body {
     margin-bottom: 60px;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+/* --- Buttons & Forms --- */
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+.form-floating > .form-control::placeholder {
     color: var(--bs-secondary-color);
     text-align: end;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+.form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
 
-/* Navbar background */
+/* --- Main Navbar Container --- */
 .custom-navbar {
-    background-color: #624b78; /* Purple */
+    min-height: 240px; 
+    background-color: #624b78;
+    position: relative;
+    border-bottom: none;
 }
 
-    /* Brand text */
-    .custom-navbar .navbar-brand {
-        color: #ffffff;
-        font-weight: 600;
-    }
+/* --- Centered Logo & Sub-Links Stack --- */
+.navbar-center-stack {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 10;
+}
 
-        .custom-navbar .navbar-brand:hover {
-            color: #a2d45e; /* Green accent */
-        }
+.logo-image {
+    height: 180px; 
+    width: auto;
+    display: block;
+    margin-bottom: 10px;
+}
 
-    /* Nav links */
-    .custom-navbar .nav-link {
+.nav-sub-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+    .nav-sub-links .nav-link {
         color: #f2f2f2;
+        font-size: 1rem;
+        font-weight: 500;
+        border: 2px solid #a2d45e; 
+        padding: 6px 16px;
+        border-radius: 5px;
+        transition: all 0.2s ease-in-out;
     }
 
-        .custom-navbar .nav-link:hover,
-        .custom-navbar .nav-link:focus {
-            color: #a2d45e; /* Green accent */
+        .nav-sub-links .nav-link:hover {
+            background-color: #a2d45e;
+            color: #624b78; 
         }
 
-        /* Active link */
-        .custom-navbar .nav-link.active {
-            color: #a2d45e;
-            font-weight: 500;
-        }
-
-    /* Navbar toggler (mobile) */
-    .custom-navbar .navbar-toggler {
-        border-color: rgba(255, 255, 255, 0.5);
-    }
-
-    .custom-navbar .navbar-toggler-icon {
-        filter: invert(1); /* Makes the icon white */
-    }
-
-/* bottom border accent */
-.custom-navbar {
-    border-bottom: 3px solid #a2d45e;
+/* --- Right Side (Login/Register) & Mobile Toggler --- */
+.custom-navbar .navbar-nav .nav-link {
+    color: #f2f2f2;
 }
 
+.custom-navbar .nav-link:hover,
+.custom-navbar .nav-link.active {
+    color: #a2d45e;
+}
+
+.custom-navbar .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.custom-navbar .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+/* --- Footer --- */
 footer.footer {
     background-color: #624b78;
     color: #f2f2f2;
@@ -88,30 +113,19 @@ footer.footer {
             color: #ffffff;
         }
 
-/* Navbar logo sizing */
-.navbar-logo {
-    height: 32px;
-    max-height: 32px;
-    width: auto;
-    display: block;
-}
-
-.custom-navbar .navbar-brand {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-.navbar-logo {
-    height: 30px;
-}
-
-@media (min-width: 992px) {
-    .navbar-logo {
-        height: 36px;
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .navbar-center-stack {
+        position: relative;
+        left: auto;
+        transform: none;
+        margin: 10px 0;
     }
-}
 
-/* Center footer content */
-footer.footer .container {
-    text-align: center;
+    .custom-navbar {
+        height: auto;
+        min-height: auto;
+        flex-direction: column;
+        padding-bottom: 1rem;
+    }
 }
