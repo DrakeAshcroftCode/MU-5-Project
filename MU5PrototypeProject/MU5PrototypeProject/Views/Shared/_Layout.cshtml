@@ -9,39 +9,43 @@
     <link rel="stylesheet" href="~/MU5PrototypeProject.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm custom-navbar box-shadow">
-            <div class="container-fluid">
+    <header class="siteHeader py-3">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="text-center flex-grow-1">
+                    <a asp-controller="Home"
+                       asp-action="Index"
+                       class="logoBox text-decoration-none d-inline-block">
+                        <!-- logo drops you back to landing -->
+                        <img src="~/assets/Movement_Unlimited_O_Logo_500px.png" id="imgLogo" alt="Movement Unlimited logo" />
+                    </a>
+                </div>
+            </div>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <!-- quick help slideout -->
+                <button class="helpButton ms-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#helpPanel" aria-controls="helpPanel">?</button>
+                <!-- hamburger keeps nav touch-friendly on tablet -->
+                <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <div class="navbar-center-stack">
-                    <a href="/">
-                        <img src="~/images/mulogo.png" alt="Movement Unlimited" class="logo-image" />
-                    </a>
-                    <ul class="nav-sub-links">
-                        <li>
-                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" asp-controller="Clients" asp-action="Index">Client</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" asp-controller="Sessions" asp-action="Index">Session</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav ms-auto">
-                        <partial name="_LoginPartial" />
-                    </ul>
-                </div>
-
             </div>
-        </nav>
+
+            <nav class="navbar navbar-expand-md navbar-light p-0 mt-3">
+                <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
+                    <ul class="navbar-nav navButtons flex-row">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link navButton" asp-controller="Home" asp-action="Index">Landing</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link navButton" asp-controller="Sessions" asp-action="Index">Sessions</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link navButton" asp-controller="Clients" asp-action="Index">Clients</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </header>
 
     <div class="container">
@@ -50,11 +54,23 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - SUM Solution - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="siteFooter mt-auto py-3">
+        <div class="container text-center">
+            <div>SUM Solutions 2026</div>
         </div>
     </footer>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="helpPanel" aria-labelledby="helpPanelLabel">
+        <div class="offcanvas-header">
+            <h5 id="helpPanelLabel">Help</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <p>Landing: Home page of the app</p>
+            <p>Sessions: view/add/edit/archive session records.</p>
+            <p>Clients: view/add/edit/archive client records.</p>
+        </div>
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

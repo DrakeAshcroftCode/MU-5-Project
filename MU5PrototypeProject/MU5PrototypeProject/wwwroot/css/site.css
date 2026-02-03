@@ -1,131 +1,274 @@
-﻿
 html {
-    font-size: 14px;
-    position: relative;
-    min-height: 100%;
+  font-size: 14px;
 }
 
 @media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
 }
 
 body {
-    margin-bottom: 60px;
+  margin-bottom: 60px;
 }
 
-/* --- Buttons & Forms --- */
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
 }
 
-.form-floating > .form-control::placeholder {
-    color: var(--bs-secondary-color);
-    text-align: end;
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
 }
 
-.form-floating > .form-control:focus::placeholder {
-    text-align: start;
+/* Header + Navigation */
+
+.siteHeader {
+    background: #624b78;
+    border-bottom: 1px solid #e5e7eb;
 }
 
-/* --- Main Navbar Container --- */
-.custom-navbar {
-    min-height: 240px;
-    background-color: #BF98CE;
-    position: relative;
-    border-bottom: none;
-}
+/* Logo */
 
-/* --- Centered Logo & Sub-Links Stack --- */
-.navbar-center-stack {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0;
+.logoRow {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.logoBox {
+    min-width: 140px;
+    text-align: center;
+    padding: 0.6rem 1.4rem;
+    border: 2px solid #1a4d8f;
+    border-radius: 8px;
+    background: #fff;
+    font-weight: 700;
+    color: #1a4d8f; 
+    width:fit-content;
+
+}
+    .logoBox img {
+        max-width: 100px;
+        height: auto;
+    }
+
+/* Nav spacing */
+.navButtons {
+    gap: .65rem;
+}
+
+.navButtons .nav-link {
+    padding: 0; /* padding comes from navButton below */
+}
+
+.navButton {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    z-index: 10;
+    padding: 0.5rem 1rem;
+    font-size: 24px;
+    border: 1.5px solid #1a4d8f;
+    border-radius: 10px;
+    font-weight: 700;
+    color: #1a4d8f;
+    background: #fff;
+    text-decoration: none;
+    transition: background 120ms ease, transform 120ms ease, color 120ms ease, border-color 120ms ease;
 }
 
-.logo-image {
-    height: 180px; 
-    width: auto;
-    display: block;
-    margin-bottom: 10px;
+.navButtons .nav-link.active,
+.navButtons .nav-link:hover {
+    background: #ff7a3c;
+    color: #fff;
+    border-color: #ff7a3c;
 }
 
-.nav-sub-links {
-    list-style: none;
-    padding: 0;
+/* Mobile navbar polish */
+@media (max-width: 767.98px) {
+    .navButtons {
+        padding: .75rem 0;
+    }
+
+    .navButton {
+        width: fit-content;
+    }
+}
+
+
+/* Footer */
+
+.siteFooter {
+    background: #f8f9fb;
+    border-top: 1px solid #e5e7eb;
+    padding: 1rem 0;
+    text-align: center;
+    color: #1a4d8f;
+    font-weight: 600;
+}
+
+.collapse {
+    margin-left: .99rem
+}
+
+.pageHeader {
+    margin-bottom: 1rem;
+}
+
+.pageTitle {
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
     margin: 0;
+}
+
+.clientGrid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+@media (max-width: 992px) {
+    .clientGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.panel {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #fff;
+    padding: 1.1rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+.panelHeader {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1rem;
 }
 
-    .nav-sub-links .nav-link {
-        color: #f2f2f2;
-        font-size: 1rem;
-        font-weight: 500;
-        border: 2px solid #a2d45e; 
-        padding: 6px 16px;
-        border-radius: 5px;
-        transition: all 0.2s ease-in-out;
-    }
-
-        .nav-sub-links .nav-link:hover {
-            background-color: #a2d45e;
-            color: #624b78; 
-        }
-
-/* --- Right Side (Login/Register) & Mobile Toggler --- */
-.custom-navbar .navbar-nav .nav-link {
-    color: #f2f2f2;
+.panelTitle {
+    font-weight: 800;
+    font-size: 1.05rem;
 }
 
-.custom-navbar .nav-link:hover,
-.custom-navbar .nav-link.active {
-    color: #a2d45e;
+.photoCircle {
+    width: 144px;
+    height: 144px;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9fafb;
 }
 
-.custom-navbar .navbar-toggler {
-    border-color: rgba(255, 255, 255, 0.5);
+.formGrid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: .75rem 1rem;
+    align-items: center;
 }
 
-.custom-navbar .navbar-toggler-icon {
-    filter: invert(1);
-}
-
-/* --- Footer --- */
-footer.footer {
-    background-color: #BF98CE;
-    color: #f2f2f2;
-}
-
-    footer.footer a {
-        color: #a2d45e;
-    }
-
-        footer.footer a:hover {
-            color: #ffffff;
-        }
-
-/* --- Mobile Responsiveness --- */
-@media (max-width: 768px) {
-    .navbar-center-stack {
-        position: relative;
-        left: auto;
-        transform: none;
-        margin: 10px 0;
-    }
-
-    .custom-navbar {
-        height: auto;
-        min-height: auto;
-        flex-direction: column;
-        padding-bottom: 1rem;
+@media (max-width: 576px) {
+    .formGrid {
+        grid-template-columns: 1fr;
     }
 }
+
+.formLabel {
+    font-weight: 700;
+}
+
+.formInput {
+    width: 100%;
+    padding: .55rem .7rem;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+}
+
+.formInput:focus {
+    outline: none;
+    border-color: #1f2937;
+    box-shadow: 0 0 0 .18rem rgba(31,41,55,0.12);
+}
+
+.medicalInput {
+    width: 100%;
+    min-height: 220px;
+    padding: .75rem;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+}
+
+.buttonRow {
+    display: flex;
+    gap: .75rem;
+    margin-top: 1.1rem;
+}
+
+.primaryButton {
+    background: #111827;
+    color: #fff;
+    border-radius: 10px;
+    padding: .55rem 1rem;
+    font-weight: 800;
+}
+
+.secondaryButton {
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: .55rem 1rem;
+    font-weight: 800;
+}
+.dataTable {
+    font-size: 20px;
+
+}
+.actionsCol {
+    padding:4px;
+    
+}
+.dataBox {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #fff;
+    padding: 1rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+.dataTable tbody tr {
+    height: 56px; /* give rows some brething room for tap targets */
+}
+
+.actionLink {
+    margin-right: .5rem;
+    color: #1a4d8f;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.actionLink:hover {
+    color: #ff7a3c;
+}
+
+.actionLink.danger {
+    color: #d14334;
+}
+
+.navbar-toggler { border: none; }
+.helpButton { width: 38px; height: 38px; border-radius: 50%; border: 2px solid #1a4d8f; background: #fff; color: #1a4d8f; font-weight: 700; }
+.helpButton:hover { background: #ff7a3c; color: #fff; border-color: #ff7a3c; }

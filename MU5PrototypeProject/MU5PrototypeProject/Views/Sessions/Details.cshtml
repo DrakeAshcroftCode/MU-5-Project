@@ -1,0 +1,84 @@
+@{
+    ViewData["Title"] = "Session Details";
+}
+
+<div class="page">
+    <h1 class="pageTitle">Session Details</h1>
+
+    <div class="mb-3">
+        <strong>Client:</strong> Nasra Ibrahim <!-- static sample until db -->
+    </div>
+
+    <div class="clientGrid">
+        <div class="panel">
+            <div class="panelTitle mb-2">Teacher Notes</div>
+            <div class="formGrid">
+                <div class="formLabel">Teacher:</div>
+                <div>Angela Foster</div>
+                <div class="formLabel">Date:</div>
+                <div>2025/01/06</div>
+                <div class="formLabel">Goals:</div>
+                <div>—</div>
+                <div class="formLabel">General Comments:</div>
+                <div>────────────</div>
+                <div class="formLabel">Subjective Reports:</div>
+                <div>────────────</div>
+                <div class="formLabel">Objective Findings:</div>
+                <div>────────────</div>
+                <div class="formLabel">Plan:</div>
+                <div>────────────</div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panelTitle mb-2">Exercises</div>
+            <div class="formGrid">
+                <div class="formLabel">Apparatus:</div>
+                <div>────────</div>
+                <div class="formLabel">Props:</div>
+                <div>────────</div>
+                <div class="formLabel">Exercises:</div>
+                <div>────────</div>
+                <div class="formLabel">Springs:</div>
+                <div>────────</div>
+                <div class="formLabel">Notes/Comments:</div>
+                <div>────────</div>
+            </div>
+
+            <div class="panelTitle mb-2 mt-3">Next Steps</div>
+            <div class="formGrid">
+                <div class="formLabel">Need Approval/Referral:</div>
+                <div>☑</div>
+                <div class="formLabel">Consulted Person:</div>
+                <div>Team consult</div>
+                <div class="formLabel">Referral By:</div>
+                <div>Matt Davis</div>
+                <div class="formLabel">Sessions/Week Rec:</div>
+                <div>3x per week</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel mt-3">
+        <div class="panelTitle mb-2">Equipment</div>
+        <div class="formGrid">
+            <div class="formLabel">Gloves/Bar:</div>
+            <div>☑</div>
+            <div class="formLabel">Straps/Striding:</div>
+            <div>☑</div>
+            <div class="formLabel">Head Pad:</div>
+            <div>☑</div>
+            <div class="formLabel">Stops:</div>
+            <div>☑</div>
+            <div class="formLabel">Towel:</div>
+            <div>☑</div>
+            <div class="formLabel">Foam/Blocks:</div>
+            <div>☑</div>
+        </div>
+    </div>
+
+    <div class="buttonRow mt-3">
+        <a class="secondaryButton" asp-controller="Sessions" asp-action="Index">back</a>
+        <a class="primaryButton" asp-controller="Sessions" asp-action="Edit" asp-route-id="1">edit/archive</a>
+    </div>
+</div>
