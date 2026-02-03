@@ -1,69 +1,61 @@
-﻿@{
-    ViewData["Title"] = "Client Data";
+@{
+    ViewData["Title"] = "Sessions Data";
 }
 
 <div class="page">
-    <h1 class="pageTitle">Client Data</h1>
+    <h1 class="pageTitle">Sessions Data</h1>
+
+    <div class="d-flex justify-content-end mb-3">
+        <a class="primaryButton" asp-controller="Sessions" asp-action="Edit">+ Session</a> <!-- add uses the edit shell -->
+    </div>
 
     <div class="dataBox">
-        <table class="dataTable">
+        <table class="table table-hover align-middle dataTable">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th class="actionsCol">Actions</th> <!-- view / edit / archive -->
+                    <th>Client</th>
+                    <th>Trainer</th>
+                    <th>Date</th>
+                    <th class="actionsCol">Actions</th>
                 </tr>
             </thead>
-
             <tbody>
-                <!-- Fake data for now, backend will change this. -->
                 <tr>
                     <td>Nasra Ibrahim</td>
-                    <td>208-889-567</td>
+                    <td>Rachel</td>
+                    <td>2025/04/12</td>
                     <td class="actionsCol">
-                        <a class="actionLink"
-                           asp-controller="Clients"
-                           asp-action="Details"
-                           asp-route-id="1">view</a>
-
-                        <a class="actionLink"
-                           asp-controller="Clients"
-                           asp-action="Edit"
-                           asp-route-id="1">edit</a>
-
-                        <a class="actionLink danger"
-                           href="#"
-                           onclick="alert('Archive later'); return false;">
-                            archive
-                        </a>
+                        <a class="actionLink" asp-action="Details" asp-route-id="1">details</a>
+                        <a class="actionLink" asp-action="Edit" asp-route-id="1">edit</a>
+                        <a class="actionLink danger" href="#" onclick="alert('Archive later'); return false;">archive</a>
                     </td>
                 </tr>
-
                 <tr>
                     <td>Hayden Moose</td>
-                    <td>908-502-895</td>
+                    <td>Penny</td>
+                    <td>2025/10/09</td>
                     <td class="actionsCol">
-                        <a class="actionLink" asp-action="Details" asp-route-id="2">view</a>
+                        <a class="actionLink" asp-action="Details" asp-route-id="2">details</a>
                         <a class="actionLink" asp-action="Edit" asp-route-id="2">edit</a>
                         <a class="actionLink danger" href="#" onclick="alert('Archive later'); return false;">archive</a>
                     </td>
                 </tr>
-                
                 <tr>
                     <td>Hunter Blue</td>
-                    <td>108-923-056</td>
+                    <td>Liz</td>
+                    <td>2025/01/20</td>
                     <td class="actionsCol">
-                        <a class="actionLink" asp-action="Details" asp-route-id="3">view</a>
+                        <a class="actionLink" asp-action="Details" asp-route-id="3">details</a>
                         <a class="actionLink" asp-action="Edit" asp-route-id="3">edit</a>
                         <a class="actionLink danger" href="#" onclick="alert('Archive later'); return false;">archive</a>
                     </td>
                 </tr>
-
                 <tr>
                     <td>Saime Drake</td>
-                    <td>248-825-676</td>
+                    <td>Beto</td>
+                    <td>2025/02/20</td>
                     <td class="actionsCol">
-                        <a class="actionLink" asp-action="Details" asp-route-id="4">view</a>
+                        <a class="actionLink" asp-action="Details" asp-route-id="4">details</a>
                         <a class="actionLink" asp-action="Edit" asp-route-id="4">edit</a>
                         <a class="actionLink danger" href="#" onclick="alert('Archive later'); return false;">archive</a>
                     </td>

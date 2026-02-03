@@ -4,57 +4,49 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - MU5PrototypeProject</title>
-    <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MU5PrototypeProject.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header class="siteHeader">
-        <div class="container py-3">
-
-            <!-- Logo row -->
-            <div class="logoRow">
-                <a asp-controller="Home" asp-action="Index"
-                   class="logoBox text-decoration-none">
-                    Logo
-                </a>
+    <header class="siteHeader py-3">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="text-center flex-grow-1">
+                    <a asp-controller="Home"
+                       asp-action="Index"
+                       class="logoBox text-decoration-none d-inline-block">
+                        <!-- logo drops you back to landing -->
+                        <img src="~/assets/Movement_Unlimited_O_Logo_500px.png" id="imgLogo" alt="Movement Unlimited logo" />
+                    </a>
+                </div>
             </div>
 
+                <!-- quick help slideout -->
+                <button class="helpButton ms-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#helpPanel" aria-controls="helpPanel">?</button>
+                <!-- hamburger keeps nav touch-friendly on tablet -->
+                <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
 
+            <nav class="navbar navbar-expand-md navbar-light p-0 mt-3">
+                <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
+                    <ul class="navbar-nav navButtons flex-row">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link navButton" asp-controller="Home" asp-action="Index">Landing</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link navButton" asp-controller="Sessions" asp-action="Index">Sessions</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link navButton" asp-controller="Clients" asp-action="Index">Clients</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
     </header>
-
-    <!-- navbar row -->
-    <nav class="navbar navbar-light p-0">
-
-        <!-- Nav buttons: show on tablets+ (md and up) -->
-        <div class="collapse navbar-collapse d-md-block" id="mainNavbar">
-            <ul class="navbar-nav navButtons flex-row">
-                <li class="nav-item">
-                    <a class="nav-link navButton" asp-controller="Home" asp-action="Index">Landing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link navButton" asp-controller="Sessions" asp-action="Index">Sessions</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link navButton" asp-controller="Clients" asp-action="Index">Clients</a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Hamburger: always visible, pushed right -->
-        <button class="navbar-toggler ms-auto"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#mainNavbar"
-                aria-controls="mainNavbar"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
-
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -62,11 +54,23 @@
         </main>
     </div>
 
-    <footer class="siteFooter mt-auto">
-        <div class="container">
-            <div>SUM Solutions</div>
+    <footer class="siteFooter mt-auto py-3">
+        <div class="container text-center">
+            <div>SUM Solutions 2026</div>
         </div>
     </footer>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="helpPanel" aria-labelledby="helpPanelLabel">
+        <div class="offcanvas-header">
+            <h5 id="helpPanelLabel">Help</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <p>Landing: Home page of the app</p>
+            <p>Sessions: view/add/edit/archive session records.</p>
+            <p>Clients: view/add/edit/archive client records.</p>
+        </div>
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

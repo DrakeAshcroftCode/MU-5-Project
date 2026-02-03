@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Client Details";
+}
+
+<div class="page">
+    <h1 class="pageTitle">Client Details</h1>
+
+    <div class="clientGrid">
+        <div class="panel">
+            <div class="photoCircle mb-3">👤</div>
+
+            <div class="formGrid">
+                <!-- static sample vals backend will fill real data -->
+                <div class="formLabel">First Name:</div>
+                <div>Nasra</div>
+
+                <div class="formLabel">Last Name:</div>
+                <div>Ibrahim</div>
+
+                <div class="formLabel">Date of Birth:</div>
+                <div>2005/01/04</div>
+
+                <div class="formLabel">Address:</div>
+                <div>7025 Oak Drive</div>
+
+                <div class="formLabel">Type of Client:</div>
+                <div>Private Client</div>
+            </div>
+
+            <div class="buttonRow mt-3">
+                <a class="primaryButton" asp-controller="Clients" asp-action="Edit" asp-route-id="1">edit/archive</a>
+                <a class="secondaryButton" asp-controller="Clients" asp-action="Index">cancel</a>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panelHeader">
+                <div class="panelTitle">Medical History</div>
+            </div>
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action" href="#">document 1</a>
+                <a class="list-group-item list-group-item-action" href="#">document 2</a>
+                <a class="list-group-item list-group-item-action" href="#">document 3</a>
+            </div>
+        </div>
+    </div>
+</div>
