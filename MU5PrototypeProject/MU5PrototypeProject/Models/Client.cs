@@ -1,19 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Azure;
+using System.ComponentModel.DataAnnotations;
 
 namespace MU5PrototypeProject.Models
 {
-    public class Client
+    public class Client : IValidatableObject
     {
         public int ID { get; set; }
 
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "You cannot leave the first name blank.")]
         [StringLength(50, ErrorMessage = "First name cannot be more than 50 characters long.")]
+        [RegularExpression(@"^[A-Za-z-]+$", ErrorMessage = "First name can only contain letters and hyphens.")]
         public string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = "You cannot leave the last name blank.")]
         [StringLength(100, ErrorMessage = "Last name cannot be more than 100 characters long.")]
+        [RegularExpression(@"^[A-Za-z-]+$", ErrorMessage = "Last name can only contain letters and hyphens.")]
         public string LastName { get; set; }
 
         [Display(Name = "Date of Birth")]
@@ -34,5 +37,14 @@ namespace MU5PrototypeProject.Models
         public DateTime CreatedAt { get; set; }
 
         public ICollection<Session> Sessions { get; set; } = new HashSet<Session>();
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (DOB > DateTime.Today)
+            {
+                yield return new ValidationResult("Date of Birth cannot be in the future.", new[] { "DOB" });
+            }       
+        }
+
     }
 }
