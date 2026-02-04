@@ -2,7 +2,7 @@
 
 namespace MU5PrototypeProject.Models
 {
-    public class AdminStatus
+    public class AdminStatus//cool
     {
         public int ID { get; set; }
 
