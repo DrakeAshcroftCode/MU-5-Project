@@ -30,7 +30,7 @@
                 </button>
             </div>
 
-            <nav class="navbar navbar-expand-md navbar-light p-0 mt-3">
+    @*         <nav class="navbar navbar-expand-md navbar-light p-0 mt-3">
                 <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
                     <ul class="navbar-nav navButtons flex-row">
                         <li class="nav-item mx-2">
@@ -46,8 +46,28 @@
                 </div>
             </nav>
         </div>
-    </header>
+    </header> *@
+        <nav class="navbar navbar-expand-md p-0 mt-3 classicNav">
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
+                <ul class="navbar-nav flex-row classicNavMenu">
+                    <li class="nav-item">
+                        <a class="nav-link classicNavLink" asp-controller="Home" asp-action="Index">Landing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link classicNavLink" asp-controller="Sessions" asp-action="Index">Sessions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link classicNavLink" asp-controller="Clients" asp-action="Index">Clients</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
