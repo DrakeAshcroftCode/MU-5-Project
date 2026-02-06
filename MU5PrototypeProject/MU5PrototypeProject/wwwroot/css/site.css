@@ -63,15 +63,15 @@ body {
     }
 
 /* Nav spacing */
-.navButtons {
+/*.navButtons {
     gap: .65rem;
-}
+}*/
 
-.navButtons .nav-link {
-    padding: 0; /* padding comes from navButton below */
-}
+/*.navButtons .nav-link {
+    padding: 0;*/ /* padding comes from navButton below */
+/*}*/
 
-.navButton {
+/*.navButton {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -84,17 +84,17 @@ body {
     background: #fff;
     text-decoration: none;
     transition: background 120ms ease, transform 120ms ease, color 120ms ease, border-color 120ms ease;
-}
+}*/
 
-.navButtons .nav-link.active,
+/*.navButtons .nav-link.active,
 .navButtons .nav-link:hover {
     background: #ff7a3c;
     color: #fff;
     border-color: #ff7a3c;
-}
+}*/
 
 /* Mobile navbar polish */
-@media (max-width: 767.98px) {
+/*@media (max-width: 767.98px) {
     .navButtons {
         padding: .75rem 0;
     }
@@ -103,7 +103,7 @@ body {
         width: fit-content;
     }
 }
-
+*/
 
 /* Footer */
 
@@ -272,3 +272,54 @@ body {
 .navbar-toggler { border: none; }
 .helpButton { width: 38px; height: 38px; border-radius: 50%; border: 2px solid #1a4d8f; background: #fff; color: #1a4d8f; font-weight: 700; }
 .helpButton:hover { background: #ff7a3c; color: #fff; border-color: #ff7a3c; }
+
+
+.classicNav {
+    background: transparent;
+}
+
+.classicNavMenu {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.classicNavLink {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    padding: 0 .85rem;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.classicNavMenu .nav-item:not(:first-child) {
+    border-left: 2px solid rgba(255,255,255,0.45);
+}
+
+.classicNavLink:hover,
+.classicNavLink:focus {
+    color: #ffb48a;
+    text-decoration: none;
+}
+
+.classicNavLink.active {
+    color: #ff7a3c;
+}
+
+@media (max-width: 767.98px) {
+    .classicNavMenu {
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+        .classicNavMenu .nav-item {
+            border-left: none;
+        }
+
+    .classicNavLink {
+        font-size: 20px;
+        padding: .4rem 0;
+    }
+}

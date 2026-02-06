@@ -4,14 +4,16 @@
 
 <div class="page">
     <h1 class="pageTitle">Client Data</h1>
-
+    <div class="d-flex justify-content-end mb-3">
+        <a class="primaryButton" asp-controller="Clients" asp-action="Edit">+ New Client</a> <!-- add uses the edit shell -->
+    </div>
     <div class="dataBox">
         <table class="dataTable">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Phone Number</th>
-                    <th class="actionsCol">Actions</th> <!-- view / edit / archive -->
+                    <th class="actionsCol">Actions</th> 
                 </tr>
             </thead>
 
