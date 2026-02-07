@@ -15,7 +15,7 @@ namespace MU5PrototypeProject.Data.MUMigrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.9");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.12");
 
             modelBuilder.Entity("MU5PrototypeProject.Models.AdminStatus", b =>
                 {
@@ -72,6 +72,10 @@ namespace MU5PrototypeProject.Data.MUMigrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ClientFolderUrl")
+                        .HasMaxLength(2048)
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
@@ -88,7 +92,7 @@ namespace MU5PrototypeProject.Data.MUMigrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool>("IsArchived")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LastName")
@@ -104,6 +108,49 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     b.HasKey("ID");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("MU5PrototypeProject.Models.Equipment", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("GearBarLevel")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("HasHeadPad")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("HasPosturePillow")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("HasRubberPads")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("HasTowel")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("HeadrestPosition")
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SessionID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("StopperSetting")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("StrapsType")
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("SessionID")
+                        .IsUnique();
+
+                    b.ToTable("Equipments");
                 });
 
             modelBuilder.Entity("MU5PrototypeProject.Models.Exercise", b =>
@@ -138,6 +185,9 @@ namespace MU5PrototypeProject.Data.MUMigrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("SessionDate")
                         .HasColumnType("TEXT");
@@ -198,6 +248,9 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     b.Property<string>("GeneralComments")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Goals")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ObjectiveFindings")
                         .HasColumnType("TEXT");
 
@@ -244,6 +297,17 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     b.HasOne("MU5PrototypeProject.Models.Session", "Session")
                         .WithOne("AdminStatus")
                         .HasForeignKey("MU5PrototypeProject.Models.AdminStatus", "SessionID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Session");
+                });
+
+            modelBuilder.Entity("MU5PrototypeProject.Models.Equipment", b =>
+                {
+                    b.HasOne("MU5PrototypeProject.Models.Session", "Session")
+                        .WithOne("Equipment")
+                        .HasForeignKey("MU5PrototypeProject.Models.Equipment", "SessionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -312,6 +376,8 @@ namespace MU5PrototypeProject.Data.MUMigrations
             modelBuilder.Entity("MU5PrototypeProject.Models.Session", b =>
                 {
                     b.Navigation("AdminStatus");
+
+                    b.Navigation("Equipment");
 
                     b.Navigation("Exercises");
 

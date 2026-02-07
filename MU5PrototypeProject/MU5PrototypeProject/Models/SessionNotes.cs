@@ -10,6 +10,10 @@ namespace MU5PrototypeProject.Models
         public int SessionID { get; set; }
         public Session Session { get; set; } = null!;
 
+        [Display(Name = "Goals")]
+        [DataType(DataType.MultilineText)]
+        public string? Goals { get; set; }
+
         [Display(Name = "General Comments")]
         [DataType(DataType.MultilineText)]
         public string? GeneralComments { get; set; }

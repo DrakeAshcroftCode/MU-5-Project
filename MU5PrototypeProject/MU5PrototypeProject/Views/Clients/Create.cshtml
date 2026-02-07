@@ -44,16 +44,11 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" />
-                    @Html.DisplayNameFor(m => m.IsActive)
-                </label>
-            </div>
+            <!-- IsArchived will default to false for new clients in the controller or model -->
 
             <!-- CreatedAt will be set on the server -->
 
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>

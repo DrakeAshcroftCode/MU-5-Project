@@ -17,15 +17,16 @@ namespace MU5PrototypeProject.Data
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<SessionNotes> SessionNotes { get; set; }
         public DbSet<AdminStatus> AdminStatuses { get; set; }
+        public DbSet<Equipment> Equipments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Trainer-Session (Restrict)
             modelBuilder.Entity<Trainer>()
-               .HasMany(t => t.Sessions)
-               .WithOne(s => s.Trainer)
-               .HasForeignKey(s => s.TrainerID)
-               .OnDelete(DeleteBehavior.Restrict);
+                .HasMany(t => t.Sessions)
+                .WithOne(s => s.Trainer)
+                .HasForeignKey(s => s.TrainerID)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Client-Session (Restrict)
             modelBuilder.Entity<Client>()
@@ -48,18 +49,25 @@ namespace MU5PrototypeProject.Data
                 .HasForeignKey(se => se.ExerciseID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Session-SessionNotes (1-1 Cascade) mapped via Session.Notes
+            // Session-SessionNotes (1-1 Cascade)
             modelBuilder.Entity<Session>()
                 .HasOne(s => s.Notes)
                 .WithOne(n => n.Session)
                 .HasForeignKey<SessionNotes>(n => n.SessionID)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Session-AdminStatus (1-1 Cascade) mapped via Session.AdminStatus
+            // Session-AdminStatus (1-1 Cascade)
             modelBuilder.Entity<Session>()
                 .HasOne(s => s.AdminStatus)
                 .WithOne(a => a.Session)
                 .HasForeignKey<AdminStatus>(a => a.SessionID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Session-Equipment (1-1 Cascade)
+            modelBuilder.Entity<Session>()
+                .HasOne(s => s.Equipment)
+                .WithOne(e => e.Session)
+                .HasForeignKey<Equipment>(e => e.SessionID)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

@@ -18,10 +18,14 @@ namespace MU5PrototypeProject.Models
         [Display(Name = "Sessions/Week (Recommended)")]
         public int? SessionsPerWeekRecommended { get; set; }
 
+        [Display(Name = "Archived")]
+        public bool IsArchived { get; set; }
+
         // Navigation
         public ICollection<SessionExercise> Exercises { get; set; } = new HashSet<SessionExercise>();
         public SessionNotes? Notes { get; set; }
         public AdminStatus? AdminStatus { get; set; }
+        public Equipment? Equipment { get; set; }
 
         [Display(Name = "Trainer")]
         [Required(ErrorMessage = "A session must be assigned to a trainer.")]
