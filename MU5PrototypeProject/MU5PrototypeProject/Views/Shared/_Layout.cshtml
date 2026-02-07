@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/MU5PrototypeProject.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <a href="#maincontent" class="skip-link">Skip to main content</a>
     <header class="siteHeader py-3">
         <div class="container">
             <div class="d-flex align-items-center justify-content-between">
@@ -69,7 +70,7 @@
         </nav>
         </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" id="maincontent" tabindex="-1">
             @RenderBody()
         </main>
     </div>
