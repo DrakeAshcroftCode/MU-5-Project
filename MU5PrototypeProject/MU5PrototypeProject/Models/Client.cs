@@ -6,6 +6,38 @@ namespace MU5PrototypeProject.Models
     {
         public int ID { get; set; }
 
+        //Summary Properties
+        [Display(Name = "Client Name")]
+        public string ClientName
+        {
+            get
+            {
+                return FirstName + " " + (string.IsNullOrEmpty(LastName) ? "" :
+                        (" " + (char?)LastName[0]).ToUpper());
+
+            }
+        }
+
+        public string? Age
+        {
+            get
+            {
+                if (DOB == null) { return null; }
+                DateTime today = DateTime.Today;
+                int? a = today.Year - DOB?.Year
+                    - ((today.Month < DOB?.Month ||
+                        (today.Month == DOB?.Month && today.Day < DOB?.Day) ? 1 : 0));
+                return a?.ToString();
+            }
+        }
+
+        [Display(Name = "Age (DOB)")]
+        public string AgeSummary => (DOB == null) ? "Unknown" : Age + " (" + DOB.GetValueOrDefault().ToString("yyyy-MM-dd") + ")";
+
+        [Display(Name = "Phone")]
+        public string PhoneFormatted => "(" + Phone?.Substring(0, 3) + ") "
+           + Phone?.Substring(3, 3) + "-" + Phone?[6..];
+
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "You cannot leave the first name blank.")]
         [StringLength(50, ErrorMessage = "First name cannot be more than 50 characters long.")]
@@ -21,7 +53,7 @@ namespace MU5PrototypeProject.Models
         [Display(Name = "Date of Birth")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime DOB { get; set; }
+        public DateTime? DOB { get; set; }
 
         [Required(ErrorMessage = "Phone number is required.")]
         [RegularExpression(@"^[2-9]\d{2}[2-9]\d{6}$", ErrorMessage = "Enter a valid 10-digit phone number.")]
