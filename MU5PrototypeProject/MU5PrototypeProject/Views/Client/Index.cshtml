@@ -13,13 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.ClientName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DOB)
+                @Html.DisplayNameFor(model => model.Age)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Phone)
@@ -30,9 +27,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.ClientFolderUrl)
             </th>
-            <th>
+@*             <th>
                 @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.IsArchived)
             </th>
@@ -43,16 +40,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                    @Html.DisplayFor(modelItem => item.ClientName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                    @Html.DisplayFor(modelItem => item.Age)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DOB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
+                    @Html.DisplayFor(modelItem => item.PhoneFormatted)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
@@ -60,9 +54,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ClientFolderUrl)
             </td>
-            <td>
+@*             <td>
                 @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.IsArchived)
             </td>

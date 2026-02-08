@@ -6,6 +6,17 @@ namespace MU5PrototypeProject.Models
     {
         public int ID { get; set; }
 
+        //Summary Properties
+        [Display(Name = "Trainer Name")]
+        public string TrainerName
+        {
+            get
+            {
+                return FirstName + " " + (string.IsNullOrEmpty(LastName));
+
+            }
+        }
+
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "You cannot leave the first name blank.")]
         [StringLength(50, ErrorMessage = "First name cannot be more than 50 characters long.")]

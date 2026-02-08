@@ -15,9 +15,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.SessionDate)
             </th>
-            <th>
+@*             <th>
                 @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.SessionsPerWeekRecommended)
             </th>
@@ -39,9 +39,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SessionDate)
             </td>
-            <td>
+@*             <td>
                 @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.SessionsPerWeekRecommended)
             </td>
@@ -49,10 +49,10 @@
                 @Html.DisplayFor(modelItem => item.IsArchived)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Trainer.FirstName)
+                    @Html.DisplayFor(modelItem => item.Trainer.TrainerName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Client.FirstName)
+                    @Html.DisplayFor(modelItem => item.Client.ClientName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
