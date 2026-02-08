@@ -36,7 +36,7 @@ namespace MU5PrototypeProject.Models
         [Display(Name = "Client Folder URL")]
         [StringLength(2048)]
         [DataType(DataType.Url)]
-        public string? ClientFolderUrl { get; set; }
+        public string? ClientFolderUrl { get; set; } //add the missing field for the client folder URL in the seed data.
 
         [Display(Name = "Created At")]
         public DateTime CreatedAt { get; set; }
