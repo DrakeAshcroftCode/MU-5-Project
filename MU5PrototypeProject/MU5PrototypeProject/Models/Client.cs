@@ -82,7 +82,7 @@ namespace MU5PrototypeProject.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (DOB > DateTime.Today)
+            if (DOB >= DateTime.Today)
             {
                 yield return new ValidationResult("Date of Birth cannot be in the future.", new[] { "DOB" });
             }
