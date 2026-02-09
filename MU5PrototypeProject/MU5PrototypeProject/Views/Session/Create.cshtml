@@ -13,8 +13,8 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="SessionDate" class="control-label"></label>
-                <input asp-for="SessionDate" class="form-control" />
+                <label asp-for="SessionDate" class="control-label"></label><span style="color:red">*</span>
+                <input asp-for="SessionDate" class="form-control" placeholder="Session Date"/>
                 <span asp-validation-for="SessionDate" class="text-danger"></span>
             </div>
 @*             <div class="form-group">
@@ -24,7 +24,7 @@
             </div> *@
             <div class="form-group">
                 <label asp-for="SessionsPerWeekRecommended" class="control-label"></label>
-                <input asp-for="SessionsPerWeekRecommended" class="form-control" />
+                <input asp-for="SessionsPerWeekRecommended" class="form-control" placeholder="Recommended Sessions Per Week"/>
                 <span asp-validation-for="SessionsPerWeekRecommended" class="text-danger"></span>
             </div>
 @*             <div class="form-group form-check">
@@ -33,11 +33,11 @@
                 </label>
             </div> *@
             <div class="form-group">
-                <label asp-for="TrainerID" class="control-label"></label>
-                <select asp-for="TrainerID" class ="form-control" asp-items="ViewBag.TrainerID"></select>
+                <label asp-for="TrainerID" class="control-label"></label><span style="color:red">*</span>
+                <select asp-for="TrainerID" class ="form-control" asp-items="ViewBag.TrainerID" ></select>
             </div>
             <div class="form-group">
-                <label asp-for="ClientID" class="control-label"></label>
+                <label asp-for="ClientID" class="control-label"></label><span style="color:red">*</span>
                 <select asp-for="ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
             </div>
             <div class="form-group">

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using MU5PrototypeProject.Data;
@@ -72,12 +73,21 @@ namespace MU5PrototypeProject.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if (client.DOB > DateTime.Today)
                 {
-                    _context.Add(client);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    ModelState.AddModelError("DOB", "Date Of Birth must not be in the future");
+
+                } else { 
+                
+                    if (ModelState.IsValid)
+                    {
+                        _context.Add(client);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Details), new { client.ID });
+                    }
+                
                 }
+
             }
             catch (RetryLimitExceededException)
             {

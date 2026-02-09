@@ -36,5 +36,14 @@ namespace MU5PrototypeProject.Models
         [Required(ErrorMessage = "A session must be assigned to a client.")]
         public int ClientID { get; set; }
         public Client? Client { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (SessionDate > DateTime.Today)
+            {
+                yield return new ValidationResult("Session cannot be in the future.", new[] { "" });
+            }
+        }
+
     }
 }

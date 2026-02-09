@@ -79,7 +79,7 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DOB")
+                    b.Property<DateTime?>("DOB")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")

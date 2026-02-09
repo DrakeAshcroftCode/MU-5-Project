@@ -61,12 +61,21 @@ namespace MU5PrototypeProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,SessionDate,CreatedAt,SessionsPerWeekRecommended,IsArchived,TrainerID,ClientID")] Session session)
         {
-            if (ModelState.IsValid)
+            /*
+            if (session.SessionDate > DateTime.Today)
             {
-                _context.Add(session);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+                ModelState.AddModelError("SessionDate", "Session date must not be in the future");
+
+            } else {
+            */
+                if (ModelState.IsValid)
+                {
+                    _context.Add(session);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Details), new { session.ID });
+                }
+
+            //}
             ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName", session.ClientID);
             ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName", session.TrainerID);
             return View(session);

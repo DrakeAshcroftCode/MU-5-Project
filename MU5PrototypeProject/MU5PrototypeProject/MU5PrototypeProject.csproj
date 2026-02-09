@@ -20,4 +20,10 @@
 	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.12" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Data\MUMigrations\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>
