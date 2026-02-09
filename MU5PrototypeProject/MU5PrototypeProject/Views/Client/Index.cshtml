@@ -4,13 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="pageTitle">Clients</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="primaryButton" asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
+<div class="dataBox">
+    <table class="table dataTable clientsTable">
+        <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
@@ -28,15 +29,12 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClientFolderUrl)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.CreatedAt)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsArchived)
             </th>
-            <th></th>
+            <th class="actionsCol">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -58,20 +56,19 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ClientFolderUrl)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.CreatedAt)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsArchived)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+                <td class="actionsCol">
+                    <a class="actionLink" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                    <span aria-hidden="true"> | </span>
+                    <a class="actionLink" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                    <span aria-hidden="true"> | </span>
+                    <a class="actionLink danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

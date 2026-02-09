@@ -1,33 +1,36 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    line-height: 1.5;
+    background: #f5f6f8;
+    color: #1f2937;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+    color: var(--bs-secondary-color);
+    text-align: end;
 }
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+    text-align: start;
 }
 
 /* Header + Navigation */
@@ -53,10 +56,10 @@ body {
     border-radius: 8px;
     background: #fff;
     font-weight: 700;
-    color: #1a4d8f; 
-    width:fit-content;
-
+    color: #1a4d8f;
+    width: fit-content;
 }
+
     .logoBox img {
         max-width: 100px;
         height: auto;
@@ -64,60 +67,17 @@ body {
 
 .skip-link {
     position: absolute;
-    top: -9999px;  Hide off-screen 
+    top: -9999px;
     left: 0;
     padding: 8px;
     background-color: #000;
     color: #fff;
-    z-index: 1000;  Ensure it appears above other elements 
+    z-index: 1000;
 }
 
-.skip-link:focus {
-        top: 0;  Position at top on focus 
+    .skip-link:focus {
+        top: 0;
     }
-
-/* Nav spacing */
-/*.navButtons {
-    gap: .65rem;
-}*/
-
-/*.navButtons .nav-link {
-    padding: 0;*/ /* padding comes from navButton below */
-/*}*/
-
-/*.navButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    font-size: 24px;
-    border: 1.5px solid #1a4d8f;
-    border-radius: 10px;
-    font-weight: 700;
-    color: #1a4d8f;
-    background: #fff;
-    text-decoration: none;
-    transition: background 120ms ease, transform 120ms ease, color 120ms ease, border-color 120ms ease;
-}*/
-
-/*.navButtons .nav-link.active,
-.navButtons .nav-link:hover {
-    background: #ff7a3c;
-    color: #fff;
-    border-color: #ff7a3c;
-}*/
-
-/* Mobile navbar polish */
-/*@media (max-width: 767.98px) {
-    .navButtons {
-        padding: .75rem 0;
-    }
-
-    .navButton {
-        width: fit-content;
-    }
-}
-*/
 
 /* Footer */
 
@@ -131,7 +91,7 @@ body {
 }
 
 .collapse {
-    margin-left: .99rem
+    margin-left: .99rem;
 }
 
 .pageHeader {
@@ -143,6 +103,7 @@ body {
     font-weight: 800;
     letter-spacing: -0.02em;
     margin: 0;
+    padding-bottom: 10px;
 }
 
 .clientGrid {
@@ -213,11 +174,11 @@ body {
     border-radius: 10px;
 }
 
-.formInput:focus {
-    outline: none;
-    border-color: #1f2937;
-    box-shadow: 0 0 0 .18rem rgba(31,41,55,0.12);
-}
+    .formInput:focus {
+        outline: none;
+        border-color: #1f2937;
+        box-shadow: 0 0 0 .18rem rgba(31,41,55,0.12);
+    }
 
 .medicalInput {
     width: 100%;
@@ -248,45 +209,116 @@ body {
     padding: .55rem 1rem;
     font-weight: 800;
 }
-.dataTable {
-    font-size: 20px;
 
-}
-.actionsCol {
-    padding:4px;
-    
-}
+/* Make wrapper the scroll container */
 .dataBox {
     border: 1px solid #e5e7eb;
     border-radius: 12px;
     background: #fff;
-    padding: 1rem;
+    padding: 1rem 1.25rem 1rem 1rem;
     box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
-.dataTable tbody tr {
-    height: 56px; /* give rows some brething room for tap targets */
+.dataTable {
+    font-size: 18px;
+    width: max-content;
+    min-width: 100%;
+    border-collapse: collapse;
 }
 
-.actionLink {
-    margin-right: .5rem;
+    /* Prevent squish */
+    .dataTable th,
+    .dataTable td {
+        white-space: nowrap;
+        padding: .7rem .65rem;
+        border-bottom: 1px solid #e5e7eb;
+        vertical-align: middle;
+    }
+
+    .dataTable thead th {
+        font-weight: 700;
+        background: #f8f9fb;
+    }
+
+    /* Keep actions area readable */
+    .dataTable th.actionsCol,
+    .dataTable td.actionsCol {
+        width: 1%;
+        min-width: max-content;
+        white-space: nowrap;
+        padding-right: 1rem;
+    }
+
+
+    /* Tabletfriendly controls */
+    .actionsCol .actionLink {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: .35rem .55rem;
+        margin-right: .25rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        line-height: 1;
+        color: #1a4d8f;
+    }
+    .actionsCol .actionLink:last-of-type {
+        margin-right: 0;
+    }
+
+    /
+    .actionsCol span[aria-hidden="true"] {
+        display: none;
+    }
+
+    /* action backgrounds (links looked hard to tap) */
+    .actionsCol .actionLink:not(.danger) {
+        background: #eef4ff;
+        border: 1px solid #cfe0ff;
+        color: #1a4d8f;
+    }
+
+    .actionsCol .actionLink.danger {
+        background: #fff1ef;
+        border: 1px solid #ffd1ca;
+        color: #d14334;
+    }
+
+    .actionsCol .actionLink:hover,
+    .actionsCol .actionLink:focus-visible {
+        text-decoration: none;
+        filter: brightness(0.97);
+        outline: none;
+    }
+
+    .actionsCol .actionLink:focus-visible {
+        box-shadow: 0 0 0 3px rgba(37, 140, 251, 0.35);
+    }
+
+.navbar-toggler {
+    border: none;
+}
+
+.helpButton {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid #1a4d8f;
+    background: #fff;
     color: #1a4d8f;
-    font-weight: 600;
-    text-decoration: none;
+    font-weight: 700;
 }
 
-.actionLink:hover {
-    color: #ff7a3c;
-}
-
-.actionLink.danger {
-    color: #d14334;
-}
-
-.navbar-toggler { border: none; }
-.helpButton { width: 38px; height: 38px; border-radius: 50%; border: 2px solid #1a4d8f; background: #fff; color: #1a4d8f; font-weight: 700; }
-.helpButton:hover { background: #ff7a3c; color: #fff; border-color: #ff7a3c; }
-
+    .helpButton:hover {
+        background: #ff7a3c;
+        color: #fff;
+        border-color: #ff7a3c;
+    }
 
 .classicNav {
     background: transparent;
@@ -322,18 +354,131 @@ body {
     color: #ff7a3c;
 }
 
-@media (max-width: 767.98px) {
-    .classicNavMenu {
-        flex-direction: column;
-        gap: .5rem;
+/* Keep action buttons visible on laptop/desktop by collapsing less necessary columns earlier */
+@media (max-width: 1500px) {
+    .clientsTable th:nth-child(6),
+    .clientsTable td:nth-child(6),
+    .sessionsTable th:nth-child(2),
+    .sessionsTable td:nth-child(2) {
+        display: none;
+    }
+}
+
+@media (max-width: 1320px) {
+    .clientsTable th:nth-child(7),
+    .clientsTable td:nth-child(7),
+    .sessionsTable th:nth-child(4),
+    .sessionsTable td:nth-child(4) {
+        display: none;
+    }
+}
+
+@media (max-width: 1090px) {
+    /* hide sessions/week in SESSIONS table */
+    .sessionsTable th:nth-child(3),
+    .sessionsTable td:nth-child(3) {
+        display: none !important;
     }
 
-        .classicNavMenu .nav-item {
-            border-left: none;
+    .dataTable {
+        font-size: 16px;
+    }
+
+
+        .dataTable th,
+        .dataTable td {
+            white-space: nowrap;
+            padding: .6rem .5rem;
         }
 
-    .classicNavLink {
-        font-size: 20px;
-        padding: .4rem 0;
+    .actionsCol { padding-right: .7rem; }
+
+        .actionsCol .actionLink {
+            min-height: 38px;
+            padding: .3rem .45rem;
+            margin-right: .2rem;
+            font-size: .95rem;
+        }
+}
+
+@media (max-width: 820px) {
+    /* CLIENTS ONLY: hide phone on narrow */
+    .clientsTable th:nth-child(4),
+    .clientsTable td:nth-child(4) {
+        display: none;
+    }
+
+    .dataTable {
+        font-size: 15px;
+    }
+
+    .actionsCol { padding-right: .8rem; }
+}
+
+@media (max-width: 680px) {
+    .clientsTable th:nth-child(3),
+    .clientsTable td:nth-child(3),
+    .clientsTable th:nth-child(5),
+    .clientsTable td:nth-child(5),
+    .sessionsTable th:nth-child(2),
+    .sessionsTable td:nth-child(2),
+    .sessionsTable th:nth-child(3),
+    .sessionsTable td:nth-child(3),
+    .sessionsTable th:nth-child(4),
+    .sessionsTable td:nth-child(4) {
+        display: none !important;
+    }
+
+    .dataTable {
+        font-size: 14px;
+    }
+
+    .actionsCol .actionLink {
+        min-height: 30px;
+        padding: .18rem .32rem;
+        margin-right: .1rem;
+        font-size: .8rem;
+    }
+}
+
+@media (max-width: 900px) and (orientation: portrait) {
+    .dataBox {
+        width: 100%;
+        max-width: 100%;
+        margin-inline: auto;
+        padding: .7rem .6rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .table.dataTable {
+        width: max-content !important;
+        min-width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .table.dataTable th,
+    .table.dataTable td {
+        padding: .5rem .35rem !important;
+        white-space: nowrap !important;
+    }
+
+    .table.dataTable th.actionsCol,
+    .table.dataTable td.actionsCol {
+        width: 1% !important;
+        min-width: max-content !important;
+        padding-right: .5rem !important;
+    }
+
+    .table.dataTable td.actionsCol .actionLink {
+        min-height: 32px !important;
+        padding: .2rem .38rem !important;
+        margin-right: .12rem !important;
+        font-size: .82rem !important;
+        border-radius: 7px !important;
+    }
+
+    .table.dataTable td.actionsCol span[aria-hidden="true"] {
+        margin: 0 .08rem !important;
     }
 }
