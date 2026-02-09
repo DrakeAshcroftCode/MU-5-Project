@@ -3,32 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\BlueKanary\\source\\repos\\MU-5-Project7\\MU5PrototypeProject\\MU5PrototypeProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|c:\\users\\bluekanary\\source\\repos\\mu-5-project7\\mu5prototypeproject\\mu5prototypeproject\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|solutionrelative:controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|c:\\users\\bluekanary\\source\\repos\\mu-5-project7\\mu5prototypeproject\\mu5prototypeproject\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|solutionrelative:controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|c:\\users\\bluekanary\\source\\repos\\mu-5-project7\\mu5prototypeproject\\mu5prototypeproject\\views\\client\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|solutionrelative:views\\client\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|c:\\users\\bluekanary\\source\\repos\\mu-5-project7\\mu5prototypeproject\\mu5prototypeproject\\models\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|solutionrelative:models\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|c:\\users\\bluekanary\\source\\repos\\mu-5-project7\\mu5prototypeproject\\mu5prototypeproject\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|solutionrelative:models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|c:\\users\\bluekanary\\source\\repos\\mu-5-project7\\mu5prototypeproject\\mu5prototypeproject\\views\\session\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|solutionrelative:views\\session\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|c:\\users\\bluekanary\\source\\repos\\mu-5-project7\\mu5prototypeproject\\mu5prototypeproject\\views\\client\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|solutionrelative:views\\client\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|c:\\users\\bluekanary\\source\\repos\\mu-5-project7\\mu5prototypeproject\\mu5prototypeproject\\views\\client\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|solutionrelative:views\\client\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|c:\\users\\bluekanary\\source\\repos\\mu-5-project7\\mu5prototypeproject\\mu5prototypeproject\\views\\session\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|solutionrelative:views\\session\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|c:\\users\\bluekanary\\source\\repos\\mu-5-project7\\mu5prototypeproject\\mu5prototypeproject\\models\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|solutionrelative:models\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|c:\\users\\bluekanary\\source\\repos\\mu-5-project7\\mu5prototypeproject\\mu5prototypeproject\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97C26D5E-C753-A0C6-9780-2D5449B7855D}|MU5PrototypeProject.csproj|solutionrelative:controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -57,14 +57,18 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "ClientController.cs",
               "DocumentMoniker": "C:\\Users\\BlueKanary\\source\\repos\\MU-5-Project7\\MU5PrototypeProject\\MU5PrototypeProject\\Controllers\\ClientController.cs",
               "RelativeDocumentMoniker": "Controllers\\ClientController.cs",
               "ToolTip": "C:\\Users\\BlueKanary\\source\\repos\\MU-5-Project7\\MU5PrototypeProject\\MU5PrototypeProject\\Controllers\\ClientController.cs",
               "RelativeToolTip": "Controllers\\ClientController.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAIwE4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAIwFIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-09T20:33:48.566Z",
               "EditorCaption": ""
@@ -84,7 +88,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\BlueKanary\\source\\repos\\MU-5-Project7\\MU5PrototypeProject\\MU5PrototypeProject\\Views\\Client\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Client\\Edit.cshtml",
@@ -97,52 +101,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "SessionController.cs",
               "DocumentMoniker": "C:\\Users\\BlueKanary\\source\\repos\\MU-5-Project7\\MU5PrototypeProject\\MU5PrototypeProject\\Controllers\\SessionController.cs",
               "RelativeDocumentMoniker": "Controllers\\SessionController.cs",
               "ToolTip": "C:\\Users\\BlueKanary\\source\\repos\\MU-5-Project7\\MU5PrototypeProject\\MU5PrototypeProject\\Controllers\\SessionController.cs",
               "RelativeToolTip": "Controllers\\SessionController.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAwwEwAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwE0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-09T19:43:21.723Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Session.cs",
               "DocumentMoniker": "C:\\Users\\BlueKanary\\source\\repos\\MU-5-Project7\\MU5PrototypeProject\\MU5PrototypeProject\\Models\\Session.cs",
               "RelativeDocumentMoniker": "Models\\Session.cs",
               "ToolTip": "C:\\Users\\BlueKanary\\source\\repos\\MU-5-Project7\\MU5PrototypeProject\\MU5PrototypeProject\\Models\\Session.cs",
               "RelativeToolTip": "Models\\Session.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAIwCoAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAIwBsAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-09T19:42:33.977Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\BlueKanary\\source\\repos\\MU-5-Project7\\MU5PrototypeProject\\MU5PrototypeProject\\Views\\Session\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\Session\\Create.cshtml",
               "ToolTip": "C:\\Users\\BlueKanary\\source\\repos\\MU-5-Project7\\MU5PrototypeProject\\MU5PrototypeProject\\Views\\Session\\Create.cshtml",
               "RelativeToolTip": "Views\\Session\\Create.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACYAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-02-09T19:42:24.927Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Client.cs",
               "DocumentMoniker": "C:\\Users\\BlueKanary\\source\\repos\\MU-5-Project7\\MU5PrototypeProject\\MU5PrototypeProject\\Models\\Client.cs",
               "RelativeDocumentMoniker": "Models\\Client.cs",
               "ToolTip": "C:\\Users\\BlueKanary\\source\\repos\\MU-5-Project7\\MU5PrototypeProject\\MU5PrototypeProject\\Models\\Client.cs",
               "RelativeToolTip": "Models\\Client.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAcwDgAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-09T19:00:25.872Z",
               "EditorCaption": ""
