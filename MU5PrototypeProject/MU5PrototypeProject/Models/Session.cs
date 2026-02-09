@@ -15,8 +15,8 @@ namespace MU5PrototypeProject.Models
         [Display(Name = "Created At")]
         public DateTime CreatedAt { get; set; }
 
-        [Display(Name = "Sessions/Week (Recommended)")]
-        public int? SessionsPerWeekRecommended { get; set; }
+        [Display(Name = "Sessions/Week")]
+        public int? SessionsPerWeekRecommended { get; set; } //why is this nullable?
 
         [Display(Name = "Archived")]
         public bool IsArchived { get; set; }
@@ -36,5 +36,14 @@ namespace MU5PrototypeProject.Models
         [Required(ErrorMessage = "A session must be assigned to a client.")]
         public int ClientID { get; set; }
         public Client? Client { get; set; }
+
+        // Already created a new migration and updated database to implement
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (SessionDate <= DateTime.Today)
+            {
+                yield return new ValidationResult("Session date must be in the future.", new[] { "SessionDate" });
+            }
+        }
     }
 }

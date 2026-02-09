@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MU5PrototypeProject.Data.MUMigrations
 {
     [DbContext(typeof(MUContext))]
-    [Migration("20260208154650_Initial")]
+    [Migration("20260209161855_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -82,7 +82,7 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DOB")
+                    b.Property<DateTime?>("DOB")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")

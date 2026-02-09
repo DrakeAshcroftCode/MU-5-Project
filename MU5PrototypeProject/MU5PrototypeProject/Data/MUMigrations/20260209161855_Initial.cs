@@ -19,7 +19,7 @@ namespace MU5PrototypeProject.Data.MUMigrations
                         .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    DOB = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DOB = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Phone = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
                     Email = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
                     ClientFolderUrl = table.Column<string>(type: "TEXT", maxLength: 2048, nullable: true),
