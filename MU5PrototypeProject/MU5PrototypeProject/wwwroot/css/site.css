@@ -210,7 +210,6 @@ body {
     font-weight: 800;
 }
 
-/* Make wrapper the scroll container */
 .dataBox {
     border: 1px solid #e5e7eb;
     border-radius: 12px;
@@ -227,6 +226,26 @@ body {
     width: max-content;
     min-width: 100%;
     border-collapse: collapse;
+}
+
+
+.clientsTable {
+    width: 100% !important;
+    min-width: 100% !important;
+}
+
+.clientsTable th:nth-child(5),
+.clientsTable td:nth-child(5) {
+    white-space: nowrap;
+}
+
+.clientsTable td:nth-child(5) a {
+    display: inline-block;
+    max-width: 18ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
 }
 
     /* Prevent squish */
@@ -271,9 +290,10 @@ body {
         margin-right: 0;
     }
 
-    /
+    /* separators */
     .actionsCol span[aria-hidden="true"] {
-        display: none;
+        display: inline;
+        margin: 0 .1rem;
     }
 
     /* action backgrounds (links looked hard to tap) */
@@ -354,10 +374,30 @@ body {
     color: #ff7a3c;
 }
 
-/* Keep action buttons visible on laptop/desktop by collapsing less necessary columns earlier */
-@media (max-width: 1500px) {
+@media (max-width: 1400px) {
     .clientsTable th:nth-child(6),
     .clientsTable td:nth-child(6),
+    .clientsTable th:nth-child(7),
+    .clientsTable td:nth-child(7) {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    .clientsTable th:nth-child(4),
+    .clientsTable td:nth-child(4) {
+        display: none;
+    }
+}
+
+@media (max-width: 1000px) {
+    .clientsTable th:nth-child(3),
+    .clientsTable td:nth-child(3) {
+        display: none;
+    }
+}
+
+@media (max-width: 1500px) {
     .sessionsTable th:nth-child(2),
     .sessionsTable td:nth-child(2) {
         display: none;
@@ -365,8 +405,6 @@ body {
 }
 
 @media (max-width: 1320px) {
-    .clientsTable th:nth-child(7),
-    .clientsTable td:nth-child(7),
     .sessionsTable th:nth-child(4),
     .sessionsTable td:nth-child(4) {
         display: none;
@@ -374,7 +412,7 @@ body {
 }
 
 @media (max-width: 1090px) {
-    /* hide sessions/week in SESSIONS table */
+    /* hide sessions/week in SESSIONS table (wide, ugly, unbecoming even) */
     .sessionsTable th:nth-child(3),
     .sessionsTable td:nth-child(3) {
         display: none !important;
@@ -402,12 +440,6 @@ body {
 }
 
 @media (max-width: 820px) {
-    /* CLIENTS ONLY: hide phone on narrow */
-    .clientsTable th:nth-child(4),
-    .clientsTable td:nth-child(4) {
-        display: none;
-    }
-
     .dataTable {
         font-size: 15px;
     }
@@ -418,8 +450,6 @@ body {
 @media (max-width: 680px) {
     .clientsTable th:nth-child(3),
     .clientsTable td:nth-child(3),
-    .clientsTable th:nth-child(5),
-    .clientsTable td:nth-child(5),
     .sessionsTable th:nth-child(2),
     .sessionsTable td:nth-child(2),
     .sessionsTable th:nth-child(3),
@@ -439,6 +469,10 @@ body {
         margin-right: .1rem;
         font-size: .8rem;
     }
+
+    .clientsTable td:nth-child(5) a {
+        max-width: 14ch;
+    }
 }
 
 @media (max-width: 900px) and (orientation: portrait) {
@@ -451,8 +485,14 @@ body {
         overflow-y: hidden;
     }
 
-    .table.dataTable {
+    .table.dataTable.sessionsTable {
         width: max-content !important;
+        min-width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .table.dataTable.clientsTable {
+        width: 100% !important;
         min-width: 100% !important;
         margin: 0 !important;
     }
@@ -461,6 +501,15 @@ body {
     .table.dataTable td {
         padding: .5rem .35rem !important;
         white-space: nowrap !important;
+    }
+
+    .table.dataTable.clientsTable th:nth-child(5),
+    .table.dataTable.clientsTable td:nth-child(5) {
+        white-space: nowrap !important;
+    }
+
+    .table.dataTable.clientsTable td:nth-child(5) a {
+        max-width: 16ch;
     }
 
     .table.dataTable th.actionsCol,
