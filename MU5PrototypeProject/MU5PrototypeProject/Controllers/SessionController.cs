@@ -169,12 +169,12 @@ namespace MU5PrototypeProject.Controllers
 
             var dQuery = from t in _context.Clients
 
-                         orderby t.ClientName
+                         orderby t.FirstName
                          select t;
 
-            ViewData["ClientID"] = new SelectList(dQuery, "ID", "ClientName", session?.ClientID);
+            ViewData["ClientID"] = new SelectList(dQuery, "FirstName", "LastName", session?.ClientID);
 
-            ViewData["TrainerID"] = new SelectList(dQuery, "ID", "TrainerName", session?.TrainerID);
+            ViewData["TrainerID"] = new SelectList(dQuery, "FirstName", "LastName", session?.TrainerID);
 
         }
         private bool SessionExists(int id)
