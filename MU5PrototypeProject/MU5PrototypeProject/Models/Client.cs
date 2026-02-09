@@ -38,6 +38,7 @@ namespace MU5PrototypeProject.Models
         public string PhoneFormatted => "(" + Phone?.Substring(0, 3) + ") "
            + Phone?.Substring(3, 3) + "-" + Phone?[6..];
 
+
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "You cannot leave the first name blank.")]
         [StringLength(50, ErrorMessage = "First name cannot be more than 50 characters long.")]
@@ -63,6 +64,7 @@ namespace MU5PrototypeProject.Models
 
         [StringLength(255)]
         [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Please follow the correct email format test@email.com")]
         public string Email { get; set; } = string.Empty;
 
         [Display(Name = "Client Folder URL")]
