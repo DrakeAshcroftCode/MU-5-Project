@@ -2,7 +2,7 @@
 
 namespace MU5PrototypeProject.Models
 {
-    public class Session
+    public class Session : IValidatableObject
     {
         public int ID { get; set; }
 
@@ -37,7 +37,7 @@ namespace MU5PrototypeProject.Models
         public int ClientID { get; set; }
         public Client? Client { get; set; }
 
-        // Already created a new migration and updated database to implement
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (SessionDate <= DateTime.Today)

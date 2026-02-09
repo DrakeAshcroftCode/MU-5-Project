@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MU5PrototypeProject.Data;
@@ -22,8 +18,11 @@ namespace MU5PrototypeProject.Controllers
         // GET: Session
         public async Task<IActionResult> Index()
         {
-            var mUContext = _context.Sessions.Include(s => s.Client).Include(s => s.Trainer);
-            return View(await mUContext.ToListAsync());
+            var sessions = _context.Sessions
+                .Include(s => s.Client)
+                .Include(s => s.Trainer)
+                .AsNoTracking(); ;
+            return View(await sessions.ToListAsync());
         }
 
         // GET: Session/Details/5
@@ -49,8 +48,9 @@ namespace MU5PrototypeProject.Controllers
         // GET: Session/Create
         public IActionResult Create()
         {
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName");
-            ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName");
+            PopulateDropDownLists();
+            //ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName");
+            //ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName");
             return View();
         }
 
@@ -67,8 +67,9 @@ namespace MU5PrototypeProject.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName", session.ClientID);
-            ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName", session.TrainerID);
+            PopulateDropDownLists(session);
+            //ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName", session.ClientID);
+            //ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName", session.TrainerID);
             return View(session);
         }
 
@@ -79,14 +80,14 @@ namespace MU5PrototypeProject.Controllers
             {
                 return NotFound();
             }
-
             var session = await _context.Sessions.FindAsync(id);
             if (session == null)
             {
                 return NotFound();
             }
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName", session.ClientID);
-            ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName", session.TrainerID);
+            PopulateDropDownLists(session);
+            //ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName", session.ClientID);
+            //ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName", session.TrainerID);
             return View(session);
         }
 
@@ -122,8 +123,9 @@ namespace MU5PrototypeProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName", session.ClientID);
-            ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName", session.TrainerID);
+            PopulateDropDownLists(session);
+            //ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName", session.ClientID);
+            //ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName", session.TrainerID);
             return View(session);
         }
 
@@ -162,6 +164,19 @@ namespace MU5PrototypeProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        private void PopulateDropDownLists(Session? session = null)
+        {
+
+            var dQuery = from t in _context.Clients
+
+                         orderby t.ClientName
+                         select t;
+
+            ViewData["ClientID"] = new SelectList(dQuery, "ID", "ClientName", session?.ClientID);
+
+            ViewData["TrainerID"] = new SelectList(dQuery, "ID", "TrainerName", session?.TrainerID);
+
+        }
         private bool SessionExists(int id)
         {
             return _context.Sessions.Any(e => e.ID == id);
