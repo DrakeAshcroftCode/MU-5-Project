@@ -18,7 +18,7 @@ namespace MU5PrototypeProject.Models
             }
         }
 
-        public string? Age
+        public int? Age
         {
             get
             {
@@ -27,7 +27,7 @@ namespace MU5PrototypeProject.Models
                 int? a = today.Year - DOB?.Year
                     - ((today.Month < DOB?.Month ||
                         (today.Month == DOB?.Month && today.Day < DOB?.Day) ? 1 : 0));
-                return a?.ToString();
+                return a;
             }
         }
 

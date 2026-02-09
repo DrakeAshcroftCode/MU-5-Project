@@ -77,15 +77,22 @@ namespace MU5PrototypeProject.Controllers
                 {
                     ModelState.AddModelError("DOB", "Date Of Birth must not be in the future");
 
-                } else { 
-                
+
+                } 
+                else if (client.Age <= 7)
+                {
+                    ModelState.AddModelError("DOB", "Client must be at least 7 years old");
+
+                }
+                else {
+
                     if (ModelState.IsValid)
                     {
                         _context.Add(client);
                         await _context.SaveChangesAsync();
                         return RedirectToAction(nameof(Details), new { client.ID });
                     }
-                
+
                 }
 
             }
