@@ -51,19 +51,23 @@
                 @Html.DisplayFor(modelItem => item.IsArchived)
             </td>
             <td>
-                    @Html.DisplayFor(modelItem => item.Trainer.TrainerName)
+                @Html.DisplayFor(modelItem => item.Trainer.TrainerName)
             </td>
             <td>
-                    @Html.DisplayFor(modelItem => item.Client.ClientName)
+                @Html.DisplayFor(modelItem => item.Client.ClientName)
             </td>
-                    <td class="actionsCol">
-                        <a class="actionLink" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                        <span aria-hidden="true"> | </span>
-                        <a class="actionLink" asp-action="Details" asp-route-id="@item.ID">Details</a>
-                        <span aria-hidden="true"> | </span>
-                        <a class="actionLink danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                    </td>
-
+            <td class="actionsCol">
+                @if (item.IsArchived)
+                {
+                    <span class="actionLink disabledAction" aria-disabled="true">Edit</span>
+                }
+                else
+                {
+                    <a class="actionLink" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                }
+                <span aria-hidden="true"> | </span>
+                <a class="actionLink" asp-action="Details" asp-route-id="@item.ID">Details</a>
+            </td>
         </tr>
 }
     </tbody>

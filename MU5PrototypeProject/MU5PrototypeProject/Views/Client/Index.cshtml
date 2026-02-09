@@ -61,14 +61,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IsArchived)
             </td>
-                <td class="actionsCol">
+            <td class="actionsCol">
+                @if (item.IsArchived)
+                {
+                    <span class="actionLink disabledAction" aria-disabled="true">Edit</span>
+                }
+                else
+                {
                     <a class="actionLink" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                    <span aria-hidden="true"> | </span>
-                    <a class="actionLink" asp-action="Details" asp-route-id="@item.ID">Details</a>
-                    <span aria-hidden="true"> | </span>
-                    <a class="actionLink danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
-            </tr>
-        }
+                }
+                <span aria-hidden="true"> | </span>
+                <a class="actionLink" asp-action="Details" asp-route-id="@item.ID">Details</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>

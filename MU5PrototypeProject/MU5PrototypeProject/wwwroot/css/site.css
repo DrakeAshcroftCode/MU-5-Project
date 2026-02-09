@@ -302,11 +302,20 @@ body {
         border: 1px solid #cfe0ff;
         color: #1a4d8f;
     }
-
+/*Commented out because we dont have any 'dangerous' (Delete :) ) buttons active. Uncomment to use again. */
+/*
     .actionsCol .actionLink.danger {
         background: #fff1ef;
         border: 1px solid #ffd1ca;
         color: #d14334;
+    }*/
+
+    .actionsCol .actionLink.disabledAction,
+    .actionsCol .actionLink[aria-disabled="true"] {
+        background: #f1f3f5;
+        border: 1px solid #d5d9de;
+        color: #7b8794;
+        cursor: not-allowed;
     }
 
     .actionsCol .actionLink:hover,
@@ -314,6 +323,14 @@ body {
         text-decoration: none;
         filter: brightness(0.97);
         outline: none;
+    }
+
+    .actionsCol .actionLink.disabledAction:hover,
+    .actionsCol .actionLink.disabledAction:focus-visible,
+    .actionsCol .actionLink[aria-disabled="true"]:hover,
+    .actionsCol .actionLink[aria-disabled="true"]:focus-visible {
+        filter: none;
+        box-shadow: none;
     }
 
     .actionsCol .actionLink:focus-visible {
