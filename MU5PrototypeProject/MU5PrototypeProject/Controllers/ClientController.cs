@@ -95,32 +95,29 @@ namespace MU5PrototypeProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,DOB,Phone,Email,ClientFolderUrl,CreatedAt,IsArchived")] Client client)
+        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,DOB,Phone,Email,ClientFolderUrl,IsArchived")] Client client)
         {
             try
             {
                 if (client.DOB > DateTime.Today)
                 {
                     ModelState.AddModelError("DOB", "Date Of Birth must not be in the future");
-
-
-                } 
+                }
                 else if (client.Age <= 7)
                 {
                     ModelState.AddModelError("DOB", "Client must be at least 7 years old");
-
                 }
-                else {
-
+                else
+                {
                     if (ModelState.IsValid)
                     {
+                        client.CreatedAt = DateTime.Now; // <- set by system
+
                         _context.Add(client);
                         await _context.SaveChangesAsync();
                         return RedirectToAction(nameof(Details), new { client.ID });
                     }
-
                 }
-
             }
             catch (RetryLimitExceededException)
             {
@@ -131,7 +128,6 @@ namespace MU5PrototypeProject.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
-
 
             return View(client);
         }
@@ -164,40 +160,47 @@ namespace MU5PrototypeProject.Controllers
 
             //Check if the client exists
             if (clientToUpdate == null)
-               {
-                    return NotFound();
-               }
-
-            if (await TryUpdateModelAsync(clientToUpdate, "", c => c.FirstName, c => c.LastName, c => c.DOB, 
-                c => c.Phone, c => c.Email, c => c.ClientFolderUrl, c => c.CreatedAt, c => c.IsArchived))  
             {
-                try
-                {
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ClientExists(clientToUpdate.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                catch (RetryLimitExceededException)
-                {
-                    ModelState.AddModelError("", "Unable to save changes after multiple attempts. " +
-                        "Try again, and if the problem persists, see your system administrator.");
-                }
-                catch (DbUpdateException)
-                {
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-                }
+                return NotFound();
             }
-            return View(clientToUpdate);
+
+            if (await TryUpdateModelAsync(clientToUpdate, "",
+                c => c.FirstName,
+                c => c.LastName,
+                c => c.DOB,
+                c => c.Phone,
+                c => c.Email,
+                c => c.ClientFolderUrl,
+                c => c.IsArchived))  // CreatedAt removed here
+    {
+        try
+        {
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!ClientExists(clientToUpdate.ID))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
+        }
+        catch (RetryLimitExceededException)
+        {
+            ModelState.AddModelError("", "Unable to save changes after multiple attempts. " +
+                "Try again, and if the problem persists, see your system administrator.");
+        }
+        catch (DbUpdateException)
+        {
+            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+        }
+    }
+
+    return View(clientToUpdate);
         }
 
         // GET: Client/Delete/5
