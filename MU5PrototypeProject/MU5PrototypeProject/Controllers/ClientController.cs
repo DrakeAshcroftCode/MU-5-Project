@@ -22,13 +22,39 @@ namespace MU5PrototypeProject.Controllers
         }
 
         // GET: Client
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchName, string SearchPhone)
         {
             try
             {
+                //Count the number of filters applied - start by assuming no filters
+                ViewData["Filtering"] = "btn-outline-secondary";
+                int numberFilters = 0;
                 var clients = await _context.Clients
                         .AsNoTracking()
                         .ToListAsync();
+
+                if (!String.IsNullOrEmpty(SearchName))
+                {
+                    clients = clients.Where(s => s.FirstName.ToUpper().Contains(SearchName.ToUpper())
+                                            || s.LastName.ToUpper().Contains(SearchName.ToUpper())).ToList();
+                        numberFilters++;
+                }
+                if (!String.IsNullOrEmpty(SearchPhone))
+                {
+                    clients = clients.Where(s => s.Phone.ToUpper().Contains(SearchPhone.ToUpper())).ToList();
+                    numberFilters++;
+                }
+                //Give feedback about the state of the filters
+                if (numberFilters != 0)
+                {
+                    //Toggle the Open/Closed state of the collapse depending on if we are filtering
+                    ViewData["Filtering"] = " btn-danger";
+                    //Show how many filters have been applied
+                    ViewData["numberFilters"] = "(" + numberFilters.ToString()
+                        + " Filter" + (numberFilters > 1 ? "s" : "") + " Applied)";
+                    //Keep the Bootstrap collapse open
+                    @ViewData["ShowFilter"] = " show";
+                }
 
                 return View(clients);
             }
