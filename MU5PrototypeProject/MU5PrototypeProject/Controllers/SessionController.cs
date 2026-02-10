@@ -39,31 +39,109 @@ namespace MU5PrototypeProject.Controllers
             if (ClientID.HasValue)
             {
                 sessions = sessions.Where(s => s.ClientID == ClientID);
+                //numberFilters++;
             }
             if (TrainerID.HasValue)
             {
                 sessions = sessions.Where(p => p.TrainerID == TrainerID);
+                //numberFilters++;
             }
-            if (!String.IsNullOrEmpty(SearchSessionDate))
-            {
-                sessions = sessions.Where(p => p.SessionDate.Date.Contains(SearchSessionDate);
-            }
+            //if (!String.IsNullOrEmpty(SearchSessionDate))
+            //{
+            //    sessions = sessions.Where(p => p.SessionDate.Date.Contains(SearchSessionDate);
+            //numberFilters++;
+            //}
             return View(await sessions.ToListAsync());
 
-            ////Before we sort, see if we have called for a change of filtering or sorting
-            //if (!String.IsNullOrEmpty(actionButton)) //Form Submitted!
-            //{
-            //    //page = 1;//Reset page to start
+            //Before we sort, see if we have called for a change of filtering or sorting
+            if (!String.IsNullOrEmpty(actionButton)) //Form Submitted!
+            {
+                //page = 1;//Reset page to start
 
-            //    if (sortOptions.Contains(actionButton))//Change of sort is requested
-            //    {
-            //        if (actionButton == sortField) //Reverse order on same field
-            //        {
-            //            sortDirection = sortDirection == "asc" ? "desc" : "asc";
-            //        }
-            //        sortField = actionButton;//Sort by the button clicked
-            //    }
+                if (sortOptions.Contains(actionButton))//Change of sort is requested
+                {
+                    if (actionButton == sortField) //Reverse order on same field
+                    {
+                        sortDirection = sortDirection == "asc" ? "desc" : "asc";
+                    }
+                    sortField = actionButton;//Sort by the button clicked
+                }
+            }
+            ////Give feedback about the state of the filters
+            //if (numberFilters != 0)
+            //{
+            //    //Toggle the Open/Closed state of the collapse depending on if we are filtering
+            //    ViewData["Filtering"] = " btn-danger";
+            //    //Show how many filters have been applied
+            //    ViewData["numberFilters"] = "(" + numberFilters.ToString()
+            //        + " Filter" + (numberFilters > 1 ? "s" : "") + " Applied)";
+            //    //Keep the Bootstrap collapse open
+            //    @ViewData["ShowFilter"] = " show";
             //}
+
+            //Before we sort, see if we have called for a change of filtering or sorting
+            if (!String.IsNullOrEmpty(actionButton)) //Form Submitted!
+            {
+                //page = 1;//Reset page to start
+
+                if (sortOptions.Contains(actionButton))//Change of sort is requested
+                {
+                    if (actionButton == sortField) //Reverse order on same field
+                    {
+                        sortDirection = sortDirection == "asc" ? "desc" : "asc";
+                    }
+                    sortField = actionButton;//Sort by the button clicked
+                }
+            }
+            //Now we know which field and direction to sort by
+            if (sortField == "SessionDate")
+            {
+                if (sortDirection == "asc")
+                {
+                    sessions = sessions
+                        .OrderByDescending(p => p.SessionDate);
+                }
+                else
+                {
+                    sessions = sessions
+                        .OrderBy(p => p.SessionDate);
+                }
+            }
+            else if (sortField == "Instruments")
+            {
+                if (sortDirection == "asc")
+                {
+                    sessions = sessions
+                       .OrderBy(p => p.Client.ClientName);
+                }
+                else
+                {
+                    sessions = sessions
+                       .OrderByDescending(p => p.Client.ClientName);
+                }
+            }
+            else //Sorting by Trainer
+            {
+                if (sortDirection == "asc")
+                {
+                    sessions = sessions
+                        .OrderBy(p => p.Trainer.TrainerName);
+                }
+                else
+                {
+                    sessions = sessions
+                        .OrderByDescending(p => p.Trainer.TrainerName);
+                }
+            }
+            //Set sort for next time
+            ViewData["sortField"] = sortField;
+            ViewData["sortDirection"] = sortDirection;
+
+            ////Handle Paging
+            //int pageSize = PageSizeHelper.SetPageSize(HttpContext, pageSizeID, ControllerName());
+            //ViewData["pageSizeID"] = PageSizeHelper.PageSizeList(pageSize);
+
+            //var pagedData = await PaginatedList<Musician>.CreateAsync(musicians.AsNoTracking(), page ?? 1, pageSize);
         }
 
 
