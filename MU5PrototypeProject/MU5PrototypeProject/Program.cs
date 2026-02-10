@@ -22,15 +22,10 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
-
-    using var scope = app.Services.CreateScope();
-    var services = scope.ServiceProvider;
-    // Dev-only initializer, similar to Medical Office
-    MUInitializer.Initialize(serviceProvider: services,
-        deleteDatabase: false, useMigrations: true, seedSampleData: true);
 }
 else
 {
@@ -51,5 +46,21 @@ app.MapControllerRoute(
 
 app.MapRazorPages()
    .WithStaticAssets();
+
+// Prepare DB and seed data (Medical Office style: just before app.Run)
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    // Dev: migrations + sample data
+    // Non-dev (staging/prod): migrations, but no sample data
+    var isDev = app.Environment.IsDevelopment();
+
+    MUInitializer.Initialize(
+        serviceProvider: services,
+        deleteDatabase: false,
+        useMigrations: true,
+        seedSampleData: isDev);
+}
 
 app.Run();

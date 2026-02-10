@@ -22,8 +22,13 @@ namespace MU5PrototypeProject.Controllers
         }
 
         // GET: Client
-        public async Task<IActionResult> Index(string SearchName, string SearchPhone,string actionButton,
-            string sortDirection = "asc", string sortField = "Client")
+        public async Task<IActionResult> Index(
+            string SearchName,
+            string SearchPhone,
+            string actionButton,
+            bool showArchived = false,
+            string sortDirection = "asc",
+            string sortField = "Client")
         {
             try
             {
@@ -35,20 +40,34 @@ namespace MU5PrototypeProject.Controllers
                 ViewData["Filtering"] = "btn-outline-secondary";
                 int numberFilters = 0;
                 var clients = await _context.Clients
-                        .AsNoTracking()
-                        .ToListAsync();
+                    .AsNoTracking()
+                    .ToListAsync();
 
-                if (!String.IsNullOrEmpty(SearchName))
+                // Apply archived filter first
+                if (!showArchived)
+                {
+                    clients = clients.Where(c => !c.IsArchived).ToList();
+                }
+                else
+                {
+                    numberFilters++; // count as a filter when showing archived
+                }
+
+                if (!string.IsNullOrEmpty(SearchName))
                 {
                     clients = clients.Where(s => s.FirstName.ToUpper().Contains(SearchName.ToUpper())
-                                            || s.LastName.ToUpper().Contains(SearchName.ToUpper())).ToList();
-                        numberFilters++;
-                }
-                if (!String.IsNullOrEmpty(SearchPhone))
-                {
-                    clients = clients.Where(s => s.Phone.ToUpper().Contains(SearchPhone.ToUpper())).ToList();
+                                            || s.LastName.ToUpper().Contains(SearchName.ToUpper()))
+                                     .ToList();
                     numberFilters++;
                 }
+
+                if (!string.IsNullOrEmpty(SearchPhone))
+                {
+                    clients = clients.Where(s => s.Phone.ToUpper().Contains(SearchPhone.ToUpper()))
+                                     .ToList();
+                    numberFilters++;
+                }
+
                 //Give feedback about the state of the filters
                 if (numberFilters != 0)
                 {
@@ -95,6 +114,8 @@ namespace MU5PrototypeProject.Controllers
                 }
                 ViewData["sortDirection"] = sortDirection;
                 ViewData["sortField"] = sortField;
+                ViewData["showArchived"] = showArchived;
+
                 return View(clients);
             }
             catch (Exception)
@@ -284,6 +305,56 @@ namespace MU5PrototypeProject.Controllers
                 ModelState.AddModelError("", "Unable to delete client. Try again, and if the problem persists see your system administrator.");
             }
             return View(client);
+        }
+
+        // POST: Client/Archive/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Archive(int id)
+        {
+            var client = await _context.Clients.FirstOrDefaultAsync(c => c.ID == id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            client.IsArchived = true;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to archive client. Try again, and if the problem persists see your system administrator.");
+                return View("Details", client);
+            }
+        }
+
+        // POST: Client/Unarchive/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Unarchive(int id)
+        {
+            var client = await _context.Clients.FirstOrDefaultAsync(c => c.ID == id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            client.IsArchived = false;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to unarchive client. Try again, and if the problem persists see your system administrator.");
+                return View("Details", client);
+            }
         }
 
         private bool ClientExists(int id)

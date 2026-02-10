@@ -57,7 +57,7 @@ namespace MU5PrototypeProject.Models
         public DateTime? DOB { get; set; }
 
         [Required(ErrorMessage = "Phone number is required.")]
-        [RegularExpression(@"^[2-9]\d{2}[2-9]\d{6}$", ErrorMessage = "Enter a valid 10-digit phone number.")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Enter a valid 10-digit phone number.")]
         [DataType(DataType.PhoneNumber)]
         [StringLength(10)]
         public string Phone { get; set; } = string.Empty;
