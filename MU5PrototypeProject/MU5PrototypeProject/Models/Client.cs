@@ -86,6 +86,10 @@ namespace MU5PrototypeProject.Models
             {
                 yield return new ValidationResult("Date of Birth cannot be in the future.", new[] { "DOB" });
             }
+            else if (Age < 17)
+            {
+                yield return new ValidationResult("Musician must be at least 18 years old.", new[] { "DOB" });
+            }
         }
     }
 }
