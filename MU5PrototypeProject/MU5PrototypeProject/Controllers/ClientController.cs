@@ -22,10 +22,15 @@ namespace MU5PrototypeProject.Controllers
         }
 
         // GET: Client
-        public async Task<IActionResult> Index(string SearchName, string SearchPhone)
+        public async Task<IActionResult> Index(string SearchName, string SearchPhone,string actionButton,
+            string sortDirection = "asc", string sortField = "Client")
         {
             try
             {
+                //List of sort options.
+                //NOTE: make sure this array has matching values to the column headings
+                string[] sortOptions = new[] { "Client" };
+
                 //Count the number of filters applied - start by assuming no filters
                 ViewData["Filtering"] = "btn-outline-secondary";
                 int numberFilters = 0;
@@ -56,6 +61,40 @@ namespace MU5PrototypeProject.Controllers
                     @ViewData["ShowFilter"] = " show";
                 }
 
+                //Before we sort, see if we have called for a change of filtering or sorting
+                if (!String.IsNullOrEmpty(actionButton)) //Form Submitted!
+                {
+
+                    if (sortOptions.Contains(actionButton))//Change of sort is requested
+                    {
+                        if (actionButton == sortField) //Reverse order on same field
+                        {
+                            sortDirection = sortDirection == "asc" ? "desc" : "asc";
+                        }
+                        sortField = actionButton;//Sort by the button clicked
+                    }
+                }
+
+                if (sortField == "Client")
+                {
+                    if (sortDirection == "asc")
+                    {
+                        clients = clients
+                            .OrderBy(c => c.LastName)
+                            .ThenBy(c => c.FirstName)
+                            .ToList();
+                            
+                    }
+                    else
+                    {
+                        clients = clients
+                            .OrderByDescending(c => c.LastName)
+                            .ThenBy(c => c.FirstName)
+                            .ToList();
+                    }
+                }
+                ViewData["sortDirection"] = sortDirection;
+                ViewData["sortField"] = sortField;
                 return View(clients);
             }
             catch (Exception)
@@ -244,7 +283,7 @@ namespace MU5PrototypeProject.Controllers
                 //Log the error (uncomment ex variable name and write a log.)   
                 ModelState.AddModelError("", "Unable to delete client. Try again, and if the problem persists see your system administrator.");
             }
-           return View(client);
+            return View(client);
         }
 
         private bool ClientExists(int id)
