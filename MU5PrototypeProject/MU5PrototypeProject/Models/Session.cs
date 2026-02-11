@@ -2,7 +2,7 @@
 
 namespace MU5PrototypeProject.Models
 {
-    public class Session
+    public class Session : IValidatableObject
     {
         public int ID { get; set; }
 
@@ -15,7 +15,7 @@ namespace MU5PrototypeProject.Models
         [Display(Name = "Created At")]
         public DateTime CreatedAt { get; set; }
 
-        [Display(Name = "Sessions/Week (Recommended)")]
+        [Display(Name = "Sessions/Week")]
         public int? SessionsPerWeekRecommended { get; set; }
 
         [Display(Name = "Archived")]
@@ -39,10 +39,11 @@ namespace MU5PrototypeProject.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (SessionDate > DateTime.Today)
+            if (SessionDate <= DateTime.Today)
             {
-                yield return new ValidationResult("Session cannot be in the future.", new[] { "" });
+                yield return new ValidationResult("Session cannot be in the future.", new[] { "SessionDate" });
             }
+
         }
 
     }

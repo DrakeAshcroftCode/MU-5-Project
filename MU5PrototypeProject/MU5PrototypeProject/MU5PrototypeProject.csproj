@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Data\MUMigrations\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 

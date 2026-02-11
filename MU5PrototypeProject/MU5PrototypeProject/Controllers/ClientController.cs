@@ -22,28 +22,52 @@ namespace MU5PrototypeProject.Controllers
         }
 
         // GET: Client
-        public async Task<IActionResult> Index(string SearchName, string SearchPhone)
+        public async Task<IActionResult> Index(
+            string SearchName,
+            string SearchPhone,
+            string actionButton,
+            bool showArchived = false,
+            string sortDirection = "asc",
+            string sortField = "Client")
         {
             try
             {
+                //List of sort options.
+                //NOTE: make sure this array has matching values to the column headings
+                string[] sortOptions = new[] { "Client" };
+
                 //Count the number of filters applied - start by assuming no filters
                 ViewData["Filtering"] = "btn-outline-secondary";
                 int numberFilters = 0;
                 var clients = await _context.Clients
-                        .AsNoTracking()
-                        .ToListAsync();
+                    .AsNoTracking()
+                    .ToListAsync();
 
-                if (!String.IsNullOrEmpty(SearchName))
+                // Apply archived filter first
+                if (!showArchived)
+                {
+                    clients = clients.Where(c => !c.IsArchived).ToList();
+                }
+                else
+                {
+                    numberFilters++; // count as a filter when showing archived
+                }
+
+                if (!string.IsNullOrEmpty(SearchName))
                 {
                     clients = clients.Where(s => s.FirstName.ToUpper().Contains(SearchName.ToUpper())
-                                            || s.LastName.ToUpper().Contains(SearchName.ToUpper())).ToList();
-                        numberFilters++;
-                }
-                if (!String.IsNullOrEmpty(SearchPhone))
-                {
-                    clients = clients.Where(s => s.Phone.ToUpper().Contains(SearchPhone.ToUpper())).ToList();
+                                            || s.LastName.ToUpper().Contains(SearchName.ToUpper()))
+                                     .ToList();
                     numberFilters++;
                 }
+
+                if (!string.IsNullOrEmpty(SearchPhone))
+                {
+                    clients = clients.Where(s => s.Phone.ToUpper().Contains(SearchPhone.ToUpper()))
+                                     .ToList();
+                    numberFilters++;
+                }
+
                 //Give feedback about the state of the filters
                 if (numberFilters != 0)
                 {
@@ -55,6 +79,42 @@ namespace MU5PrototypeProject.Controllers
                     //Keep the Bootstrap collapse open
                     @ViewData["ShowFilter"] = " show";
                 }
+
+                //Before we sort, see if we have called for a change of filtering or sorting
+                if (!String.IsNullOrEmpty(actionButton)) //Form Submitted!
+                {
+
+                    if (sortOptions.Contains(actionButton))//Change of sort is requested
+                    {
+                        if (actionButton == sortField) //Reverse order on same field
+                        {
+                            sortDirection = sortDirection == "asc" ? "desc" : "asc";
+                        }
+                        sortField = actionButton;//Sort by the button clicked
+                    }
+                }
+
+                if (sortField == "Client")
+                {
+                    if (sortDirection == "asc")
+                    {
+                        clients = clients
+                            .OrderBy(c => c.LastName)
+                            .ThenBy(c => c.FirstName)
+                            .ToList();
+                            
+                    }
+                    else
+                    {
+                        clients = clients
+                            .OrderByDescending(c => c.LastName)
+                            .ThenBy(c => c.FirstName)
+                            .ToList();
+                    }
+                }
+                ViewData["sortDirection"] = sortDirection;
+                ViewData["sortField"] = sortField;
+                ViewData["showArchived"] = showArchived;
 
                 return View(clients);
             }
@@ -95,32 +155,29 @@ namespace MU5PrototypeProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,DOB,Phone,Email,ClientFolderUrl,CreatedAt,IsArchived")] Client client)
+        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,DOB,Phone,Email,ClientFolderUrl,IsArchived")] Client client)
         {
             try
             {
                 if (client.DOB > DateTime.Today)
                 {
                     ModelState.AddModelError("DOB", "Date Of Birth must not be in the future");
-
-
-                } 
+                }
                 else if (client.Age <= 7)
                 {
                     ModelState.AddModelError("DOB", "Client must be at least 7 years old");
-
                 }
-                else {
-
+                else
+                {
                     if (ModelState.IsValid)
                     {
+                        client.CreatedAt = DateTime.Now; // <- set by system
+
                         _context.Add(client);
                         await _context.SaveChangesAsync();
                         return RedirectToAction(nameof(Details), new { client.ID });
                     }
-
                 }
-
             }
             catch (RetryLimitExceededException)
             {
@@ -131,7 +188,6 @@ namespace MU5PrototypeProject.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
-
 
             return View(client);
         }
@@ -164,40 +220,47 @@ namespace MU5PrototypeProject.Controllers
 
             //Check if the client exists
             if (clientToUpdate == null)
-               {
-                    return NotFound();
-               }
-
-            if (await TryUpdateModelAsync(clientToUpdate, "", c => c.FirstName, c => c.LastName, c => c.DOB, 
-                c => c.Phone, c => c.Email, c => c.ClientFolderUrl, c => c.CreatedAt, c => c.IsArchived))  
             {
-                try
-                {
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ClientExists(clientToUpdate.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                catch (RetryLimitExceededException)
-                {
-                    ModelState.AddModelError("", "Unable to save changes after multiple attempts. " +
-                        "Try again, and if the problem persists, see your system administrator.");
-                }
-                catch (DbUpdateException)
-                {
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-                }
+                return NotFound();
             }
-            return View(clientToUpdate);
+
+            if (await TryUpdateModelAsync(clientToUpdate, "",
+                c => c.FirstName,
+                c => c.LastName,
+                c => c.DOB,
+                c => c.Phone,
+                c => c.Email,
+                c => c.ClientFolderUrl,
+                c => c.IsArchived))  // CreatedAt removed here
+    {
+        try
+        {
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!ClientExists(clientToUpdate.ID))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
+        }
+        catch (RetryLimitExceededException)
+        {
+            ModelState.AddModelError("", "Unable to save changes after multiple attempts. " +
+                "Try again, and if the problem persists, see your system administrator.");
+        }
+        catch (DbUpdateException)
+        {
+            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+        }
+    }
+
+    return View(clientToUpdate);
         }
 
         // GET: Client/Delete/5
@@ -241,7 +304,57 @@ namespace MU5PrototypeProject.Controllers
                 //Log the error (uncomment ex variable name and write a log.)   
                 ModelState.AddModelError("", "Unable to delete client. Try again, and if the problem persists see your system administrator.");
             }
-           return View(client);
+            return View(client);
+        }
+
+        // POST: Client/Archive/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Archive(int id)
+        {
+            var client = await _context.Clients.FirstOrDefaultAsync(c => c.ID == id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            client.IsArchived = true;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to archive client. Try again, and if the problem persists see your system administrator.");
+                return View("Details", client);
+            }
+        }
+
+        // POST: Client/Unarchive/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Unarchive(int id)
+        {
+            var client = await _context.Clients.FirstOrDefaultAsync(c => c.ID == id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            client.IsArchived = false;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to unarchive client. Try again, and if the problem persists see your system administrator.");
+                return View("Details", client);
+            }
         }
 
         private bool ClientExists(int id)

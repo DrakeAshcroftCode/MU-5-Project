@@ -53,14 +53,21 @@
     {
         <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
         <text> | </text>
-    }
-    @if (Model != null && !Model.IsArchived)
-    {
+
         <form asp-action="Archive" asp-route-id="@Model.ID" method="post" class="d-inline">
             @Html.AntiForgeryToken()
             <button type="submit" class="btn btn-link p-0 align-baseline">Archive</button>
         </form>
         <text> | </text>
     }
+    else if (Model != null && Model.IsArchived)
+    {
+        <form asp-action="Unarchive" asp-route-id="@Model.ID" method="post" class="d-inline">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-link p-0 align-baseline">Unarchive</button>
+        </form>
+        <text> | </text>
+    }
+
     <a asp-action="Index">Back to List</a>
 </div>

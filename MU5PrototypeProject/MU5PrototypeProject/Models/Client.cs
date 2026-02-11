@@ -57,7 +57,7 @@ namespace MU5PrototypeProject.Models
         public DateTime? DOB { get; set; }
 
         [Required(ErrorMessage = "Phone number is required.")]
-        [RegularExpression(@"^[2-9]\d{2}[2-9]\d{6}$", ErrorMessage = "Enter a valid 10-digit phone number.")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Enter a valid 10-digit phone number.")]
         [DataType(DataType.PhoneNumber)]
         [StringLength(10)]
         public string Phone { get; set; } = string.Empty;
@@ -85,6 +85,10 @@ namespace MU5PrototypeProject.Models
             if (DOB >= DateTime.Today)
             {
                 yield return new ValidationResult("Date of Birth cannot be in the future.", new[] { "DOB" });
+            }
+            else if (Age < 17)
+            {
+                yield return new ValidationResult("Musician must be at least 18 years old.", new[] { "DOB" });
             }
         }
     }
