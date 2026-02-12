@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using MU5PrototypeProject.Data;
 using MU5PrototypeProject.Models;
+using MU5PrototypeProject.Utilities;    
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,8 @@ namespace MU5PrototypeProject.Controllers
             string SearchName,
             string SearchPhone,
             string actionButton,
-            bool showArchived = false,
+            int? page,
+            bool showArchived = false,       
             string sortDirection = "asc",
             string sortField = "Client")
         {
@@ -39,14 +41,13 @@ namespace MU5PrototypeProject.Controllers
                 //Count the number of filters applied - start by assuming no filters
                 ViewData["Filtering"] = "btn-outline-secondary";
                 int numberFilters = 0;
-                var clients = await _context.Clients
-                    .AsNoTracking()
-                    .ToListAsync();
+                var clients = _context.Clients
+                        .AsNoTracking();
 
                 // Apply archived filter first
                 if (!showArchived)
                 {
-                    clients = clients.Where(c => !c.IsArchived).ToList();
+                    clients = clients.Where(c => !c.IsArchived);
                 }
                 else
                 {
@@ -56,15 +57,13 @@ namespace MU5PrototypeProject.Controllers
                 if (!string.IsNullOrEmpty(SearchName))
                 {
                     clients = clients.Where(s => s.FirstName.ToUpper().Contains(SearchName.ToUpper())
-                                            || s.LastName.ToUpper().Contains(SearchName.ToUpper()))
-                                     .ToList();
+                                            || s.LastName.ToUpper().Contains(SearchName.ToUpper()));
                     numberFilters++;
                 }
 
                 if (!string.IsNullOrEmpty(SearchPhone))
                 {
-                    clients = clients.Where(s => s.Phone.ToUpper().Contains(SearchPhone.ToUpper()))
-                                     .ToList();
+                    clients = clients.Where(s => s.Phone.ToUpper().Contains(SearchPhone.ToUpper()));
                     numberFilters++;
                 }
 
@@ -83,9 +82,9 @@ namespace MU5PrototypeProject.Controllers
                 //Before we sort, see if we have called for a change of filtering or sorting
                 if (!String.IsNullOrEmpty(actionButton)) //Form Submitted!
                 {
-
                     if (sortOptions.Contains(actionButton))//Change of sort is requested
                     {
+                        page = 1; //Reset page to start when changing sort or filters
                         if (actionButton == sortField) //Reverse order on same field
                         {
                             sortDirection = sortDirection == "asc" ? "desc" : "asc";
@@ -99,24 +98,25 @@ namespace MU5PrototypeProject.Controllers
                     if (sortDirection == "asc")
                     {
                         clients = clients
-                            .OrderBy(c => c.LastName)
-                            .ThenBy(c => c.FirstName)
-                            .ToList();
+                            .OrderBy(c => c.FirstName)
+                            .ThenBy(c => c.LastName);
                             
                     }
                     else
                     {
                         clients = clients
-                            .OrderByDescending(c => c.LastName)
-                            .ThenBy(c => c.FirstName)
-                            .ToList();
+                            .OrderByDescending(c => c.FirstName)
+                            .ThenBy(c => c.LastName);
                     }
                 }
                 ViewData["sortDirection"] = sortDirection;
                 ViewData["sortField"] = sortField;
                 ViewData["showArchived"] = showArchived;
 
-                return View(clients);
+                int pageSize = 5;
+                var pagedData = await PaginatedList<Client>.CreateAsync(clients.AsNoTracking(), page ?? 1, pageSize);
+
+                return View(pagedData);
             }
             catch (Exception)
             {
@@ -147,6 +147,14 @@ namespace MU5PrototypeProject.Controllers
         // GET: Client/Create
         public IActionResult Create()
         {
+            DateTime today = DateTime.Today;
+            DateTime maxDate = today.AddYears(-7);   // Must be at least 7
+            DateTime minDate = today.AddYears(-120); 
+
+            ViewData["MaxDOB"] = maxDate.ToString("yyyy-MM-dd");
+            ViewData["MinDOB"] = minDate.ToString("yyyy-MM-dd");
+            ViewData["DefaultDOB"] = maxDate.ToString("yyyy-MM-dd");
+
             return View();
         }
 

@@ -21,13 +21,13 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
-							<label for="SearchPhone" class="control-label">Search Phone Number:</label>
-							@Html.TextBox("SearchPhone", null, new { @class = "form-control" })
+							<label for="SearchName" class="control-label">Search Client Name:</label>
+							@Html.TextBox("SearchName", null, new { @class = "form-control" })
 						</div>
 					</div>
 					<div class="form-group col-md-4">
-						<label for="SearchName" class="control-label">Search Client Name:</label>
-						@Html.TextBox("SearchName", null, new { @class = "form-control" })
+						<label for="SearchPhone" class="control-label">Search Phone Number:</label>
+						@Html.TextBox("SearchPhone", null, new { @class = "form-control" })
 					</div>
 					<div class="form-group col-md-4">
 						<div class="form-check mt-4">
@@ -113,4 +113,5 @@
 			}
 		</tbody>
 	</table>
+	<partial name="_PagingNavBar" />
 </form>
