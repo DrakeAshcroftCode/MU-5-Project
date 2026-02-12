@@ -21,12 +21,12 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
-							<label class="control-label">Search Phone Number:</label>
+							<label for="SearchPhone" class="control-label">Search Phone Number:</label>
 							@Html.TextBox("SearchPhone", null, new { @class = "form-control" })
 						</div>
 					</div>
 					<div class="form-group col-md-4">
-						<label class="control-label">Search Client Name:</label>
+						<label for="SearchName" class="control-label">Search Client Name:</label>
 						@Html.TextBox("SearchName", null, new { @class = "form-control" })
 					</div>
 					<div class="form-group col-md-4">
@@ -55,7 +55,7 @@
 		<thead>
 			<tr>
 				<th>
-					<input type="submit" name="actionButton" value="Client" class="btn btn-link" />
+					<input type="submit" name="actionButton" value="Client" class="btn btn-link">
 				</th>
 				<th>
 					@Html.DisplayNameFor(model => model.Age)
