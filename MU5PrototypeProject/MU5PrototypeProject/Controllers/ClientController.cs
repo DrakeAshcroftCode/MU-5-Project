@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using MU5PrototypeProject.CustomController;
 using MU5PrototypeProject.Data;
 using MU5PrototypeProject.Models;
 using MU5PrototypeProject.Utilities;    
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace MU5PrototypeProject.Controllers
 {
-    public class ClientController : Controller
+    public class ClientController : CognizantController
     {
         private readonly MUContext _context;
 
@@ -28,6 +29,7 @@ namespace MU5PrototypeProject.Controllers
             string SearchPhone,
             string actionButton,
             int? page,
+            int? pageSizeID,
             bool showArchived = false,       
             string sortDirection = "asc",
             string sortField = "Client")
@@ -113,7 +115,9 @@ namespace MU5PrototypeProject.Controllers
                 ViewData["sortField"] = sortField;
                 ViewData["showArchived"] = showArchived;
 
-                int pageSize = 5;
+                int pageSize = PageSizeHelper.SetPageSize(HttpContext, pageSizeID, ControllerName());
+                ViewData["pageSizeID"] = PageSizeHelper.PageSizeList(pageSize);
+
                 var pagedData = await PaginatedList<Client>.CreateAsync(clients.AsNoTracking(), page ?? 1, pageSize);
 
                 return View(pagedData);
