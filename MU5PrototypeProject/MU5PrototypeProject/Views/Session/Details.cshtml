@@ -44,7 +44,7 @@
             @Html.DisplayNameFor(model => model.Client)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Client.ClientName)
+            @Html.DisplayFor(model => model.Client.FullName)
         </dd>
     </dl>
 </div>
@@ -69,5 +69,5 @@
         <text> | </text>
     }
 
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to Sessions</a>
 </div>
