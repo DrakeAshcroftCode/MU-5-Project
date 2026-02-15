@@ -183,6 +183,10 @@ namespace MU5PrototypeProject.Controllers
         // GET: Session/Create
         public IActionResult Create()
         {
+            //default session date to today
+            DateTime today = DateTime.Today;
+            ViewData["DefaultSessionDate"] = today.ToString("yyyy-MM-dd");
+
             PopulateDropDownLists();
             //ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName");
             //ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName");
@@ -251,7 +255,7 @@ namespace MU5PrototypeProject.Controllers
 
             //Try updating it with value
             if (await TryUpdateModelAsync<Session>(sessionToUpdate, "",
-                t => t.SessionDate, t => t.CreatedAt, t => t.SessionsPerWeekRecommended,
+                t => t.SessionDate, t => t.SessionsPerWeekRecommended,
                 t => t.IsArchived, t => t.TrainerID, t => t.ClientID))
             {
                 try

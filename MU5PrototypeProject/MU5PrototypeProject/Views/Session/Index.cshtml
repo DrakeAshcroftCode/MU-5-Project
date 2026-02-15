@@ -20,8 +20,6 @@
 			<div class="card card-body bg-light">
 				<div class="row">
 					<div class="form-group col-md-4">
-						@* <label for="ClientID" class="control-label">Select by Client:</label>
-						@Html.DropDownList("ClientID", null, "All Clients", htmlAttributes: new { @class = "form-control" }) *@
 						<label for="SearchName" class="control-label">Search Client Name:</label>
 						@Html.TextBox("SearchClient", null, new { @class = "form-control" })
 					</div>
@@ -75,9 +73,6 @@
 					<th>
 						@Html.DisplayNameFor(model => model.SessionsPerWeekRecommended)
 					</th>
-					<th>
-						@Html.DisplayNameFor(model => model.CreatedAt)
-					</th>
 					<th class="actionsCol">Actions</th>
 				</tr>
 			</thead>
@@ -97,10 +92,6 @@
 						<td>
 							@Html.DisplayFor(modelItem => item.SessionsPerWeekRecommended)
 						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.CreatedAt)
-						</td>
-
 						<td class="actionsCol">
 							@if (item.IsArchived)
 							{
