@@ -18,6 +18,15 @@ namespace MU5PrototypeProject.Models
             }
         }
 
+        [Display(Name = "Full Name")]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+
+            }
+        }
         public int? Age
         {
             get

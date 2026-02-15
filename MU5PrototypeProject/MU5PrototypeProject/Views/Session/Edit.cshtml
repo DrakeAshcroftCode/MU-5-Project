@@ -36,22 +36,27 @@
             <div class="form-group">
                 <label asp-for="TrainerID" class="control-label"></label>
                 <select asp-for="TrainerID" class="form-control" asp-items="ViewBag.TrainerID"></select>
-                <span asp-validation-for="TrainerID" class="text-danger"></span>  @* How do I make is grab the TrainerName instead? *@
+                <span asp-validation-for="TrainerID" class="text-danger"></span> 
+                @* <input class="form-control" value="@Model.Trainer.TrainerName" readonly />
+                @Html.HiddenFor(m => m.TrainerID) *@
             </div>
             <div class="form-group">
                 <label asp-for="ClientID" class="control-label"></label>
                 <select asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
-                <span asp-validation-for="ClientID" class="text-danger"></span> @* How do I make is grab the ClientName instead? *@
+                <span asp-validation-for="ClientID" class="text-danger"></span> 
+                @* <input class="form-control" value="@Model.Client.FullName" readonly />
+                @Html.HiddenFor(m => m.ClientID) *@
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+            <a asp-action="Index" class="btn btn-primary">Cancel</a>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to Sessions</a>
 </div>
 
 @section Scripts {
