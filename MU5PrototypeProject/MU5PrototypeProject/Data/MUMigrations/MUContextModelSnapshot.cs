@@ -183,7 +183,11 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     b.Property<int>("ClientID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsArchived")
@@ -197,6 +201,13 @@ namespace MU5PrototypeProject.Data.MUMigrations
 
                     b.Property<int>("TrainerID")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 

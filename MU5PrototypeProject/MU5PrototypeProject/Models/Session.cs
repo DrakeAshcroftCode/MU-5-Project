@@ -2,7 +2,7 @@
 
 namespace MU5PrototypeProject.Models
 {
-    public class Session : IValidatableObject
+    public class Session : Auditable, IValidatableObject
     {
         public int ID { get; set; }
 
@@ -11,9 +11,6 @@ namespace MU5PrototypeProject.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime SessionDate { get; set; }
-
-        [Display(Name = "Created At")]
-        public DateTime CreatedAt { get; set; }
 
         [Display(Name = "Sessions/Week")]
         public int? SessionsPerWeekRecommended { get; set; }

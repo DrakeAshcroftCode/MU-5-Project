@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MU5PrototypeProject.Data.MUMigrations
 {
     [DbContext(typeof(MUContext))]
-    [Migration("20260215183737_Initial")]
+    [Migration("20260215224341_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -186,7 +186,11 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     b.Property<int>("ClientID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsArchived")
@@ -200,6 +204,13 @@ namespace MU5PrototypeProject.Data.MUMigrations
 
                     b.Property<int>("TrainerID")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 

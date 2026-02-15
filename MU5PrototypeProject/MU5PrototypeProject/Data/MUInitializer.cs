@@ -45,10 +45,10 @@ namespace MU5PrototypeProject.Data
             if (!context.Trainers.Any())
             {
                 context.Trainers.AddRange(
-                    new Trainer { FirstName = "Alex",   LastName = "Green" },
-                    new Trainer { FirstName = "Jordan", LastName = "Lee"   },
-                    new Trainer { FirstName = "Morgan", LastName = "Park"  },
-                    new Trainer { FirstName = "Taylor", LastName = "Kim"   }
+                    new Trainer { FirstName = "Alex", LastName = "Green" },
+                    new Trainer { FirstName = "Jordan", LastName = "Lee" },
+                    new Trainer { FirstName = "Morgan", LastName = "Park" },
+                    new Trainer { FirstName = "Taylor", LastName = "Kim" }
                 );
                 context.SaveChanges();
             }
@@ -57,17 +57,17 @@ namespace MU5PrototypeProject.Data
             {
                 context.Exercises.AddRange(
                     new Exercise { ExerciseName = "Reformer Footwork", Apparatus = "Reformer" },
-                    new Exercise { ExerciseName = "Hundred",            Apparatus = "Reformer" },
-                    new Exercise { ExerciseName = "Wall Squat",         Apparatus = "Mat"      },
-                    new Exercise { ExerciseName = "Bridge",             Apparatus = "Mat"      },
-                    new Exercise { ExerciseName = "Spine Stretch",      Apparatus = "Mat"      },
-                    new Exercise { ExerciseName = "Rowing Front",       Apparatus = "Reformer" },
-                    new Exercise { ExerciseName = "Cat-Cow",            Apparatus = "Mat"      },
-                    new Exercise { ExerciseName = "Lunge",              Apparatus = "Reformer" },
-                    new Exercise { ExerciseName = "Single Leg Stand",   Apparatus = "Mat"      },
-                    new Exercise { ExerciseName = "Swan",               Apparatus = "Mat"      },
-                    new Exercise { ExerciseName = "Side Splits",        Apparatus = "Reformer" },
-                    new Exercise { ExerciseName = "Plank",              Apparatus = "Mat"      }
+                    new Exercise { ExerciseName = "Hundred", Apparatus = "Reformer" },
+                    new Exercise { ExerciseName = "Wall Squat", Apparatus = "Mat" },
+                    new Exercise { ExerciseName = "Bridge", Apparatus = "Mat" },
+                    new Exercise { ExerciseName = "Spine Stretch", Apparatus = "Mat" },
+                    new Exercise { ExerciseName = "Rowing Front", Apparatus = "Reformer" },
+                    new Exercise { ExerciseName = "Cat-Cow", Apparatus = "Mat" },
+                    new Exercise { ExerciseName = "Lunge", Apparatus = "Reformer" },
+                    new Exercise { ExerciseName = "Single Leg Stand", Apparatus = "Mat" },
+                    new Exercise { ExerciseName = "Swan", Apparatus = "Mat" },
+                    new Exercise { ExerciseName = "Side Splits", Apparatus = "Reformer" },
+                    new Exercise { ExerciseName = "Plank", Apparatus = "Mat" }
                 );
                 context.SaveChanges();
             }
@@ -303,7 +303,7 @@ namespace MU5PrototypeProject.Data
                 // === Generate ~40 additional clients ===
                 var rnd = new Random();
                 string[] firstNames = { "Alex", "Jordan", "Taylor", "Riley", "Casey", "Morgan", "Quinn", "Sydney", "Rowan", "Parker" };
-                string[] lastNames  = { "Green", "Lee", "Park", "Kim", "Nguyen", "Patel", "Singh", "Brown", "Hughes", "Shaw" };
+                string[] lastNames = { "Green", "Lee", "Park", "Kim", "Nguyen", "Patel", "Singh", "Brown", "Hughes", "Shaw" };
 
                 int basePhone = 9000; // just to keep phones unique-ish
                 int extraCount = 40;
@@ -342,18 +342,18 @@ namespace MU5PrototypeProject.Data
                 // Seed a core set of example sessions
                 var sessions = new List<Session>
                 {
-                    new Session { SessionDate = new DateTime(2025,2,1),  CreatedAt = new DateTime(2025,1,25), SessionsPerWeekRecommended = 2, TrainerID = 1, ClientID = 1,  IsArchived = false },
-                    new Session { SessionDate = new DateTime(2025,2,2),  CreatedAt = new DateTime(2025,1,25), SessionsPerWeekRecommended = 2, TrainerID = 2, ClientID = 2,  IsArchived = false },
-                    new Session { SessionDate = new DateTime(2025,2,3),  CreatedAt = new DateTime(2025,1,26), SessionsPerWeekRecommended = 3, TrainerID = 3, ClientID = 3,  IsArchived = false },
-                    new Session { SessionDate = new DateTime(2025,2,4),  CreatedAt = new DateTime(2025,1,26), SessionsPerWeekRecommended = 1, TrainerID = 1, ClientID = 4,  IsArchived = false },
-                    new Session { SessionDate = new DateTime(2025,2,5),  CreatedAt = new DateTime(2025,1,27), SessionsPerWeekRecommended = 2, TrainerID = 2, ClientID = 5,  IsArchived = false },
-                    new Session { SessionDate = new DateTime(2025,2,6),  CreatedAt = new DateTime(2025,1,27), SessionsPerWeekRecommended = 1, TrainerID = 3, ClientID = 6,  IsArchived = false },
-                    new Session { SessionDate = new DateTime(2025,2,7),  CreatedAt = new DateTime(2025,1,28), SessionsPerWeekRecommended = 2, TrainerID = 1, ClientID = 7,  IsArchived = false },
-                    new Session { SessionDate = new DateTime(2025,2,8),  CreatedAt = new DateTime(2025,1,28), SessionsPerWeekRecommended = 2, TrainerID = 2, ClientID = 8,  IsArchived = false },
-                    new Session { SessionDate = new DateTime(2025,2,9),  CreatedAt = new DateTime(2025,1,29), SessionsPerWeekRecommended = 3, TrainerID = 3, ClientID = 9,  IsArchived = false },
-                    new Session { SessionDate = new DateTime(2025,2,10), CreatedAt = new DateTime(2025,1,29), SessionsPerWeekRecommended = 1, TrainerID = 1, ClientID = 10, IsArchived = false },
-                    new Session { SessionDate = new DateTime(2025,2,11), CreatedAt = new DateTime(2025,1,30), SessionsPerWeekRecommended = 2, TrainerID = 2, ClientID = 11, IsArchived = false },
-                    new Session { SessionDate = new DateTime(2025,2,12), CreatedAt = new DateTime(2025,1,30), SessionsPerWeekRecommended = 2, TrainerID = 3, ClientID = 12, IsArchived = false }
+                    new Session { SessionDate = new DateTime(2025,2,1),  SessionsPerWeekRecommended = 2, TrainerID = 1, ClientID = 1,  IsArchived = false },
+                    new Session { SessionDate = new DateTime(2025,2,2),  SessionsPerWeekRecommended = 2, TrainerID = 2, ClientID = 2,  IsArchived = false },
+                    new Session { SessionDate = new DateTime(2025,2,3),  SessionsPerWeekRecommended = 3, TrainerID = 3, ClientID = 3,  IsArchived = false },
+                    new Session { SessionDate = new DateTime(2025,2,4),  SessionsPerWeekRecommended = 1, TrainerID = 1, ClientID = 4,  IsArchived = false },
+                    new Session { SessionDate = new DateTime(2025,2,5),  SessionsPerWeekRecommended = 2, TrainerID = 2, ClientID = 5,  IsArchived = false },
+                    new Session { SessionDate = new DateTime(2025,2,6),  SessionsPerWeekRecommended = 1, TrainerID = 3, ClientID = 6,  IsArchived = false },
+                    new Session { SessionDate = new DateTime(2025,2,7),  SessionsPerWeekRecommended = 2, TrainerID = 1, ClientID = 7,  IsArchived = false },
+                    new Session { SessionDate = new DateTime(2025,2,8),  SessionsPerWeekRecommended = 2, TrainerID = 2, ClientID = 8,  IsArchived = false },
+                    new Session { SessionDate = new DateTime(2025,2,9),  SessionsPerWeekRecommended = 3, TrainerID = 3, ClientID = 9,  IsArchived = false },
+                    new Session { SessionDate = new DateTime(2025,2,10), SessionsPerWeekRecommended = 1, TrainerID = 1, ClientID = 10, IsArchived = false },
+                    new Session { SessionDate = new DateTime(2025,2,11), SessionsPerWeekRecommended = 2, TrainerID = 2, ClientID = 11, IsArchived = false },
+                    new Session { SessionDate = new DateTime(2025,2,12), SessionsPerWeekRecommended = 2, TrainerID = 3, ClientID = 12, IsArchived = false }
                 };
 
                 // Additional sessions provide more realistic volume across clients/trainers
@@ -370,7 +370,6 @@ namespace MU5PrototypeProject.Data
                     var session = new Session
                     {
                         SessionDate = DateTime.Today.AddDays(rnd.Next(-30, 60)),
-                        CreatedAt = DateTime.Today.AddDays(rnd.Next(-60, -1)),
                         SessionsPerWeekRecommended = rnd.Next(1, 4),
                         TrainerID = trainerId,
                         ClientID = clientId,
@@ -389,15 +388,15 @@ namespace MU5PrototypeProject.Data
             if (!context.SessionNotes.Any())
             {
                 context.SessionNotes.AddRange(
-                    new SessionNotes { SessionID = 1,  GeneralComments = "New client; explain apparatus safety.", SubjectiveReports = "3/10 shoulder pain.", ObjectiveFindings = "Limited ROM on left shoulder.", Plan = "Mobility + core stability." },
-                    new SessionNotes { SessionID = 2,  GeneralComments = "Prefers mornings.", SubjectiveReports = "Knee stable.", ObjectiveFindings = "Good squat mechanics.", Plan = "Progress load carefully." },
-                    new SessionNotes { SessionID = 3,  GeneralComments = "Asthma managed.", SubjectiveReports = "Breathing ok.", ObjectiveFindings = "Normal vitals.", Plan = "Endurance and posture." },
-                    new SessionNotes { SessionID = 4,  GeneralComments = "Desk job; back stiffness.", SubjectiveReports = "Tight lower back.", ObjectiveFindings = "Tight hamstrings.", Plan = "Hip hinge patterning." },
-                    new SessionNotes { SessionID = 5,  GeneralComments = "Very motivated.", SubjectiveReports = "Wants strength.", ObjectiveFindings = "Baseline strength ok.", Plan = "Progressive overload." },
-                    new SessionNotes { SessionID = 6,  GeneralComments = string.Empty, SubjectiveReports = "Occasional ankle soreness.", ObjectiveFindings = "Slight instability.", Plan = "Balance + ankle stability." },
-                    new SessionNotes { SessionID = 7,  GeneralComments = string.Empty, SubjectiveReports = "Sleep improved.", ObjectiveFindings = "Better thoracic mobility.", Plan = "Introduce loaded carries." },
-                    new SessionNotes { SessionID = 8,  GeneralComments = "Hypertension controlled.", SubjectiveReports = "Energy low.", ObjectiveFindings = "BP safe range.", Plan = "Longer warm-up; intervals." },
-                    new SessionNotes { SessionID = 9,  GeneralComments = string.Empty, SubjectiveReports = "No pain today.", ObjectiveFindings = "Asymmetry reduced.", Plan = "Eccentric hamstring work." },
+                    new SessionNotes { SessionID = 1, GeneralComments = "New client; explain apparatus safety.", SubjectiveReports = "3/10 shoulder pain.", ObjectiveFindings = "Limited ROM on left shoulder.", Plan = "Mobility + core stability." },
+                    new SessionNotes { SessionID = 2, GeneralComments = "Prefers mornings.", SubjectiveReports = "Knee stable.", ObjectiveFindings = "Good squat mechanics.", Plan = "Progress load carefully." },
+                    new SessionNotes { SessionID = 3, GeneralComments = "Asthma managed.", SubjectiveReports = "Breathing ok.", ObjectiveFindings = "Normal vitals.", Plan = "Endurance and posture." },
+                    new SessionNotes { SessionID = 4, GeneralComments = "Desk job; back stiffness.", SubjectiveReports = "Tight lower back.", ObjectiveFindings = "Tight hamstrings.", Plan = "Hip hinge patterning." },
+                    new SessionNotes { SessionID = 5, GeneralComments = "Very motivated.", SubjectiveReports = "Wants strength.", ObjectiveFindings = "Baseline strength ok.", Plan = "Progressive overload." },
+                    new SessionNotes { SessionID = 6, GeneralComments = string.Empty, SubjectiveReports = "Occasional ankle soreness.", ObjectiveFindings = "Slight instability.", Plan = "Balance + ankle stability." },
+                    new SessionNotes { SessionID = 7, GeneralComments = string.Empty, SubjectiveReports = "Sleep improved.", ObjectiveFindings = "Better thoracic mobility.", Plan = "Introduce loaded carries." },
+                    new SessionNotes { SessionID = 8, GeneralComments = "Hypertension controlled.", SubjectiveReports = "Energy low.", ObjectiveFindings = "BP safe range.", Plan = "Longer warm-up; intervals." },
+                    new SessionNotes { SessionID = 9, GeneralComments = string.Empty, SubjectiveReports = "No pain today.", ObjectiveFindings = "Asymmetry reduced.", Plan = "Eccentric hamstring work." },
                     new SessionNotes { SessionID = 10, GeneralComments = string.Empty, SubjectiveReports = "Stressed week.", ObjectiveFindings = "Tension in traps.", Plan = "Downregulate, breathing." },
                     new SessionNotes { SessionID = 11, GeneralComments = string.Empty, SubjectiveReports = "Ready for test.", ObjectiveFindings = "Strong core activation.", Plan = "Advance series." },
                     new SessionNotes { SessionID = 12, GeneralComments = string.Empty, SubjectiveReports = "Mild DOMS.", ObjectiveFindings = "Good recovery.", Plan = "Maintain volume." }
@@ -409,18 +408,18 @@ namespace MU5PrototypeProject.Data
             if (!context.AdminStatuses.Any())
             {
                 context.AdminStatuses.AddRange(
-                    new AdminStatus { SessionID = 1,  IsPaid = false, AdminNotes = "Intake complete.",        AdminInitials = "AG", NextAppointmentBooked = true,  CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
-                    new AdminStatus { SessionID = 2,  IsPaid = true,  AdminNotes = "Completed.",              AdminInitials = "JL", NextAppointmentBooked = true,  CommunicatedProgress = true,  ReadyToProgress = true,  CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
-                    new AdminStatus { SessionID = 3,  IsPaid = true,  AdminNotes = "Completed.",              AdminInitials = "MP", NextAppointmentBooked = true,  CommunicatedProgress = true,  ReadyToProgress = true,  CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
-                    new AdminStatus { SessionID = 4,  IsPaid = false, AdminNotes = "Cancelled.",              AdminInitials = "AG", NextAppointmentBooked = false, CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
-                    new AdminStatus { SessionID = 5,  IsPaid = false, AdminNotes = "Scheduled.",              AdminInitials = "JL", NextAppointmentBooked = true,  CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
-                    new AdminStatus { SessionID = 6,  IsPaid = false, AdminNotes = "No-show invoiced.",       AdminInitials = "MP", NextAppointmentBooked = false, CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
-                    new AdminStatus { SessionID = 7,  IsPaid = true,  AdminNotes = "Completed.",              AdminInitials = "AG", NextAppointmentBooked = true,  CommunicatedProgress = true,  ReadyToProgress = true,  CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
-                    new AdminStatus { SessionID = 8,  IsPaid = false, AdminNotes = "Scheduled.",              AdminInitials = "JL", NextAppointmentBooked = true,  CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
-                    new AdminStatus { SessionID = 9,  IsPaid = true,  AdminNotes = "Completed.",              AdminInitials = "MP", NextAppointmentBooked = true,  CommunicatedProgress = true,  ReadyToProgress = true,  CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
-                    new AdminStatus { SessionID = 10, IsPaid = true,  AdminNotes = "Completed.",              AdminInitials = "AG", NextAppointmentBooked = true,  CommunicatedProgress = true,  ReadyToProgress = true,  CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
-                    new AdminStatus { SessionID = 11, IsPaid = false, AdminNotes = "Scheduled.",              AdminInitials = "JL", NextAppointmentBooked = true,  CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
-                    new AdminStatus { SessionID = 12, IsPaid = false, AdminNotes = "Scheduled.",              AdminInitials = "MP", NextAppointmentBooked = true,  CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null }
+                    new AdminStatus { SessionID = 1, IsPaid = false, AdminNotes = "Intake complete.", AdminInitials = "AG", NextAppointmentBooked = true, CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
+                    new AdminStatus { SessionID = 2, IsPaid = true, AdminNotes = "Completed.", AdminInitials = "JL", NextAppointmentBooked = true, CommunicatedProgress = true, ReadyToProgress = true, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
+                    new AdminStatus { SessionID = 3, IsPaid = true, AdminNotes = "Completed.", AdminInitials = "MP", NextAppointmentBooked = true, CommunicatedProgress = true, ReadyToProgress = true, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
+                    new AdminStatus { SessionID = 4, IsPaid = false, AdminNotes = "Cancelled.", AdminInitials = "AG", NextAppointmentBooked = false, CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
+                    new AdminStatus { SessionID = 5, IsPaid = false, AdminNotes = "Scheduled.", AdminInitials = "JL", NextAppointmentBooked = true, CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
+                    new AdminStatus { SessionID = 6, IsPaid = false, AdminNotes = "No-show invoiced.", AdminInitials = "MP", NextAppointmentBooked = false, CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
+                    new AdminStatus { SessionID = 7, IsPaid = true, AdminNotes = "Completed.", AdminInitials = "AG", NextAppointmentBooked = true, CommunicatedProgress = true, ReadyToProgress = true, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
+                    new AdminStatus { SessionID = 8, IsPaid = false, AdminNotes = "Scheduled.", AdminInitials = "JL", NextAppointmentBooked = true, CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
+                    new AdminStatus { SessionID = 9, IsPaid = true, AdminNotes = "Completed.", AdminInitials = "MP", NextAppointmentBooked = true, CommunicatedProgress = true, ReadyToProgress = true, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
+                    new AdminStatus { SessionID = 10, IsPaid = true, AdminNotes = "Completed.", AdminInitials = "AG", NextAppointmentBooked = true, CommunicatedProgress = true, ReadyToProgress = true, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
+                    new AdminStatus { SessionID = 11, IsPaid = false, AdminNotes = "Scheduled.", AdminInitials = "JL", NextAppointmentBooked = true, CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null },
+                    new AdminStatus { SessionID = 12, IsPaid = false, AdminNotes = "Scheduled.", AdminInitials = "MP", NextAppointmentBooked = true, CommunicatedProgress = false, ReadyToProgress = false, CourseCorrectionNeeded = false, TeamConsult = false, ReferredExternally = false, ReferredTo = null }
                 );
                 context.SaveChanges();
             }
@@ -429,30 +428,30 @@ namespace MU5PrototypeProject.Data
             if (!context.SessionExercises.Any())
             {
                 context.SessionExercises.AddRange(
-                    new SessionExercise { SessionID = 1,  ExerciseID = 1,  Springs = "3R", Props = string.Empty, Notes = "Neutral pelvis focus." },
-                    new SessionExercise { SessionID = 1,  ExerciseID = 2,  Springs = "2R", Props = "Straps",    Notes = "Breathing emphasis."   },
-                    new SessionExercise { SessionID = 2,  ExerciseID = 3,  Springs = string.Empty, Props = "Ball",   Notes = "Knee alignment."       },
-                    new SessionExercise { SessionID = 2,  ExerciseID = 4,  Springs = string.Empty, Props = string.Empty, Notes = "Glute activation."     },
-                    new SessionExercise { SessionID = 3,  ExerciseID = 5,  Springs = string.Empty, Props = string.Empty, Notes = string.Empty           },
-                    new SessionExercise { SessionID = 3,  ExerciseID = 6,  Springs = "1R", Props = "Straps",    Notes = string.Empty           },
-                    new SessionExercise { SessionID = 4,  ExerciseID = 7,  Springs = string.Empty, Props = string.Empty, Notes = "Lumbar mobility."      },
-                    new SessionExercise { SessionID = 5,  ExerciseID = 8,  Springs = "1R", Props = "Box",      Notes = "Control tempo."        },
-                    new SessionExercise { SessionID = 6,  ExerciseID = 9,  Springs = string.Empty, Props = "Pad",      Notes = "Ankle stability."      },
-                    new SessionExercise { SessionID = 7,  ExerciseID = 10, Springs = string.Empty, Props = string.Empty, Notes = string.Empty           },
-                    new SessionExercise { SessionID = 8,  ExerciseID = 11, Springs = "1R", Props = string.Empty, Notes = string.Empty           },
-                    new SessionExercise { SessionID = 9,  ExerciseID = 12, Springs = string.Empty, Props = string.Empty, Notes = string.Empty           },
-                    new SessionExercise { SessionID = 10, ExerciseID = 1,  Springs = "3R", Props = string.Empty, Notes = string.Empty           },
-                    new SessionExercise { SessionID = 10, ExerciseID = 2,  Springs = "2R", Props = "Straps",    Notes = string.Empty           },
-                    new SessionExercise { SessionID = 11, ExerciseID = 3,  Springs = string.Empty, Props = "Ball",     Notes = string.Empty           },
-                    new SessionExercise { SessionID = 11, ExerciseID = 4,  Springs = string.Empty, Props = string.Empty, Notes = string.Empty           },
-                    new SessionExercise { SessionID = 12, ExerciseID = 5,  Springs = string.Empty, Props = string.Empty, Notes = string.Empty           },
-                    new SessionExercise { SessionID = 12, ExerciseID = 6,  Springs = "1R", Props = "Straps",    Notes = string.Empty           },
-                    new SessionExercise { SessionID = 8,  ExerciseID = 1,  Springs = "3R", Props = string.Empty, Notes = string.Empty           },
-                    new SessionExercise { SessionID = 9,  ExerciseID = 2,  Springs = "2R", Props = "Straps",    Notes = string.Empty           },
-                    new SessionExercise { SessionID = 6,  ExerciseID = 3,  Springs = string.Empty, Props = "Ball",     Notes = string.Empty           },
-                    new SessionExercise { SessionID = 7,  ExerciseID = 4,  Springs = string.Empty, Props = string.Empty, Notes = string.Empty           },
-                    new SessionExercise { SessionID = 5,  ExerciseID = 5,  Springs = string.Empty, Props = string.Empty, Notes = string.Empty           },
-                    new SessionExercise { SessionID = 4,  ExerciseID = 6,  Springs = "1R", Props = "Straps",    Notes = string.Empty           }
+                    new SessionExercise { SessionID = 1, ExerciseID = 1, Springs = "3R", Props = string.Empty, Notes = "Neutral pelvis focus." },
+                    new SessionExercise { SessionID = 1, ExerciseID = 2, Springs = "2R", Props = "Straps", Notes = "Breathing emphasis." },
+                    new SessionExercise { SessionID = 2, ExerciseID = 3, Springs = string.Empty, Props = "Ball", Notes = "Knee alignment." },
+                    new SessionExercise { SessionID = 2, ExerciseID = 4, Springs = string.Empty, Props = string.Empty, Notes = "Glute activation." },
+                    new SessionExercise { SessionID = 3, ExerciseID = 5, Springs = string.Empty, Props = string.Empty, Notes = string.Empty },
+                    new SessionExercise { SessionID = 3, ExerciseID = 6, Springs = "1R", Props = "Straps", Notes = string.Empty },
+                    new SessionExercise { SessionID = 4, ExerciseID = 7, Springs = string.Empty, Props = string.Empty, Notes = "Lumbar mobility." },
+                    new SessionExercise { SessionID = 5, ExerciseID = 8, Springs = "1R", Props = "Box", Notes = "Control tempo." },
+                    new SessionExercise { SessionID = 6, ExerciseID = 9, Springs = string.Empty, Props = "Pad", Notes = "Ankle stability." },
+                    new SessionExercise { SessionID = 7, ExerciseID = 10, Springs = string.Empty, Props = string.Empty, Notes = string.Empty },
+                    new SessionExercise { SessionID = 8, ExerciseID = 11, Springs = "1R", Props = string.Empty, Notes = string.Empty },
+                    new SessionExercise { SessionID = 9, ExerciseID = 12, Springs = string.Empty, Props = string.Empty, Notes = string.Empty },
+                    new SessionExercise { SessionID = 10, ExerciseID = 1, Springs = "3R", Props = string.Empty, Notes = string.Empty },
+                    new SessionExercise { SessionID = 10, ExerciseID = 2, Springs = "2R", Props = "Straps", Notes = string.Empty },
+                    new SessionExercise { SessionID = 11, ExerciseID = 3, Springs = string.Empty, Props = "Ball", Notes = string.Empty },
+                    new SessionExercise { SessionID = 11, ExerciseID = 4, Springs = string.Empty, Props = string.Empty, Notes = string.Empty },
+                    new SessionExercise { SessionID = 12, ExerciseID = 5, Springs = string.Empty, Props = string.Empty, Notes = string.Empty },
+                    new SessionExercise { SessionID = 12, ExerciseID = 6, Springs = "1R", Props = "Straps", Notes = string.Empty },
+                    new SessionExercise { SessionID = 8, ExerciseID = 1, Springs = "3R", Props = string.Empty, Notes = string.Empty },
+                    new SessionExercise { SessionID = 9, ExerciseID = 2, Springs = "2R", Props = "Straps", Notes = string.Empty },
+                    new SessionExercise { SessionID = 6, ExerciseID = 3, Springs = string.Empty, Props = "Ball", Notes = string.Empty },
+                    new SessionExercise { SessionID = 7, ExerciseID = 4, Springs = string.Empty, Props = string.Empty, Notes = string.Empty },
+                    new SessionExercise { SessionID = 5, ExerciseID = 5, Springs = string.Empty, Props = string.Empty, Notes = string.Empty },
+                    new SessionExercise { SessionID = 4, ExerciseID = 6, Springs = "1R", Props = "Straps", Notes = string.Empty }
                 );
                 context.SaveChanges();
             }
