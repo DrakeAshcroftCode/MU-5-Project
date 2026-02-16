@@ -206,7 +206,7 @@ namespace MU5PrototypeProject.Controllers
                 {
                     _context.Add(session);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Details), new { session.ID });
                 }
             }
             catch (DbUpdateException dex)

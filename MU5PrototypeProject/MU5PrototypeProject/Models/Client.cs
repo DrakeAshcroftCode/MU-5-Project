@@ -94,7 +94,7 @@ namespace MU5PrototypeProject.Models
             }
             else if (Age < 7)
             {
-                yield return new ValidationResult("Client must be at least 18 years old.", new[] { "DOB" });
+                yield return new ValidationResult("Client must be at least 7 years old.", new[] { "DOB" });
             }
         }
     }
