@@ -344,7 +344,12 @@ body {
     .actionsCol .actionLink:focus-visible {
         box-shadow: 0 0 0 3px rgba(37, 140, 251, 0.35);
     }
-
+#filterToggle {
+    color: black;
+}
+.btn-link {
+    color: black;
+}
 .navbar-toggler {
     border: none;
     padding: .2rem .35rem;
