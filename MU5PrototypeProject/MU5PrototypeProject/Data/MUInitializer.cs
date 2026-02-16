@@ -85,7 +85,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1990,5,12),
                         Phone = "2265550101",
                         Email = "ava.reed@example.com",
-                        CreatedAt = new DateTime(2025,1,3),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/ava-reed",
                         IsArchived = false
                     },
@@ -96,7 +95,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1985,8,23),
                         Phone = "2895550102",
                         Email = "noah.hughes@example.com",
-                        CreatedAt = new DateTime(2025,1,4),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/noah-hughes",
                         IsArchived = false
                     },
@@ -107,7 +105,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1992,2,14),
                         Phone = "3435550103",
                         Email = "mia.turner@example.com",
-                        CreatedAt = new DateTime(2025,1,5),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/mia-turner",
                         IsArchived = true
                     },
@@ -118,7 +115,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1988,11,2),
                         Phone = "3655550104",
                         Email = "liam.baker@example.com",
-                        CreatedAt = new DateTime(2025,1,6),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/liam-baker",
                         IsArchived = false
                     },
@@ -129,7 +125,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1995,7,7),
                         Phone = "4165550105",
                         Email = "emma.cole@example.com",
-                        CreatedAt = new DateTime(2025,1,7),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/emma-cole",
                         IsArchived = false
                     },
@@ -140,7 +135,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1983,6,9),
                         Phone = "4375550106",
                         Email = "oliver.shaw@example.com",
-                        CreatedAt = new DateTime(2025,1,8),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/oliver-shaw",
                         IsArchived = false
                     },
@@ -151,7 +145,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1991,3,29),
                         Phone = "5195550107",
                         Email = "sophia.wong@example.com",
-                        CreatedAt = new DateTime(2025,1,9),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/sophia-wong",
                         IsArchived = false
                     },
@@ -162,7 +155,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1996,1,17),
                         Phone = "5485550108",
                         Email = "lucas.nguyen@example.com",
-                        CreatedAt = new DateTime(2025,1,10),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/lucas-nguyen",
                         IsArchived = false
                     },
@@ -173,7 +165,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1993,12,4),
                         Phone = "5795550109",
                         Email = "isabella.khan@example.com",
-                        CreatedAt = new DateTime(2025,1,11),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/isabella-khan",
                         IsArchived = false
                     },
@@ -184,7 +175,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1987,9,1),
                         Phone = "5815550110",
                         Email = "ethan.moore@example.com",
-                        CreatedAt = new DateTime(2025,1,12),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/ethan-moore",
                         IsArchived = false
                     },
@@ -195,7 +185,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1994,4,26),
                         Phone = "5875550111",
                         Email = "amelia.young@example.com",
-                        CreatedAt = new DateTime(2025,1,13),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/amelia-young",
                         IsArchived = true
                     },
@@ -206,7 +195,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1989,10,20),
                         Phone = "6045550112",
                         Email = "james.diaz@example.com",
-                        CreatedAt = new DateTime(2025,1,14),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/james-diaz",
                         IsArchived = true
                     },
@@ -217,7 +205,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1997,3,6),
                         Phone = "6135550113",
                         Email = "charlotte.singh@example.com",
-                        CreatedAt = new DateTime(2025,1,15),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/charlotte-singh",
                         IsArchived = false
                     },
@@ -228,7 +215,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1990,8,8),
                         Phone = "6225550114",
                         Email = "benjamin.chen@example.com",
-                        CreatedAt = new DateTime(2025,1,16),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/benjamin-chen",
                         IsArchived = false
                     },
@@ -239,7 +225,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1992,5,18),
                         Phone = "6475550115",
                         Email = "harper.ali@example.com",
-                        CreatedAt = new DateTime(2025,1,17),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/harper-ali",
                         IsArchived = false
                     },
@@ -250,7 +235,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1986,2,9),
                         Phone = "6725550116",
                         Email = "henry.brown@example.com",
-                        CreatedAt = new DateTime(2025,1,18),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/henry-brown",
                         IsArchived = false
                     },
@@ -261,7 +245,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1993,7,30),
                         Phone = "7055550117",
                         Email = "evelyn.patel@example.com",
-                        CreatedAt = new DateTime(2025,1,19),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/evelyn-patel",
                         IsArchived = false
                     },
@@ -272,7 +255,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1984,6,12),
                         Phone = "7425550118",
                         Email = "daniel.gomez@example.com",
-                        CreatedAt = new DateTime(2025,1,20),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/daniel-gomez",
                         IsArchived = false
                     },
@@ -283,7 +265,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1998,1,5),
                         Phone = "7785550119",
                         Email = "abigail.foster@example.com",
-                        CreatedAt = new DateTime(2025,1,21),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/abigail-foster",
                         IsArchived = true
                     },
@@ -294,7 +275,6 @@ namespace MU5PrototypeProject.Data
                         DOB = new DateTime(1982,11,28),
                         Phone = "8075550120",
                         Email = "jack.murphy@example.com",
-                        CreatedAt = new DateTime(2025,1,22),
                         ClientFolderUrl = "https://files.movementunlimited.com/clients/jack-murphy",
                         IsArchived = false
                     }
@@ -323,7 +303,6 @@ namespace MU5PrototypeProject.Data
                         DOB = DateTime.Today.AddYears(-rnd.Next(18, 75)).AddDays(-rnd.Next(365)),
                         Phone = phoneNumber,
                         Email = email,
-                        CreatedAt = DateTime.Today.AddDays(-rnd.Next(60)),
                         ClientFolderUrl = $"https://files.movementunlimited.com/clients/{fn.ToLower()}-{ln.ToLower()}-{i}",
                         // About 20% of extra clients start archived
                         IsArchived = rnd.NextDouble() < 0.2
