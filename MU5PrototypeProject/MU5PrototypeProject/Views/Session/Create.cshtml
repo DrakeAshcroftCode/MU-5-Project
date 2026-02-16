@@ -13,7 +13,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" id="pageForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="SessionDate" class="control-label"></label><span style="color:darkred"> *</span>
@@ -44,7 +44,9 @@
                 <select asp-for="ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
             </div>
             <div class="form-group">
-                <input onclick="ShowModal()" type="submit" value="Create" class="btn btn-primary" />
+
+                <input type="hidden" id="confirmation" name="confirmation" value="confirm" />
+                <input id="btnconfirm" onclick="ShowModal()" type="submit" value="Create" class="btn btn-primary" />
             </div>
 
             <div class="modal fade" id="mymodal" role="dialog">
@@ -62,7 +64,7 @@
                         </div>
                         <div class="modal-body">
 
-                            <input type="submit" value="Submit" class="btn btn-primary" />
+                            <input type="submit" id="btnsubmit" value="Submit" class="btn btn-primary" />
                             <input type="button" value="Cancel" class="btn btn-danger" data-bs-dismiss="modal">
 
                         </div>
@@ -108,15 +110,19 @@
 
             var form = document.forms.namedItem("pageForm");
 
+            form.btnconfirm.onclick =_=> form.confirmation.value = 'confirm';
+            form.btnsubmit.onclick =_=> form.confirmation.value = 'submit'
+
             form.onsubmit = ev => {
-                ev.preventDefault();
+                if(form.confirmation.value == "confirm"){
+                    ev.preventDefault();
+
+                    document.getElementById("ModalSessionDate").value = document.getElementById("SessionDate").value;
+                    document.getElementById("ModalSessions").value = document.getElementById("SessionsPerWeekRecommended").value;
+                    document.getElementById("ModalTrainer").value = document.getElementById("TrainerID").value;
+                    document.getElementById("ModalClient").value = document.getElementById("ClientID").value;
+                }
             }
-
-            document.getElementById("ModalSessionDate").value = document.getElementById("SessionDate").value;
-            document.getElementById("ModalSessions").value = document.getElementById("SessionsPerWeekRecommended").value;
-            document.getElementById("ModalTrainer").value = document.getElementById("TrainerID").value;
-            document.getElementById("ModalClient").value = document.getElementById("ClientID").value;
-
             
             var myModal = new bootstrap.Modal(document.getElementById('mymodal'));
             myModal.show();
