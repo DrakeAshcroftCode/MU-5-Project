@@ -2,7 +2,7 @@
 
 namespace MU5PrototypeProject.Models
 {
-    public class Session : IValidatableObject
+    public class Session : Auditable, IValidatableObject
     {
         public int ID { get; set; }
 
@@ -11,9 +11,6 @@ namespace MU5PrototypeProject.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime SessionDate { get; set; }
-
-        [Display(Name = "Created At")]
-        public DateTime CreatedAt { get; set; }
 
         [Display(Name = "Sessions/Week")]
         public int? SessionsPerWeekRecommended { get; set; }
@@ -28,20 +25,20 @@ namespace MU5PrototypeProject.Models
         public Equipment? Equipment { get; set; }
 
         [Display(Name = "Trainer")]
-        [Required(ErrorMessage = "A session must be assigned to a trainer.")]
+        [Required(ErrorMessage = "You must select a trainer to add to the session.")]
         public int TrainerID { get; set; }
         public Trainer? Trainer { get; set; }
 
         [Display(Name = "Client")]
-        [Required(ErrorMessage = "A session must be assigned to a client.")]
+        [Required(ErrorMessage = "You must select a client to add to the session.")]
         public int ClientID { get; set; }
         public Client? Client { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (SessionDate <= DateTime.Today)
+            if (SessionDate < DateTime.Today)
             {
-                yield return new ValidationResult("Session cannot be in the future.", new[] { "SessionDate" });
+                yield return new ValidationResult("Session cannot be in the past.", new[] { "SessionDate" });
             }
 
         }

@@ -2,7 +2,7 @@
 
 namespace MU5PrototypeProject.Models
 {
-    public class Client : IValidatableObject
+    public class Client : Auditable, IValidatableObject
     {
         public int ID { get; set; }
 
@@ -18,6 +18,15 @@ namespace MU5PrototypeProject.Models
             }
         }
 
+        [Display(Name = "Full Name")]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+
+            }
+        }
         public int? Age
         {
             get
@@ -70,10 +79,7 @@ namespace MU5PrototypeProject.Models
         [Display(Name = "Client Folder URL")]
         [StringLength(2048)]
         [DataType(DataType.Url)]
-        public string? ClientFolderUrl { get; set; } //add the missing field for the client folder URL in the seed data.
-
-        [Display(Name = "Created At")]
-        public DateTime CreatedAt { get; set; }
+        public string? ClientFolderUrl { get; set; }
 
         [Display(Name = "Archived")]
         public bool IsArchived { get; set; }
