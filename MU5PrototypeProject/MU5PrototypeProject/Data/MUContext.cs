@@ -69,6 +69,11 @@ namespace MU5PrototypeProject.Data
                 .WithOne(e => e.Session)
                 .HasForeignKey<Equipment>(e => e.SessionID)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Client Unique Email
+            modelBuilder.Entity<Client>()
+            .HasIndex(p => p.Email)
+            .IsUnique();
         }
     }
 }
