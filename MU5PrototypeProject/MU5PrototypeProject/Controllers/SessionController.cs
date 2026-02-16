@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MU5PrototypeProject.CustomController;
 using MU5PrototypeProject.Data;
 using MU5PrototypeProject.Models;
+using MU5PrototypeProject.Utilities;
 
 namespace MU5PrototypeProject.Controllers
 {
-    public class SessionController : Controller
+    public class SessionController : CognizantController
     {
         private readonly MUContext _context;
 
@@ -19,16 +21,23 @@ namespace MU5PrototypeProject.Controllers
         public async Task<IActionResult> Index(
             string? SearchSessionDate,
             int? TrainerID,
-            int? ClientID,
+            string SearchClient,
             string actionButton,
+            int? page,
+            int? pageSizeID,
             bool showArchived = false,
             string sortDirection = "asc",
-            string sortField = "Session"/*, int? page, int? pageSizeID*/)
+            string sortField = "Session")
         {
 
             //List of sort options.
             //NOTE: make sure this array has matching values to the column headings
             string[] sortOptions = new[] { "Client", "Trainer", "SessionDate" };
+
+            //Count the number of filters applied - start by assuming no filters
+            ViewData["Filtering"] = "btn-outline-secondary";
+            int numberFilters = 0;
+            //Then in each "test" for filtering, add to the count of Filters applied
 
             PopulateDropDownLists();//Data for Session filter for ddl
 
@@ -43,23 +52,110 @@ namespace MU5PrototypeProject.Controllers
             {
                 sessions = sessions.Where(s => !s.IsArchived);
             }
-
-            //Add as many filters as needed 
-            if (ClientID.HasValue)
+            else
             {
-                sessions = sessions.Where(s => s.ClientID == ClientID);
+                numberFilters++; // count as a filter when showing archived
+            }
+            //Add as many filters as needed 
+            if (!string.IsNullOrEmpty(SearchClient))
+            {
+                sessions = sessions.Where(s => s.Client.FirstName.ToUpper().Contains(SearchClient.ToUpper())
+                                        || s.Client.LastName.ToUpper().Contains(SearchClient.ToUpper()));
+                numberFilters++;
             }
             if (TrainerID.HasValue)
             {
                 sessions = sessions.Where(p => p.TrainerID == TrainerID);
+                numberFilters++;
             }
+            //if (!string.IsNullOrEmpty(SearchSessionDate))
+            //{
+            //    sessions = sessions.Where(p => p.SearchSessionDate.Date.Contains(SearchSessionDate));
+            //    numberFilters++;
+            //}
 
-            // TODO: sorting logic here (if you want to re-enable it)
-            // ...
+            //Give feedback about the state of the filters
+            if (numberFilters != 0)
+            {
+                //Toggle the Open/Closed state of the collapse depending on if we are filtering
+                ViewData["Filtering"] = " btn-danger";
+                //Show how many filters have been applied
+                ViewData["numberFilters"] = "(" + numberFilters.ToString()
+                    + " Filter" + (numberFilters > 1 ? "s" : "") + " Applied)";
+                //Keep the Bootstrap collapse open
+                @ViewData["ShowFilter"] = " show";
+            }
+            //Before we sort, see if we have called for a change of filtering or sorting
+            if (!String.IsNullOrEmpty(actionButton)) //Form Submitted!
+            {
+                page = 1;//Reset page to start
 
+                if (sortOptions.Contains(actionButton))//Change of sort is requested
+                {
+                    if (actionButton == sortField) //Reverse order on same field
+                    {
+                        sortDirection = sortDirection == "asc" ? "desc" : "asc";
+                    }
+                    sortField = actionButton;//Sort by the button clicked
+                }
+            }
+            //Now we know which field and direction to sort by
+            if (sortField == "Client")
+            {
+                if (sortDirection == "asc")
+                {
+                    sessions = sessions
+                        .OrderBy(p => p.Client.FirstName);
+                }
+                else
+                {
+                    sessions = sessions
+                        .OrderByDescending(p => p.Client.FirstName);
+                }
+            }
+            else if (sortField == "Trainer")
+            {
+                if (sortDirection == "asc")
+                {
+                    sessions = sessions
+                        .OrderBy(p => p.Trainer.LastName);
+                }
+                else
+                {
+                    sessions = sessions
+                        .OrderByDescending(p => p.Trainer.LastName);
+                }
+            }
+            else //Sorting by Sessio date
+            {
+                if (sortDirection == "asc")
+                {
+                    sessions = sessions
+                        .OrderByDescending(p => p.SessionDate)
+                        .ThenBy(p => p.Client.FirstName)
+                        .ThenBy(p => p.Trainer.LastName);
+                }
+                else
+                {
+                    sessions = sessions
+                        .OrderBy(p => p.SessionDate)
+                        .ThenBy(p => p.Client.FirstName)
+                        .ThenBy(p => p.Trainer.LastName);
+                }
+            }
+            //Set sort for next time
+            ViewData["sortField"] = sortField;
+            ViewData["sortDirection"] = sortDirection;
             ViewData["showArchived"] = showArchived;
 
-            return View(await sessions.ToListAsync());
+            //Handle Paging
+            int pageSize = PageSizeHelper.SetPageSize(HttpContext, pageSizeID, ControllerName());
+            ViewData["pageSizeID"] = PageSizeHelper.PageSizeList(pageSize);
+
+            var pagedData = await PaginatedList<Session>.CreateAsync(sessions.AsNoTracking(), page ?? 1, pageSize);
+
+            //return View(await sessions.ToListAsync());
+            return View(pagedData);
         }
 
 
@@ -87,6 +183,10 @@ namespace MU5PrototypeProject.Controllers
         // GET: Session/Create
         public IActionResult Create()
         {
+            //default session date to today
+            DateTime today = DateTime.Today;
+            ViewData["DefaultSessionDate"] = today.ToString("yyyy-MM-dd");
+
             PopulateDropDownLists();
             //ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName");
             //ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName");
@@ -98,7 +198,7 @@ namespace MU5PrototypeProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,SessionDate,CreatedAt,SessionsPerWeekRecommended,IsArchived,TrainerID,ClientID")] Session session)
+        public async Task<IActionResult> Create([Bind("ID,SessionDate,SessionsPerWeekRecommended,IsArchived,TrainerID,ClientID")] Session session)
         {
             try
             {
@@ -146,7 +246,7 @@ namespace MU5PrototypeProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id)
         {
-            //Go get the musician to update
+            //Go get the session to update
             var sessionToUpdate = await _context.Sessions.FirstOrDefaultAsync(s => s.ID == id);
             if (sessionToUpdate == null)
             {
@@ -155,7 +255,7 @@ namespace MU5PrototypeProject.Controllers
 
             //Try updating it with value
             if (await TryUpdateModelAsync<Session>(sessionToUpdate, "",
-                t => t.SessionDate, t => t.CreatedAt, t => t.SessionsPerWeekRecommended,
+                t => t.SessionDate, t => t.SessionsPerWeekRecommended,
                 t => t.IsArchived, t => t.TrainerID, t => t.ClientID))
             {
                 try
@@ -278,7 +378,7 @@ namespace MU5PrototypeProject.Controllers
                              orderby t.FirstName
                              select t;
 
-            ViewData["ClientID"] = new SelectList(clientObjs, nameof(Client.ID), nameof(Client.ClientName));
+            ViewData["ClientID"] = new SelectList(clientObjs, nameof(Client.ID), nameof(Client.FullName));
 
 
 

@@ -23,8 +23,11 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     Phone = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
                     Email = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
                     ClientFolderUrl = table.Column<string>(type: "TEXT", maxLength: 2048, nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    IsArchived = table.Column<bool>(type: "INTEGER", nullable: false)
+                    IsArchived = table.Column<bool>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    UpdatedOn = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,11 +69,14 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     SessionDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     SessionsPerWeekRecommended = table.Column<int>(type: "INTEGER", nullable: true),
                     IsArchived = table.Column<bool>(type: "INTEGER", nullable: false),
                     TrainerID = table.Column<int>(type: "INTEGER", nullable: false),
-                    ClientID = table.Column<int>(type: "INTEGER", nullable: false)
+                    ClientID = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    UpdatedOn = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

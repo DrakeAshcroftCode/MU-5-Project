@@ -17,14 +17,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="SessionDate" class="control-label"></label><span style="color:darkred"> *</span>
-                <input asp-for="SessionDate" class="form-control" placeholder="Session Date"/>
+                <input asp-for="SessionDate" class="form-control" type="date" value="@ViewData["DefaultSessionDate"]" /> @* default session date to today *@
                 <span asp-validation-for="SessionDate" class="text-danger"></span>
             </div>
-@*             <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div> *@
             <div class="form-group">
                 <label asp-for="SessionsPerWeekRecommended" class="control-label"></label>
                 <input asp-for="SessionsPerWeekRecommended" class="form-control" placeholder="Recommended Sessions Per Week"/>
@@ -37,11 +32,17 @@
             </div> *@
             <div class="form-group">
                 <label asp-for="TrainerID" class="control-label"></label><span style="color:darkred"> *</span>
-                <select asp-for="TrainerID" class ="form-control" asp-items="ViewBag.TrainerID" ></select>
+                <select asp-for="TrainerID" class ="form-control" asp-items="ViewBag.TrainerID" >
+                    <option value="">Select a Trainer</option>
+                </select>
+                <span asp-validation-for="TrainerID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ClientID" class="control-label"></label><span style="color:darkred"> *</span>
-                <select asp-for="ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
+                <select asp-for="ClientID" class ="form-control" asp-items="ViewBag.ClientID">
+                    <option value="">Select a Client</option>
+                </select>
+                <span asp-validation-for="ClientID" class="text-danger"></span>
             </div>
             <div class="form-group">
 
@@ -76,7 +77,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to Sessions</a>
 </div>
 
 
