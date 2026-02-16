@@ -10,65 +10,42 @@
 </head>
 <body>
     <a href="#maincontent" class="skip-link">Skip to main content</a>
-    <header class="siteHeader py-3">
+    <header class="siteHeader">
         <div class="container">
-            <div class="d-flex align-items-center justify-content-between">
-                <div class="text-center flex-grow-1">
-                    <a asp-controller="Home"
-                       asp-action="Index"
-                       class="logoBox text-decoration-none d-inline-block">
-                        <!-- logo drops you back to landing -->
-                        <img src="~/assets/Movement_Unlimited_O_Logo_500px.png" id="imgLogo" alt="Movement Unlimited logo" />
-                    </a>
-                </div>
-            </div>
+            <div class="headerBar">
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="logoBox text-decoration-none d-inline-block">
+                    <!-- logo drops you back to landing -->
+                    <img src="~/assets/Movement_Unlimited_O_Logo_500px.png" id="imgLogo" alt="Movement Unlimited logo" />
+                </a>
+
+                <nav class="navbar navbar-expand-md p-0 classicNav">
+                    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                            aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="mainNavbar">
+                        <ul class="navbar-nav flex-row classicNavMenu">
+                            <li class="nav-item">
+                                <a class="nav-link classicNavLink" asp-controller="Home" asp-action="Index">Landing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link classicNavLink" asp-controller="Client" asp-action="Index">Clients</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link classicNavLink" asp-controller="Session" asp-action="Index">Sessions</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
 
                 <!-- quick help slideout -->
-                <button class="helpButton ms-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#helpPanel" aria-controls="helpPanel">?</button>
-                <!-- hamburger keeps nav touch-friendly on tablet -->
-                <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <button class="helpButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#helpPanel" aria-controls="helpPanel">?</button>
             </div>
-
-    @*         <nav class="navbar navbar-expand-md navbar-light p-0 mt-3">
-                <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
-                    <ul class="navbar-nav navButtons flex-row">
-                        <li class="nav-item mx-2">
-                            <a class="nav-link navButton" asp-controller="Home" asp-action="Index">Landing</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link navButton" asp-controller="Sessions" asp-action="Index">Sessions</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link navButton" asp-controller="Clients" asp-action="Index">Clients</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
         </div>
-    </header> *@
-        <nav class="navbar navbar-expand-md p-0 mt-3 classicNav">
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
-                <ul class="navbar-nav flex-row classicNavMenu">
-                    <li class="nav-item">
-                        <a class="nav-link classicNavLink" asp-controller="Home" asp-action="Index">Landing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link classicNavLink" asp-controller="Client" asp-action="Index">Clients</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link classicNavLink" asp-controller="Session" asp-action="Index">Sessions</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        </header>
+    </header>
     <div class="container">
         <main role="main" class="pb-3" id="maincontent" tabindex="-1">
             @RenderBody()

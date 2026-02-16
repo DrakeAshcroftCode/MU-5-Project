@@ -80,7 +80,7 @@ namespace MU5PrototypeProject.Models
         [StringLength(2048)]
         [DataType(DataType.Url)]
         public string? ClientFolderUrl { get; set; }
-
+        public DateTime CreatedAt = new DateTime();
         [Display(Name = "Archived")]
         public bool IsArchived { get; set; }
 
