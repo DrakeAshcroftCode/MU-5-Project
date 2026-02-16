@@ -450,12 +450,12 @@ body {
     }
 }
 
-@media (max-width: 1200px) {
+/*@media (max-width: 1200px) {
     .clientsTable th:nth-child(4),
     .clientsTable td:nth-child(4) {
         display: none;
     }
-}
+}*/
 
 @media (max-width: 1000px) {
     .clientsTable th:nth-child(3),
@@ -464,7 +464,7 @@ body {
     }
 }
 
-@media (max-width: 1500px) {
+/*@media (max-width: 1500px) {
     .sessionsTable th:nth-child(2),
     .sessionsTable td:nth-child(2) {
         display: none;
@@ -475,7 +475,7 @@ body {
     .sessionsTable th:nth-child(4),
     .sessionsTable td:nth-child(4) {
         display: none;
-    }
+    }*/
 }
 
 @media (max-width: 1090px) {
@@ -514,13 +514,15 @@ body {
     .actionsCol { padding-right: .8rem; }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 480px) {
+    .clientsTable th:nth-child(2),
+    .clientsTable td:nth-child(2),
     .clientsTable th:nth-child(3),
     .clientsTable td:nth-child(3),
     .sessionsTable th:nth-child(2),
     .sessionsTable td:nth-child(2),
-    .sessionsTable th:nth-child(3),
-    .sessionsTable td:nth-child(3),
+    /*    .sessionsTable th:nth-child(3),
+    .sessionsTable td:nth-child(3),*/
     .sessionsTable th:nth-child(4),
     .sessionsTable td:nth-child(4) {
         display: none !important;
