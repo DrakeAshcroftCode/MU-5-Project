@@ -171,24 +171,14 @@ namespace MU5PrototypeProject.Controllers
         {
             try
             {
-                if (client.DOB > DateTime.Today)
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError("DOB", "Date Of Birth must not be in the future");
-                }
-                else if (client.Age <= 7)
-                {
-                    ModelState.AddModelError("DOB", "Client must be at least 7 years old");
-                }
-                else
-                {
-                    if (ModelState.IsValid)
-                    {
-                        client.CreatedAt = DateTime.Now; // <- set by system
+                    
+                    client.CreatedAt = DateTime.Now; // <- set by system
 
-                        _context.Add(client);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Details), new { client.ID });
-                    }
+                    _context.Add(client);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Details), new { client.ID });
                 }
             }
             catch (RetryLimitExceededException)

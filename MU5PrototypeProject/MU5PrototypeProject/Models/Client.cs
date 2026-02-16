@@ -82,13 +82,13 @@ namespace MU5PrototypeProject.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (DOB >= DateTime.Today)
+            if (DOB > DateTime.Today)
             {
                 yield return new ValidationResult("Date of Birth cannot be in the future.", new[] { "DOB" });
             }
-            else if (Age < 17)
+            else if (Age < 7)
             {
-                yield return new ValidationResult("Musician must be at least 18 years old.", new[] { "DOB" });
+                yield return new ValidationResult("Client must be at least 7 years old.", new[] { "DOB" });
             }
         }
     }
