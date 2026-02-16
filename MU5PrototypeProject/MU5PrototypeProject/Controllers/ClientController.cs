@@ -1,16 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using MU5PrototypeProject.CustomController;
 using MU5PrototypeProject.Data;
 using MU5PrototypeProject.Models;
-using MU5PrototypeProject.Utilities;    
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MU5PrototypeProject.Utilities;
 
 namespace MU5PrototypeProject.Controllers
 {
@@ -30,7 +24,7 @@ namespace MU5PrototypeProject.Controllers
             string actionButton,
             int? page,
             int? pageSizeID,
-            bool showArchived = false,       
+            bool showArchived = false,
             string sortDirection = "asc",
             string sortField = "Client")
         {
@@ -102,7 +96,7 @@ namespace MU5PrototypeProject.Controllers
                         clients = clients
                             .OrderBy(c => c.FirstName)
                             .ThenBy(c => c.LastName);
-                            
+
                     }
                     else
                     {
@@ -153,7 +147,7 @@ namespace MU5PrototypeProject.Controllers
         {
             DateTime today = DateTime.Today;
             DateTime maxDate = today.AddYears(-7);   // Must be at least 7
-            DateTime minDate = today.AddYears(-120); 
+            DateTime minDate = today.AddYears(-120);
 
             ViewData["MaxDOB"] = maxDate.ToString("yyyy-MM-dd");
             ViewData["MinDOB"] = minDate.ToString("yyyy-MM-dd");
@@ -171,24 +165,14 @@ namespace MU5PrototypeProject.Controllers
         {
             try
             {
-                if (client.DOB > DateTime.Today)
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError("DOB", "Date Of Birth must not be in the future");
-                }
-                else if (client.Age <= 7)
-                {
-                    ModelState.AddModelError("DOB", "Client must be at least 7 years old");
-                }
-                else
-                {
-                    if (ModelState.IsValid)
-                    {
-                        client.CreatedAt = DateTime.Now; // <- set by system
+                    
+                    client.CreatedAt = DateTime.Now; // <- set by system
 
-                        _context.Add(client);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Details), new { client.ID });
-                    }
+                    _context.Add(client);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Details), new { client.ID });
                 }
             }
             catch (RetryLimitExceededException)
@@ -244,35 +228,35 @@ namespace MU5PrototypeProject.Controllers
                 c => c.Email,
                 c => c.ClientFolderUrl,
                 c => c.IsArchived))  // CreatedAt removed here
-    {
-        try
-        {
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!ClientExists(clientToUpdate.ID))
             {
-                return NotFound();
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ClientExists(clientToUpdate.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                catch (RetryLimitExceededException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes after multiple attempts. " +
+                        "Try again, and if the problem persists, see your system administrator.");
+                }
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                }
             }
-            else
-            {
-                throw;
-            }
-        }
-        catch (RetryLimitExceededException)
-        {
-            ModelState.AddModelError("", "Unable to save changes after multiple attempts. " +
-                "Try again, and if the problem persists, see your system administrator.");
-        }
-        catch (DbUpdateException)
-        {
-            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-        }
-    }
 
-    return View(clientToUpdate);
+            return View(clientToUpdate);
         }
 
         // GET: Client/Delete/5
