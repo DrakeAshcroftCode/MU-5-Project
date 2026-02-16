@@ -66,12 +66,9 @@
 				<th>
 					@Html.DisplayNameFor(model => model.Email)
 				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.CreatedAt)
-				</th>
-				<th>
+@* 				<th>
 					@Html.DisplayNameFor(model => model.IsArchived)
-				</th>
+				</th> *@
 				<th class="actionsCol">Actions</th>
 			</tr>
 		</thead>
@@ -91,12 +88,9 @@
 					<td>
 						@Html.DisplayFor(modelItem => item.Email)
 					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.CreatedAt)
-					</td>
-					<td>
+@* 					<td>
 						@Html.DisplayFor(modelItem => item.IsArchived)
-					</td>
+					</td> *@
 					<td class="actionsCol">
 						@if (item.IsArchived)
 						{

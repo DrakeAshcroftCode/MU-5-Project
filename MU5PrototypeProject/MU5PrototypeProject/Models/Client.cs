@@ -2,7 +2,7 @@
 
 namespace MU5PrototypeProject.Models
 {
-    public class Client : IValidatableObject
+    public class Client : Auditable, IValidatableObject
     {
         public int ID { get; set; }
 
@@ -79,10 +79,7 @@ namespace MU5PrototypeProject.Models
         [Display(Name = "Client Folder URL")]
         [StringLength(2048)]
         [DataType(DataType.Url)]
-        public string? ClientFolderUrl { get; set; } //add the missing field for the client folder URL in the seed data.
-
-        [Display(Name = "Created At")]
-        public DateTime CreatedAt { get; set; }
+        public string? ClientFolderUrl { get; set; }
 
         [Display(Name = "Archived")]
         public bool IsArchived { get; set; }
@@ -91,13 +88,13 @@ namespace MU5PrototypeProject.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (DOB >= DateTime.Today)
+            if (DOB > DateTime.Today)
             {
                 yield return new ValidationResult("Date of Birth cannot be in the future.", new[] { "DOB" });
             }
-            else if (Age < 17)
+            else if (Age < 7)
             {
-                yield return new ValidationResult("Musician must be at least 18 years old.", new[] { "DOB" });
+                yield return new ValidationResult("Client must be at least 18 years old.", new[] { "DOB" });
             }
         }
     }

@@ -198,7 +198,7 @@ namespace MU5PrototypeProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,SessionDate,CreatedAt,SessionsPerWeekRecommended,IsArchived,TrainerID,ClientID")] Session session)
+        public async Task<IActionResult> Create([Bind("ID,SessionDate,SessionsPerWeekRecommended,IsArchived,TrainerID,ClientID")] Session session)
         {
             try
             {

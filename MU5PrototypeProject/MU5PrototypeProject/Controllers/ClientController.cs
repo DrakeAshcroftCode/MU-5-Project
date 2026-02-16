@@ -177,7 +177,7 @@ namespace MU5PrototypeProject.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        client.CreatedAt = DateTime.Now; // <- set by system
+                        //client.CreatedAt = DateTime.Now; // <- set by system
 
                         _context.Add(client);
                         await _context.SaveChangesAsync();
