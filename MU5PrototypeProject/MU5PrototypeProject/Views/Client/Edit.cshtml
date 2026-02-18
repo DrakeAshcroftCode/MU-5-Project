@@ -49,7 +49,7 @@
                     <input class="form-check-input" asp-for="IsArchived" /> @Html.DisplayNameFor(model => model.IsArchived)
                 </label>
             </div>*@
-            <div class="form-group">
+            <div class="form-group d-flex gap-2 mt-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-primary">Cancel</a>
             </div>
@@ -58,8 +58,10 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to Clients</a>
+<div class="mt-4">
+    <a asp-action="Index" class="btn btn-secondary">
+        Back to Clients
+    </a>
 </div>
 
 @section Scripts {

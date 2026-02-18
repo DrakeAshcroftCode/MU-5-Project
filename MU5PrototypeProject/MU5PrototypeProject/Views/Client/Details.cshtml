@@ -54,26 +54,33 @@
         </dd> *@
     </dl>
 </div>
-<div>
+
+<div class="mb-3">
+    <a asp-controller="Session"
+       asp-action="Create"
+       asp-route-clientId="@Model.ID"
+       class="btn btn-success">
+        Create Session For This Client
+    </a>
+</div>
+
+<div class="mt-2">
     @if (Model != null && !Model.IsArchived)
     {
-        <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
-        <text> | </text>
+        <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-primary me-2">Edit</a>
 
         <form asp-action="Archive" asp-route-id="@Model.ID" method="post" class="d-inline">
             @Html.AntiForgeryToken()
-            <button type="submit" class="btn btn-link p-0 align-baseline">Archive</button>
+            <button type="submit" class="btn btn-danger me-2">Archive</button>
         </form>
-        <text> | </text>
     }
     else if (Model != null && Model.IsArchived)
     {
         <form asp-action="Unarchive" asp-route-id="@Model.ID" method="post" class="d-inline">
             @Html.AntiForgeryToken()
-            <button type="submit" class="btn btn-link p-0 align-baseline">Unarchive</button>
+            <button type="submit" class="btn btn-warning me-2">Unarchive</button>
         </form>
-        <text> | </text>
     }
 
-    <a asp-action="Index">Back to Clients</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to Clients</a>
 </div>

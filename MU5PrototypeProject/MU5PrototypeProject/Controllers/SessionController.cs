@@ -181,16 +181,21 @@ namespace MU5PrototypeProject.Controllers
         }
 
         // GET: Session/Create
-        public IActionResult Create()
+        public IActionResult Create(int? clientId)
         {
             //default session date to today
             DateTime today = DateTime.Today;
             ViewData["DefaultSessionDate"] = today.ToString("yyyy-MM-dd");
 
-            PopulateDropDownLists();
+            Session session = new Session();
+
+            if (clientId != null)
+                session.ClientID = clientId.Value;
+
+            PopulateDropDownLists(session);
             //ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName");
             //ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName");
-            return View();
+            return View(session);
         }
 
         // POST: Session/Create
@@ -378,7 +383,7 @@ namespace MU5PrototypeProject.Controllers
                              orderby t.FirstName
                              select t;
 
-            ViewData["ClientID"] = new SelectList(clientObjs, nameof(Client.ID), nameof(Client.FullName));
+            ViewData["ClientID"] = new SelectList(clientObjs, nameof(Client.ID), nameof(Client.FullName), session?.ClientID);
 
 
 
@@ -387,7 +392,7 @@ namespace MU5PrototypeProject.Controllers
                               orderby t.FirstName
 
                               select t;
-            ViewData["TrainerID"] = new SelectList(trainerObjs, nameof(Trainer.ID), nameof(Trainer.TrainerName));
+            ViewData["TrainerID"] = new SelectList(trainerObjs, nameof(Trainer.ID), nameof(Trainer.TrainerName), session?.TrainerID);
 
         }
         private bool SessionExists(int id)
