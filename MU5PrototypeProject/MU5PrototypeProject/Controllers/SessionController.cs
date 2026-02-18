@@ -160,7 +160,7 @@ namespace MU5PrototypeProject.Controllers
 
 
         // GET: Session/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, bool post = false)
         {
             if (id == null)
             {
@@ -176,6 +176,7 @@ namespace MU5PrototypeProject.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Post = post;
 
             return View(session);
         }
@@ -211,7 +212,7 @@ namespace MU5PrototypeProject.Controllers
                 {
                     _context.Add(session);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Details), new { session.ID });
+                    return RedirectToAction(nameof(Details), new { session.ID, ModelState.IsValid });
                 }
             }
             catch (DbUpdateException dex)

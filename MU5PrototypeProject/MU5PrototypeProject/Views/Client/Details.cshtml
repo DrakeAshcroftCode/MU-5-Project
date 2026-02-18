@@ -55,6 +55,7 @@
     </dl>
 </div>
 
+
 <div class="mb-3">
     <a asp-controller="Session"
        asp-action="Create"
@@ -63,6 +64,7 @@
         Create Session For This Client
     </a>
 </div>
+
 
 <div class="mt-2">
     @if (Model != null && !Model.IsArchived)
@@ -84,3 +86,21 @@
 
     <a asp-action="Index" class="btn btn-secondary">Back to Clients</a>
 </div>
+
+<div class="modal fade" id="mymodal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <p>Success Message!</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    var Post = 'ViewBag.Post'
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("Event Fired" + Post)
+        if(Post){
+            var myModal = new bootstrap.Modal(document.getElementById('mymodal'));
+            myModal.show();
+        }
+    }, false);
+</script>
