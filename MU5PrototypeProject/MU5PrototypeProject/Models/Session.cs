@@ -2,6 +2,13 @@
 
 namespace MU5PrototypeProject.Models
 {
+    public enum SessionType
+    {
+        Private,
+        SemiPrivate,
+        Physio
+    }
+
     public class Session : Auditable, IValidatableObject
     {
         public int ID { get; set; }
@@ -11,6 +18,10 @@ namespace MU5PrototypeProject.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime SessionDate { get; set; }
+
+        [Display(Name = "Session Type")]
+        [Required(ErrorMessage = "You must select a session type.")]
+        public SessionType SessionType { get; set; }
 
         [Display(Name = "Sessions/Week")]
         public int? SessionsPerWeekRecommended { get; set; }
@@ -22,7 +33,7 @@ namespace MU5PrototypeProject.Models
         public ICollection<SessionExercise> Exercises { get; set; } = new HashSet<SessionExercise>();
         public SessionNotes? Notes { get; set; }
         public AdminStatus? AdminStatus { get; set; }
-        public Equipment? Equipment { get; set; }
+        public PhysioInfo? PhysioInfo { get; set; }
 
         [Display(Name = "Trainer")]
         [Required(ErrorMessage = "You must select a trainer to add to the session.")]
@@ -37,11 +48,7 @@ namespace MU5PrototypeProject.Models
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (SessionDate < DateTime.Today)
-            {
                 yield return new ValidationResult("Session cannot be in the past.", new[] { "SessionDate" });
-            }
-
         }
-
     }
 }

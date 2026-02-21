@@ -11,9 +11,9 @@ namespace MU5PrototypeProject.Models
         [StringLength(100)]
         public string ExerciseName { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(100)]
-        public string Apparatus { get; set; } = string.Empty;
+        [Display(Name = "Apparatus")]
+        public int? ApparatusID { get; set; }
+        public Apparatus? Apparatus { get; set; }
 
         public ICollection<SessionExercise> SessionExercises { get; set; } = new HashSet<SessionExercise>();
     }

@@ -170,7 +170,7 @@ namespace MU5PrototypeProject.Controllers
                 if (ModelState.IsValid)
                 {
                     
-                    client.CreatedAt = DateTime.Now; // <- set by system
+                    //client.CreatedAt = DateTime.Now; // causing error deleting for now
 
                     _context.Add(client);
                     await _context.SaveChangesAsync();

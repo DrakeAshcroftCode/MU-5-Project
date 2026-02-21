@@ -6,11 +6,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MU5PrototypeProject.Data.MUMigrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Apparatuses",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ApparatusName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Apparatuses", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Clients",
                 columns: table => new
@@ -35,20 +48,6 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Exercises",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ExerciseName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    Apparatus = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Exercises", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Trainers",
                 columns: table => new
                 {
@@ -63,12 +62,33 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Exercises",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ExerciseName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    ApparatusID = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Exercises", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Exercises_Apparatuses_ApparatusID",
+                        column: x => x.ApparatusID,
+                        principalTable: "Apparatuses",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Sessions",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     SessionDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    SessionType = table.Column<int>(type: "INTEGER", nullable: false),
                     SessionsPerWeekRecommended = table.Column<int>(type: "INTEGER", nullable: true),
                     IsArchived = table.Column<bool>(type: "INTEGER", nullable: false),
                     TrainerID = table.Column<int>(type: "INTEGER", nullable: false),
@@ -93,6 +113,29 @@ namespace MU5PrototypeProject.Data.MUMigrations
                         principalTable: "Trainers",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExerciseSettings",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ExerciseID = table.Column<int>(type: "INTEGER", nullable: false),
+                    GearBarLevel = table.Column<int>(type: "INTEGER", nullable: true),
+                    StopperSetting = table.Column<int>(type: "INTEGER", nullable: true),
+                    HeadrestPosition = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    StrapsType = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExerciseSettings", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_ExerciseSettings_Exercises_ExerciseID",
+                        column: x => x.ExerciseID,
+                        principalTable: "Exercises",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,26 +168,25 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Equipments",
+                name: "PhysioInfos",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     SessionID = table.Column<int>(type: "INTEGER", nullable: false),
-                    GearBarLevel = table.Column<int>(type: "INTEGER", nullable: true),
-                    StopperSetting = table.Column<int>(type: "INTEGER", nullable: true),
-                    HeadrestPosition = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                    StrapsType = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                    HasTowel = table.Column<bool>(type: "INTEGER", nullable: false),
-                    HasPosturePillow = table.Column<bool>(type: "INTEGER", nullable: false),
-                    HasHeadPad = table.Column<bool>(type: "INTEGER", nullable: false),
-                    HasRubberPads = table.Column<bool>(type: "INTEGER", nullable: false)
+                    InsuranceCompany = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    CoverageAmountPerYear = table.Column<decimal>(type: "TEXT", nullable: true),
+                    AmountUsed = table.Column<decimal>(type: "TEXT", nullable: true),
+                    CoverageResetsDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    PhysiotherapistName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    CoverageShared = table.Column<bool>(type: "INTEGER", nullable: false),
+                    CommunicatedWithPhysio = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Equipments", x => x.ID);
+                    table.PrimaryKey("PK_PhysioInfos", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Equipments_Sessions_SessionID",
+                        name: "FK_PhysioInfos_Sessions_SessionID",
                         column: x => x.SessionID,
                         principalTable: "Sessions",
                         principalColumn: "ID",
@@ -187,7 +229,9 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     SessionID = table.Column<int>(type: "INTEGER", nullable: false),
+                    CompletedByTrainerID = table.Column<int>(type: "INTEGER", nullable: true),
                     Goals = table.Column<string>(type: "TEXT", nullable: true),
+                    HealthMedicalHistory = table.Column<string>(type: "TEXT", nullable: true),
                     GeneralComments = table.Column<string>(type: "TEXT", nullable: true),
                     SubjectiveReports = table.Column<string>(type: "TEXT", nullable: true),
                     ObjectiveFindings = table.Column<string>(type: "TEXT", nullable: true),
@@ -202,6 +246,12 @@ namespace MU5PrototypeProject.Data.MUMigrations
                         principalTable: "Sessions",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SessionNotes_Trainers_CompletedByTrainerID",
+                        column: x => x.CompletedByTrainerID,
+                        principalTable: "Trainers",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -211,8 +261,18 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Equipments_SessionID",
-                table: "Equipments",
+                name: "IX_Exercises_ApparatusID",
+                table: "Exercises",
+                column: "ApparatusID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExerciseSettings_ExerciseID",
+                table: "ExerciseSettings",
+                column: "ExerciseID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PhysioInfos_SessionID",
+                table: "PhysioInfos",
                 column: "SessionID",
                 unique: true);
 
@@ -225,6 +285,11 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 name: "IX_SessionExercises_SessionID",
                 table: "SessionExercises",
                 column: "SessionID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SessionNotes_CompletedByTrainerID",
+                table: "SessionNotes",
+                column: "CompletedByTrainerID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SessionNotes_SessionID",
@@ -250,7 +315,10 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 name: "AdminStatuses");
 
             migrationBuilder.DropTable(
-                name: "Equipments");
+                name: "ExerciseSettings");
+
+            migrationBuilder.DropTable(
+                name: "PhysioInfos");
 
             migrationBuilder.DropTable(
                 name: "SessionExercises");
@@ -263,6 +331,9 @@ namespace MU5PrototypeProject.Data.MUMigrations
 
             migrationBuilder.DropTable(
                 name: "Sessions");
+
+            migrationBuilder.DropTable(
+                name: "Apparatuses");
 
             migrationBuilder.DropTable(
                 name: "Clients");

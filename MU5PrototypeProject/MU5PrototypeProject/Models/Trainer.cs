@@ -6,16 +6,8 @@ namespace MU5PrototypeProject.Models
     {
         public int ID { get; set; }
 
-        //Summary Properties
         [Display(Name = "Trainer Name")]
-        public string TrainerName
-        {
-            get
-            {
-                return FirstName + " " + (string.IsNullOrEmpty(LastName));
-
-            }
-        }
+        public string TrainerName => $"{FirstName} {LastName}";
 
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "You cannot leave the first name blank.")]
@@ -28,6 +20,18 @@ namespace MU5PrototypeProject.Models
         [StringLength(100, ErrorMessage = "Last name cannot be more than 100 characters long.")]
         [RegularExpression(@"^[A-Za-z-]+$", ErrorMessage = "Last name can only contain letters and hyphens.")]
         public string LastName { get; set; } = string.Empty;
+
+        [Display(Name = "Email")]
+        [EmailAddress]
+        [StringLength(255)]
+        public string? Email { get; set; }
+
+        [Display(Name = "Role")]
+        [StringLength(50)]
+        public string? Role { get; set; }
+
+        [Display(Name = "Active")]
+        public bool IsActive { get; set; } = true;
 
         public ICollection<Session> Sessions { get; set; } = new HashSet<Session>();
     }

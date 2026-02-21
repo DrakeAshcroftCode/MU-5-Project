@@ -45,29 +45,44 @@ namespace MU5PrototypeProject.Data
             if (!context.Trainers.Any())
             {
                 context.Trainers.AddRange(
-                    new Trainer { FirstName = "Alex", LastName = "Green" },
-                    new Trainer { FirstName = "Jordan", LastName = "Lee" },
-                    new Trainer { FirstName = "Morgan", LastName = "Park" },
-                    new Trainer { FirstName = "Taylor", LastName = "Kim" }
+                    new Trainer { FirstName = "Alex",   LastName = "Green", Email = "alex@mu.com",   Role = "Trainer", IsActive = true },
+                    new Trainer { FirstName = "Jordan", LastName = "Lee",   Email = "jordan@mu.com", Role = "Admin",   IsActive = true },
+                    new Trainer { FirstName = "Morgan", LastName = "Park",  Email = "morgan@mu.com", Role = "Physio",  IsActive = true },
+                    new Trainer { FirstName = "Taylor", LastName = "Kim",   Email = "taylor@mu.com", Role = "Trainer", IsActive = true }
+                );
+                context.SaveChanges();
+            }
+
+            if (!context.Apparatuses.Any())
+            {
+                context.Apparatuses.AddRange(
+                    new Apparatus { ApparatusName = "Reformer" },
+                    new Apparatus { ApparatusName = "Mat"      },
+                    new Apparatus { ApparatusName = "Chair"    },
+                    new Apparatus { ApparatusName = "Cadillac" }
                 );
                 context.SaveChanges();
             }
 
             if (!context.Exercises.Any())
             {
+                // Load apparatus IDs after seeding
+                int reformerID = context.Apparatuses.First(a => a.ApparatusName == "Reformer").ID;
+                int matID      = context.Apparatuses.First(a => a.ApparatusName == "Mat").ID;
+
                 context.Exercises.AddRange(
-                    new Exercise { ExerciseName = "Reformer Footwork", Apparatus = "Reformer" },
-                    new Exercise { ExerciseName = "Hundred", Apparatus = "Reformer" },
-                    new Exercise { ExerciseName = "Wall Squat", Apparatus = "Mat" },
-                    new Exercise { ExerciseName = "Bridge", Apparatus = "Mat" },
-                    new Exercise { ExerciseName = "Spine Stretch", Apparatus = "Mat" },
-                    new Exercise { ExerciseName = "Rowing Front", Apparatus = "Reformer" },
-                    new Exercise { ExerciseName = "Cat-Cow", Apparatus = "Mat" },
-                    new Exercise { ExerciseName = "Lunge", Apparatus = "Reformer" },
-                    new Exercise { ExerciseName = "Single Leg Stand", Apparatus = "Mat" },
-                    new Exercise { ExerciseName = "Swan", Apparatus = "Mat" },
-                    new Exercise { ExerciseName = "Side Splits", Apparatus = "Reformer" },
-                    new Exercise { ExerciseName = "Plank", Apparatus = "Mat" }
+                    new Exercise { ExerciseName = "Reformer Footwork", ApparatusID = reformerID },
+                    new Exercise { ExerciseName = "Hundred",            ApparatusID = reformerID },
+                    new Exercise { ExerciseName = "Wall Squat",         ApparatusID = matID      },
+                    new Exercise { ExerciseName = "Bridge",             ApparatusID = matID      },
+                    new Exercise { ExerciseName = "Spine Stretch",      ApparatusID = matID      },
+                    new Exercise { ExerciseName = "Rowing Front",       ApparatusID = reformerID },
+                    new Exercise { ExerciseName = "Cat-Cow",            ApparatusID = matID      },
+                    new Exercise { ExerciseName = "Lunge",              ApparatusID = reformerID },
+                    new Exercise { ExerciseName = "Single Leg Stand",   ApparatusID = matID      },
+                    new Exercise { ExerciseName = "Swan",               ApparatusID = matID      },
+                    new Exercise { ExerciseName = "Side Splits",        ApparatusID = reformerID },
+                    new Exercise { ExerciseName = "Plank",              ApparatusID = matID      }
                 );
                 context.SaveChanges();
             }

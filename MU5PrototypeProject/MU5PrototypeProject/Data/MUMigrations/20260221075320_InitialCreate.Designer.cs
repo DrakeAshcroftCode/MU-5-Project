@@ -3,6 +3,7 @@ using System;
 using MU5PrototypeProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MU5PrototypeProject.Data.MUMigrations
 {
     [DbContext(typeof(MUContext))]
-    partial class MUContextModelSnapshot : ModelSnapshot
+    [Migration("20260221075320_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.12");
@@ -158,27 +161,6 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     b.ToTable("Exercises");
                 });
 
-            modelBuilder.Entity("MU5PrototypeProject.Models.ExerciseProp", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ExerciseID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PropID")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ExerciseID");
-
-                    b.HasIndex("PropID");
-
-                    b.ToTable("ExerciseProps");
-                });
-
             modelBuilder.Entity("MU5PrototypeProject.Models.ExerciseSettings", b =>
                 {
                     b.Property<int>("ID")
@@ -247,27 +229,6 @@ namespace MU5PrototypeProject.Data.MUMigrations
                         .IsUnique();
 
                     b.ToTable("PhysioInfos");
-                });
-
-            modelBuilder.Entity("MU5PrototypeProject.Models.Prop", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("PropName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("SessionID")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("SessionID");
-
-                    b.ToTable("Props");
                 });
 
             modelBuilder.Entity("MU5PrototypeProject.Models.Session", b =>
@@ -395,25 +356,14 @@ namespace MU5PrototypeProject.Data.MUMigrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Email")
-                        .HasMaxLength(255)
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Role")
-                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
@@ -442,25 +392,6 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     b.Navigation("Apparatus");
                 });
 
-            modelBuilder.Entity("MU5PrototypeProject.Models.ExerciseProp", b =>
-                {
-                    b.HasOne("MU5PrototypeProject.Models.Exercise", "Exercise")
-                        .WithMany()
-                        .HasForeignKey("ExerciseID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MU5PrototypeProject.Models.Prop", "Prop")
-                        .WithMany("ExerciseProps")
-                        .HasForeignKey("PropID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Exercise");
-
-                    b.Navigation("Prop");
-                });
-
             modelBuilder.Entity("MU5PrototypeProject.Models.ExerciseSettings", b =>
                 {
                     b.HasOne("MU5PrototypeProject.Models.Exercise", "Exercise")
@@ -477,17 +408,6 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     b.HasOne("MU5PrototypeProject.Models.Session", "Session")
                         .WithOne("PhysioInfo")
                         .HasForeignKey("MU5PrototypeProject.Models.PhysioInfo", "SessionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Session");
-                });
-
-            modelBuilder.Entity("MU5PrototypeProject.Models.Prop", b =>
-                {
-                    b.HasOne("MU5PrototypeProject.Models.Session", "Session")
-                        .WithMany()
-                        .HasForeignKey("SessionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -563,11 +483,6 @@ namespace MU5PrototypeProject.Data.MUMigrations
             modelBuilder.Entity("MU5PrototypeProject.Models.Exercise", b =>
                 {
                     b.Navigation("SessionExercises");
-                });
-
-            modelBuilder.Entity("MU5PrototypeProject.Models.Prop", b =>
-                {
-                    b.Navigation("ExerciseProps");
                 });
 
             modelBuilder.Entity("MU5PrototypeProject.Models.Session", b =>

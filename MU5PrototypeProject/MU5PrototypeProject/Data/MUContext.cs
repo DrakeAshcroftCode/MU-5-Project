@@ -18,17 +18,9 @@ namespace MU5PrototypeProject.Data
              : base(options)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
-            if (_httpContextAccessor.HttpContext != null)
-            {
-                //We have a HttpContext, but there might not be anyone Authenticated
-                UserName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "Unknown";
-            }
-            else
-            {
-                //No HttpContext so seeding data
-                UserName = "Seed Data";
-            }
+            UserName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "Unknown";
         }
+
         public MUContext(DbContextOptions<MUContext> options)
             : base(options)
         {
@@ -41,9 +33,13 @@ namespace MU5PrototypeProject.Data
         public DbSet<Session> Sessions { get; set; }
         public DbSet<SessionExercise> SessionExercises { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<Apparatus> Apparatuses { get; set; }
+        public DbSet<ExerciseSettings> ExerciseSettings { get; set; }
         public DbSet<SessionNotes> SessionNotes { get; set; }
         public DbSet<AdminStatus> AdminStatuses { get; set; }
-        public DbSet<Equipment> Equipments { get; set; }
+        public DbSet<PhysioInfo> PhysioInfos { get; set; }
+        public DbSet<Prop> Props { get; set; }
+        public DbSet<ExerciseProp> ExerciseProps { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,19 +57,33 @@ namespace MU5PrototypeProject.Data
                 .HasForeignKey(s => s.ClientID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Session-SessionExercise (1-M Cascade)
+            // Session-SessionExercise (Cascade)
             modelBuilder.Entity<SessionExercise>()
                 .HasOne(se => se.Session)
                 .WithMany(s => s.Exercises)
                 .HasForeignKey(se => se.SessionID)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Exercise-SessionExercise (1-M Restrict)
+            // Exercise-SessionExercise (Restrict)
             modelBuilder.Entity<SessionExercise>()
                 .HasOne(se => se.Exercise)
                 .WithMany(e => e.SessionExercises)
                 .HasForeignKey(se => se.ExerciseID)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // Apparatus-Exercise (Restrict)
+            modelBuilder.Entity<Exercise>()
+                .HasOne(e => e.Apparatus)
+                .WithMany(a => a.Exercises)
+                .HasForeignKey(e => e.ApparatusID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Exercise-ExerciseSettings (Cascade)
+            modelBuilder.Entity<ExerciseSettings>()
+                .HasOne(es => es.Exercise)
+                .WithMany()
+                .HasForeignKey(es => es.ExerciseID)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Session-SessionNotes (1-1 Cascade)
             modelBuilder.Entity<Session>()
@@ -82,6 +92,13 @@ namespace MU5PrototypeProject.Data
                 .HasForeignKey<SessionNotes>(n => n.SessionID)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // SessionNotes-Trainer (Restrict, nullable)
+            modelBuilder.Entity<SessionNotes>()
+                .HasOne(n => n.CompletedByTrainer)
+                .WithMany()
+                .HasForeignKey(n => n.CompletedByTrainerID)
+                .OnDelete(DeleteBehavior.Restrict);
+
             // Session-AdminStatus (1-1 Cascade)
             modelBuilder.Entity<Session>()
                 .HasOne(s => s.AdminStatus)
@@ -89,11 +106,11 @@ namespace MU5PrototypeProject.Data
                 .HasForeignKey<AdminStatus>(a => a.SessionID)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Session-Equipment (1-1 Cascade)
+            // Session-PhysioInfo (1-1 Cascade)
             modelBuilder.Entity<Session>()
-                .HasOne(s => s.Equipment)
-                .WithOne(e => e.Session)
-                .HasForeignKey<Equipment>(e => e.SessionID)
+                .HasOne(s => s.PhysioInfo)
+                .WithOne(p => p.Session)
+                .HasForeignKey<PhysioInfo>(p => p.SessionID)
                 .OnDelete(DeleteBehavior.Cascade);
         }
 
@@ -102,7 +119,9 @@ namespace MU5PrototypeProject.Data
             OnBeforeSaving();
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
+            CancellationToken cancellationToken = default)
         {
             OnBeforeSaving();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
@@ -122,7 +141,6 @@ namespace MU5PrototypeProject.Data
                             trackable.UpdatedOn = now;
                             trackable.UpdatedBy = UserName;
                             break;
-
                         case EntityState.Added:
                             trackable.CreatedOn = now;
                             trackable.CreatedBy = UserName;
