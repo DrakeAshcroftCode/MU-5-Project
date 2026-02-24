@@ -233,7 +233,12 @@ namespace MU5PrototypeProject.Controllers
             {
                 return NotFound();
             }
-            var session = await _context.Sessions.FindAsync(id);
+            var session = await _context.Sessions/*.FindAsync(id);*/
+                .Include(s => s.Client)
+                .Include(s => s.Trainer)
+                .FirstOrDefaultAsync(s => s.ID == id);
+
+
             if (session == null)
             {
                 return NotFound();

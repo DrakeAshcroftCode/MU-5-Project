@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="SessionsPerWeekRecommended" class="control-label"></label>
-                <input asp-for="SessionsPerWeekRecommended" class="form-control" placeholder="Recommended Sessions Per Week"/>
+                <input asp-for="SessionsPerWeekRecommended" class="form-control" placeholder="Recommended Sessions Per Week" min="1"/>
                 <span asp-validation-for="SessionsPerWeekRecommended" class="text-danger"></span>
             </div>
 @*             <div class="form-group form-check">
