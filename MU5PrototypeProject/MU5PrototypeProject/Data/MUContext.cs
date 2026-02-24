@@ -112,6 +112,14 @@ namespace MU5PrototypeProject.Data
                 .WithOne(p => p.Session)
                 .HasForeignKey<PhysioInfo>(p => p.SessionID)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            //To deal with mclients with same first and last name
+            //add a unique index to the combination
+            //of DOB, Last and First Names
+            modelBuilder.Entity<Client>()
+                .HasIndex(c => new { c.DOB, c.LastName, c.FirstName })
+                .IsUnique();
+            // need to do migrations to activate
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
