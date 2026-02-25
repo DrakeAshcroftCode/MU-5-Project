@@ -160,7 +160,7 @@ namespace MU5PrototypeProject.Controllers
 
 
         // GET: Session/Details/5
-        public async Task<IActionResult> Details(int? id, string success = "False")
+        public async Task<IActionResult> Details(int? id, string PostResult = "Details")
         {
             if (id == null)
             {
@@ -177,7 +177,7 @@ namespace MU5PrototypeProject.Controllers
                 return NotFound();
             }
 
-            ViewData["Success"] = success;
+            ViewData["PostResult"] = PostResult;
 
             return View(session);
         }
@@ -213,7 +213,7 @@ namespace MU5PrototypeProject.Controllers
                 {
                     _context.Add(session);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Details), new { session.ID, success = "True" });
+                    return RedirectToAction(nameof(Details), new { session.ID, PostResult = "Create" });
                 }
             }
             catch (DbUpdateException dex)
@@ -273,7 +273,7 @@ namespace MU5PrototypeProject.Controllers
                 try
                 {
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Details), new { id, PostResult = "Edit" });
                 }
                 catch (DbUpdateException dex)
                 {

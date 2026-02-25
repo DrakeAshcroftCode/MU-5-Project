@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" id="pageForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
@@ -48,13 +48,40 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsArchived" /> @Html.DisplayNameFor(model => model.IsArchived)
                 </label>
-            </div>*@
-            <div class="form-group d-flex gap-2 mt-3">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-primary">Cancel</a>
+            </div>
+            *@
+            <div class="form-group">
+                <input type="hidden" id="confirmation" name="confirmation" value="confirm" />
+				<input id="btnconfirm" type="submit" onclick="ShowModal()" value="Save" class="btn btn-primary" />
+				<a asp-action="Index" class="btn btn-primary">Cancel</a>
             </div>
             
         </form>
+    </div>
+</div>
+
+<div class="modal fade" id="mymodal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <h1 class="modal-title"> Confirm that values are correct </h1>
+            <div class="modal-body">
+
+                <input id="ModalFirstName" class="form-control" disabled />
+                <input id="ModalLastName" class="form-control" disabled />
+                <input id="ModalDOB" class="form-control" type="date" disabled />
+                <input id="ModalPhone" class="form-control" disabled />
+                <input id="ModalEmail" class="form-control" disabled />
+                <input id="ModalClientFolderUrl" class="form-control" disabled />
+
+            </div>
+            <div class="modal-body">
+
+                <input id="btnsubmit" type="submit" form="pageForm" value="Submit" class="btn btn-primary" />
+                <input type="button" value="Cancel" class="btn btn-danger" data-bs-dismiss="modal">
+
+            </div>
+        </div>
     </div>
 </div>
 
@@ -66,4 +93,36 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript" language="javascript">
+
+        function ShowModal() {
+
+            var form = document.forms.namedItem("pageForm");
+
+            form.btnconfirm.onclick =_=> form.confirmation.value = 'confirm';
+            form.btnsubmit.onclick =_=> form.confirmation.value = 'submit'
+
+            form.onsubmit = ev => {
+                if(form.confirmation.value == "confirm"){
+                    ev.preventDefault();
+
+                    var isValid = form.checkValidity();
+                    if(isValid){
+
+                        document.getElementById("ModalFirstName").value = document.getElementById("FirstName").value;
+                        document.getElementById("ModalLastName").value = document.getElementById("LastName").value;
+                        document.getElementById("ModalDOB").value = document.getElementById("DOB").value;
+                        document.getElementById("ModalPhone").value = document.getElementById("Phone").value;
+                        document.getElementById("ModalEmail").value = document.getElementById("Email").value;
+                        document.getElementById("ModalClientFolderUrl").value = document.getElementById("ClientFolderUrl").value;
+
+                        var myModal = new bootstrap.Modal(document.getElementById('mymodal'));
+                        myModal.show();
+                    }
+                }
+            }
+        }
+
+    </script>
 }

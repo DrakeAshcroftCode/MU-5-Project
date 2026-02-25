@@ -90,7 +90,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
-                <h1 class="modal-title"> Client Successfully Created </h1>
+                <h1 class="modal-title" id="ModalTitle"> Success </h1>
                 <div class="modal-body">
 
 
@@ -110,12 +110,23 @@
 
     function Startup(){
 
-        var False = false;
-        var True = true;
-        var Success = @ViewData["Success"];
+        var Details = "none";
+        var Create = "Create";
+        var Edit = "Edit";
 
-        if(Success){
+        var ModalTitle = document.getElementById("ModalTitle");
+        var Success = @ViewData["PostResult"];
 
+        console.log(Success);
+
+        if(Success != Details){
+            if (Success == Create){
+                ModalTitle.textContent = "Client Successfully Created";
+
+            } else if (Success == Edit){
+                ModalTitle.textContent = "Client Successfully Edited";
+
+            }
             var myModal = new bootstrap.Modal(document.getElementById('mymodal'));
             myModal.show();
         }
