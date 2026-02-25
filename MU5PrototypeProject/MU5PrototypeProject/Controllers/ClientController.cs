@@ -23,7 +23,7 @@ namespace MU5PrototypeProject.Controllers
             string SearchPhone,
             string actionButton,
             int? page,
-            
+
             int? pageSizeID,
             bool showArchived = false,
             string sortDirection = "asc",
@@ -126,7 +126,7 @@ namespace MU5PrototypeProject.Controllers
 
 
         // GET: Client/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, string PostResult = "Details")
         {
             if (id == null)
             {
@@ -140,6 +140,8 @@ namespace MU5PrototypeProject.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["PostResult"] = PostResult;
 
             return View(client);
         }
@@ -169,12 +171,12 @@ namespace MU5PrototypeProject.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    
+
                     //client.CreatedAt = DateTime.Now; // causing error deleting for now
 
                     _context.Add(client);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Details), new { client.ID });
+                    return RedirectToAction(nameof(Details), new { client.ID, PostResult = "Create" });
                 }
             }
             catch (RetryLimitExceededException)
@@ -234,7 +236,7 @@ namespace MU5PrototypeProject.Controllers
                 try
                 {
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Details), new { id, PostResult = "Edit" });
                 }
                 catch (DbUpdateConcurrencyException)
                 {

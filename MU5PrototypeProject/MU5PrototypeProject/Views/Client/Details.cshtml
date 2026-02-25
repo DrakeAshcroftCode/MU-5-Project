@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<body onload="Startup()">
 <h1>Details</h1>
 
 <div>
@@ -84,3 +84,52 @@
 
     <a asp-action="Index" class="btn btn-secondary">Back to Clients</a>
 </div>
+
+
+    <div class="modal fade" id="mymodal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <h1 class="modal-title" id="ModalTitle"> Success </h1>
+                <div class="modal-body">
+
+
+
+                </div>
+                <div class="modal-body">
+
+                    <input type="button" value="Close" class="btn btn-danger" data-bs-dismiss="modal">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+
+    function Startup(){
+
+        var Details = "none";
+        var Create = "Create";
+        var Edit = "Edit";
+
+        var ModalTitle = document.getElementById("ModalTitle");
+        var Success = @ViewData["PostResult"];
+
+        console.log(Success);
+
+        if(Success != Details){
+            if (Success == Create){
+                ModalTitle.textContent = "Client Successfully Created";
+
+            } else if (Success == Edit){
+                ModalTitle.textContent = "Client Successfully Edited";
+
+            }
+            var myModal = new bootstrap.Modal(document.getElementById('mymodal'));
+            myModal.show();
+        }
+    }
+
+</script>

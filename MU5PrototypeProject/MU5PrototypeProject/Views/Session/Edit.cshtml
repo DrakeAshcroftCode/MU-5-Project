@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" id="pageForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
@@ -45,13 +45,36 @@
                 <span asp-validation-for="ClientID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-primary">Cancel</a>
+                <input type="hidden" id="confirmation" name="confirmation" value="confirm" />
+				<input id="btnconfirm" onclick="ShowModal()" type="submit" value="Create" class="btn btn-primary" />
+				<a asp-action="Index" class="btn btn-primary">Cancel</a>
             </div>
         </form>
     </div>
 </div>
 
+<div class="modal fade" id="mymodal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <h1 class="modal-title"> Confirm that values are correct </h1>
+            <div class="modal-body">
+
+                <input id="ModalSessionDate" class="form-control" type="date" disabled />
+                <input id="ModalSessions" class="form-control" disabled />
+                <select id="ModalTrainer" class="form-control" asp-items="ViewBag.TrainerID" disabled></select>
+                <select id="ModalClient" class="form-control" asp-items="ViewBag.ClientID" disabled></select>
+
+            </div>
+            <div class="modal-body">
+
+                <input type="submit" form="pageForm" id="btnsubmit" value="Submit" class="btn btn-primary" />
+                <input type="button" value="Cancel" class="btn btn-danger" data-bs-dismiss="modal">
+
+            </div>
+        </div>
+    </div>
+</div>
 <div>
     <a asp-action="Index">Back to Sessions</a>
 </div>
@@ -59,5 +82,37 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+
+        <script type="text/javascript" language="javascript">
+
+            function ShowModal() {
+
+                var form = document.forms.namedItem("pageForm");
+
+                form.btnconfirm.onclick =_=> form.confirmation.value = 'confirm';
+                form.btnsubmit.onclick =_=> form.confirmation.value = 'submit'
+
+                form.onsubmit = ev => {
+
+                    if(form.confirmation.value == "confirm"){
+                        ev.preventDefault();
+
+                        var isValid = form.checkValidity();
+                        console.log(isValid);
+                        if(isValid){
+                            document.getElementById("ModalSessionDate").value   = document.getElementById("SessionDate").value;
+                            document.getElementById("ModalSessions").value      = document.getElementById("SessionsPerWeekRecommended").value;
+                            document.getElementById("ModalTrainer").value       = document.getElementById("TrainerID").value;
+                            document.getElementById("ModalClient").value        = document.getElementById("ClientID").value;
+
+                            var myModal = new bootstrap.Modal(document.getElementById('mymodal'));
+                            myModal.show();
+                        }
+                    }
+                }
+            }
+
+        </script>
     }
 }
