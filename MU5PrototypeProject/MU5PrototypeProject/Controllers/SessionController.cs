@@ -44,6 +44,9 @@ namespace MU5PrototypeProject.Controllers
             var sessions = _context.Sessions
                 .Include(s => s.Client)
                 .Include(s => s.Trainer)
+                .Include(s => s.SessionNotes)
+                .Include(s => s.PhysioInfo)
+                .Include(s => s.AdminStatus)
                 .AsNoTracking()
                 .AsQueryable();
 
@@ -170,7 +173,10 @@ namespace MU5PrototypeProject.Controllers
             var session = await _context.Sessions
                 .Include(s => s.Client)
                 .Include(s => s.Trainer)
-                .AsNoTracking() //needed?
+                .Include(s => s.SessionNotes)
+                .Include(s => s.PhysioInfo)
+                .Include(s => s.AdminStatus)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (session == null)
             {
@@ -195,8 +201,6 @@ namespace MU5PrototypeProject.Controllers
                 session.ClientID = clientId.Value;
 
             PopulateDropDownLists(session);
-            //ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName");
-            //ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName");
             return View(session);
         }
 
@@ -205,7 +209,7 @@ namespace MU5PrototypeProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,SessionDate,SessionsPerWeekRecommended,IsArchived,TrainerID,ClientID")] Session session)
+        public async Task<IActionResult> Create([Bind("ID,SessionDate,SessionsPerWeekRecommended,IsArchived,SessionNoteID, AdminStatusID, PhysioInfoID, TrainerID,ClientID")] Session session)
         {
             try
             {
@@ -223,8 +227,6 @@ namespace MU5PrototypeProject.Controllers
             }
 
             PopulateDropDownLists(session);
-            //ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "FirstName", session.ClientID);
-            //ViewData["TrainerID"] = new SelectList(_context.Trainers, "ID", "FirstName", session.TrainerID);
             return View(session);
         }
 
@@ -268,7 +270,7 @@ namespace MU5PrototypeProject.Controllers
             //Try updating it with value
             if (await TryUpdateModelAsync<Session>(sessionToUpdate, "",
                 t => t.SessionDate, t => t.SessionsPerWeekRecommended,
-                t => t.IsArchived, t => t.TrainerID, t => t.ClientID))
+                t => t.IsArchived, t => t.SessionNotes, t => t.AdminStatus, t => t.PhysioInfo, t => t.TrainerID, t => t.ClientID))
             {
                 try
                 {
@@ -298,6 +300,9 @@ namespace MU5PrototypeProject.Controllers
             var session = await _context.Sessions
                 .Include(s => s.Client)
                 .Include(s => s.Trainer)
+                .Include(s => s.SessionNotes)
+                .Include(s => s.PhysioInfo)
+                .Include(s => s.AdminStatus)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (session == null)
             {
@@ -382,25 +387,23 @@ namespace MU5PrototypeProject.Controllers
             }
         }
 
+        private SelectList ClientSelectList(int? selectedId)
+        {
+            return new SelectList(_context.Clients
+                .OrderBy(d => d.FirstName)
+                .ThenBy(d => d.LastName), "ID", "FullName", selectedId);
+        }
+
+        private SelectList TrainerList(int? selectedId)
+        {
+            return new SelectList(_context.Trainers
+                .OrderBy(d => d.LastName)
+                .ThenBy(d => d.FirstName), "ID", "TrainerName", selectedId);
+        }
         private void PopulateDropDownLists(Session? session = null)
         {
-
-            var clientObjs = from t in _context.Clients
-
-                             orderby t.FirstName
-                             select t;
-
-            ViewData["ClientID"] = new SelectList(clientObjs, nameof(Client.ID), nameof(Client.FullName), session?.ClientID);
-
-
-
-            var trainerObjs = from t in _context.Trainers
-
-                              orderby t.FirstName
-
-                              select t;
-            ViewData["TrainerID"] = new SelectList(trainerObjs, nameof(Trainer.ID), nameof(Trainer.TrainerName), session?.TrainerID);
-
+            ViewData["ClientID"] = ClientSelectList(session?.ClientID);
+            ViewData["TrainerID"] = TrainerList(session?.TrainerID);
         }
         private bool SessionExists(int id)
         {

@@ -31,7 +31,7 @@ namespace MU5PrototypeProject.Models
 
         // Navigation
         public ICollection<SessionExercise> Exercises { get; set; } = new HashSet<SessionExercise>();
-        public SessionNotes? Notes { get; set; }
+        public SessionNotes? SessionNotes { get; set; }
         public AdminStatus? AdminStatus { get; set; }
         public PhysioInfo? PhysioInfo { get; set; }
 
@@ -44,6 +44,8 @@ namespace MU5PrototypeProject.Models
         [Required(ErrorMessage = "You must select a client to add to the session.")]
         public int ClientID { get; set; }
         public Client? Client { get; set; }
+
+
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
