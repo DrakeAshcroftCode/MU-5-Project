@@ -606,4 +606,16 @@ body {
     .table.dataTable td.actionsCol span[aria-hidden="true"] {
         margin: 0 .08rem !important;
     }
+
 }
+
+
+.select2-container,
+.select2-container .select2-selection {
+    width: 100% !important;
+}
+    .select2-container .select2-selection__rendered,
+    .select2-container .select2-selection__placeholder {
+        color: whitesmoke !important;
+
+    }

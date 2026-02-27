@@ -56,13 +56,13 @@ namespace MU5PrototypeProject.Models
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Enter a valid 10-digit phone number.")]
         [DataType(DataType.PhoneNumber)]
         [StringLength(10)]
-        public string Phone { get; set; } = string.Empty;
+        public string? Phone { get; set; }
 
         [StringLength(255)]
         [DataType(DataType.EmailAddress)]
         [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
             ErrorMessage = "Please follow the correct email format test@email.com")]
-        public string Email { get; set; } = string.Empty;
+        public string? Email { get; set; }
 
         [Display(Name = "Client Folder URL")]
         [StringLength(2048)]
