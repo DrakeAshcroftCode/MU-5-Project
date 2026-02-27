@@ -87,7 +87,7 @@ namespace MU5PrototypeProject.Data
 
             // Session-SessionNotes (1-1 Cascade)
             modelBuilder.Entity<Session>()
-                .HasOne(s => s.Notes)
+                .HasOne(s => s.SessionNotes)
                 .WithOne(n => n.Session)
                 .HasForeignKey<SessionNotes>(n => n.SessionID)
                 .OnDelete(DeleteBehavior.Cascade);
