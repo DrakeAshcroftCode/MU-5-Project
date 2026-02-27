@@ -134,6 +134,9 @@ namespace MU5PrototypeProject.Data.MUMigrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("DOB", "LastName", "FirstName")
+                        .IsUnique();
+
                     b.ToTable("Clients");
                 });
 
@@ -540,7 +543,7 @@ namespace MU5PrototypeProject.Data.MUMigrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("MU5PrototypeProject.Models.Session", "Session")
-                        .WithOne("Notes")
+                        .WithOne("SessionNotes")
                         .HasForeignKey("MU5PrototypeProject.Models.SessionNotes", "SessionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -576,9 +579,9 @@ namespace MU5PrototypeProject.Data.MUMigrations
 
                     b.Navigation("Exercises");
 
-                    b.Navigation("Notes");
-
                     b.Navigation("PhysioInfo");
+
+                    b.Navigation("SessionNotes");
                 });
 
             modelBuilder.Entity("MU5PrototypeProject.Models.Trainer", b =>

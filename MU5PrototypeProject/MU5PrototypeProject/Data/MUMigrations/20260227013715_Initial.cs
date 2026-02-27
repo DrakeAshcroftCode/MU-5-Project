@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace MU5PrototypeProject.Data.MUMigrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,7 +53,10 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
+                    LastName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    Role = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -194,6 +196,26 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Props",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    SessionID = table.Column<int>(type: "INTEGER", nullable: false),
+                    PropName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Props", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Props_Sessions_SessionID",
+                        column: x => x.SessionID,
+                        principalTable: "Sessions",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SessionExercises",
                 columns: table => new
                 {
@@ -254,11 +276,53 @@ namespace MU5PrototypeProject.Data.MUMigrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ExerciseProps",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ExerciseID = table.Column<int>(type: "INTEGER", nullable: false),
+                    PropID = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExerciseProps", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_ExerciseProps_Exercises_ExerciseID",
+                        column: x => x.ExerciseID,
+                        principalTable: "Exercises",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExerciseProps_Props_PropID",
+                        column: x => x.PropID,
+                        principalTable: "Props",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AdminStatuses_SessionID",
                 table: "AdminStatuses",
                 column: "SessionID",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_DOB_LastName_FirstName",
+                table: "Clients",
+                columns: new[] { "DOB", "LastName", "FirstName" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExerciseProps_ExerciseID",
+                table: "ExerciseProps",
+                column: "ExerciseID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExerciseProps_PropID",
+                table: "ExerciseProps",
+                column: "PropID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Exercises_ApparatusID",
@@ -275,6 +339,11 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 table: "PhysioInfos",
                 column: "SessionID",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Props_SessionID",
+                table: "Props",
+                column: "SessionID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SessionExercises_ExerciseID",
@@ -315,6 +384,9 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 name: "AdminStatuses");
 
             migrationBuilder.DropTable(
+                name: "ExerciseProps");
+
+            migrationBuilder.DropTable(
                 name: "ExerciseSettings");
 
             migrationBuilder.DropTable(
@@ -325,6 +397,9 @@ namespace MU5PrototypeProject.Data.MUMigrations
 
             migrationBuilder.DropTable(
                 name: "SessionNotes");
+
+            migrationBuilder.DropTable(
+                name: "Props");
 
             migrationBuilder.DropTable(
                 name: "Exercises");
