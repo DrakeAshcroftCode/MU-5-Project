@@ -289,6 +289,9 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("ExerciseSettingsID")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("IsArchived")
                         .HasColumnType("INTEGER");
 
@@ -314,6 +317,8 @@ namespace MU5PrototypeProject.Data.MUMigrations
                     b.HasKey("ID");
 
                     b.HasIndex("ClientID");
+
+                    b.HasIndex("ExerciseSettingsID");
 
                     b.HasIndex("TrainerID");
 
@@ -505,6 +510,10 @@ namespace MU5PrototypeProject.Data.MUMigrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("MU5PrototypeProject.Models.ExerciseSettings", "ExerciseSettings")
+                        .WithMany()
+                        .HasForeignKey("ExerciseSettingsID");
+
                     b.HasOne("MU5PrototypeProject.Models.Trainer", "Trainer")
                         .WithMany("Sessions")
                         .HasForeignKey("TrainerID")
@@ -512,6 +521,8 @@ namespace MU5PrototypeProject.Data.MUMigrations
                         .IsRequired();
 
                     b.Navigation("Client");
+
+                    b.Navigation("ExerciseSettings");
 
                     b.Navigation("Trainer");
                 });

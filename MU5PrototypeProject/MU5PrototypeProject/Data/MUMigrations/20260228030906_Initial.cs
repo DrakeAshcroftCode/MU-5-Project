@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -84,40 +85,6 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sessions",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    SessionDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    SessionType = table.Column<int>(type: "INTEGER", nullable: false),
-                    SessionsPerWeekRecommended = table.Column<int>(type: "INTEGER", nullable: true),
-                    IsArchived = table.Column<bool>(type: "INTEGER", nullable: false),
-                    TrainerID = table.Column<int>(type: "INTEGER", nullable: false),
-                    ClientID = table.Column<int>(type: "INTEGER", nullable: false),
-                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sessions", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Sessions_Clients_ClientID",
-                        column: x => x.ClientID,
-                        principalTable: "Clients",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Sessions_Trainers_TrainerID",
-                        column: x => x.TrainerID,
-                        principalTable: "Trainers",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ExerciseSettings",
                 columns: table => new
                 {
@@ -138,6 +105,46 @@ namespace MU5PrototypeProject.Data.MUMigrations
                         principalTable: "Exercises",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sessions",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    SessionDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    SessionType = table.Column<int>(type: "INTEGER", nullable: false),
+                    SessionsPerWeekRecommended = table.Column<int>(type: "INTEGER", nullable: true),
+                    IsArchived = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ExerciseSettingsID = table.Column<int>(type: "INTEGER", nullable: true),
+                    TrainerID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ClientID = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    UpdatedOn = table.Column<DateTime>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sessions", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Sessions_Clients_ClientID",
+                        column: x => x.ClientID,
+                        principalTable: "Clients",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Sessions_ExerciseSettings_ExerciseSettingsID",
+                        column: x => x.ExerciseSettingsID,
+                        principalTable: "ExerciseSettings",
+                        principalColumn: "ID");
+                    table.ForeignKey(
+                        name: "FK_Sessions_Trainers_TrainerID",
+                        column: x => x.TrainerID,
+                        principalTable: "Trainers",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -372,6 +379,11 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 column: "ClientID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Sessions_ExerciseSettingsID",
+                table: "Sessions",
+                column: "ExerciseSettingsID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Sessions_TrainerID",
                 table: "Sessions",
                 column: "TrainerID");
@@ -387,9 +399,6 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 name: "ExerciseProps");
 
             migrationBuilder.DropTable(
-                name: "ExerciseSettings");
-
-            migrationBuilder.DropTable(
                 name: "PhysioInfos");
 
             migrationBuilder.DropTable(
@@ -402,19 +411,22 @@ namespace MU5PrototypeProject.Data.MUMigrations
                 name: "Props");
 
             migrationBuilder.DropTable(
-                name: "Exercises");
-
-            migrationBuilder.DropTable(
                 name: "Sessions");
-
-            migrationBuilder.DropTable(
-                name: "Apparatuses");
 
             migrationBuilder.DropTable(
                 name: "Clients");
 
             migrationBuilder.DropTable(
+                name: "ExerciseSettings");
+
+            migrationBuilder.DropTable(
                 name: "Trainers");
+
+            migrationBuilder.DropTable(
+                name: "Exercises");
+
+            migrationBuilder.DropTable(
+                name: "Apparatuses");
         }
     }
 }
