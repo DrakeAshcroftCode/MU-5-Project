@@ -2,6 +2,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MU5PrototypeProject.Models
 {
+    public enum HeadPadOption
+    {
+        Down,
+        Middle,
+        Full,
+        [Display(Name = "1 Extra Cushion")]
+        OneExtraCushion,
+        [Display(Name = "2 Extra Cushion")]
+        TwoExtraCushion,
+        [Display(Name = "Posture Pillow")]
+        PosturePillow
+    }
+    public enum StrapOrHandleOption
+    {
+        Straps = 1,
+        Handles = 2
+    }
     public class ExerciseSettings
     {
         public int ID { get; set; }

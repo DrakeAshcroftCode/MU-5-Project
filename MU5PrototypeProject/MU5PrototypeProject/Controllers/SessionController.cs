@@ -176,6 +176,7 @@ namespace MU5PrototypeProject.Controllers
                 .Include(s => s.SessionNotes)
                 .Include(s => s.PhysioInfo)
                 .Include(s => s.AdminStatus)
+                .Include(s => s.ExerciseSettings)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (session == null)
@@ -209,7 +210,7 @@ namespace MU5PrototypeProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,SessionDate,SessionsPerWeekRecommended,IsArchived,SessionNoteID, AdminStatusID, PhysioInfoID, TrainerID,ClientID")] Session session)
+        public async Task<IActionResult> Create([Bind("ID,SessionDate,SessionsPerWeekRecommended,IsArchived,SessionNoteID, AdminStatusID, PhysioInfoID, TrainerID, ClientID")] Session session)
         {
             try
             {
@@ -270,8 +271,9 @@ namespace MU5PrototypeProject.Controllers
             //Try updating it with value
             if (await TryUpdateModelAsync<Session>(sessionToUpdate, "",
                 t => t.SessionDate, t => t.SessionsPerWeekRecommended,
-                t => t.IsArchived, t => t.SessionNotes, t => t.AdminStatus, t => t.PhysioInfo, t => t.TrainerID, t => t.ClientID))
+                t => t.IsArchived, t => t.SessionNotes, t => t.AdminStatus, t => t.PhysioInfo, t => t.ExerciseSettings, t => t.TrainerID, t => t.ClientID))
             {
+
                 try
                 {
                     await _context.SaveChangesAsync();
@@ -303,6 +305,7 @@ namespace MU5PrototypeProject.Controllers
                 .Include(s => s.SessionNotes)
                 .Include(s => s.PhysioInfo)
                 .Include(s => s.AdminStatus)
+                .Include(s => s.ExerciseSettings)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (session == null)
             {

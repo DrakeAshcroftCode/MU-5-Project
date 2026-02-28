@@ -34,6 +34,7 @@ namespace MU5PrototypeProject.Models
         public SessionNotes? SessionNotes { get; set; }
         public AdminStatus? AdminStatus { get; set; }
         public PhysioInfo? PhysioInfo { get; set; }
+        public ExerciseSettings? ExerciseSettings { get; set; }
 
         [Display(Name = "Trainer")]
         [Required(ErrorMessage = "You must select a trainer to add to the session.")]
@@ -44,8 +45,6 @@ namespace MU5PrototypeProject.Models
         [Required(ErrorMessage = "You must select a client to add to the session.")]
         public int ClientID { get; set; }
         public Client? Client { get; set; }
-
-
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
